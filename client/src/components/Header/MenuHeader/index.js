@@ -1,5 +1,5 @@
-import { Typography, Button, Link } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Typography, Button, Link } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 // import SubMenu from '../SubMenu';
 export default function MenuHeader({ secondState }) {
   const firstState = (
@@ -7,18 +7,22 @@ export default function MenuHeader({ secondState }) {
       disableRipple
       startIcon={<MenuIcon />}
       sx={{
-        '&:hover': {
-          '& .MuiTypography-root': {
-            color: '#14cdc8'
-          }
-        }
+        "&:hover": {
+          "& .MuiTypography-root": {
+            color: "#14cdc8",
+          },
+        },
       }}
     >
       <Typography
         noWrap
         variant="body1"
         component="div"
-        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, textTransform: 'initial' }}
+        sx={{
+          flexGrow: 1,
+          display: { xs: "none", sm: "block" },
+          textTransform: "initial",
+        }}
       >
         Danh mục
       </Typography>
@@ -30,38 +34,46 @@ export default function MenuHeader({ secondState }) {
         disableRipple
         startIcon={<MenuIcon />}
         sx={{
-          '&:hover': {
-            '& .MuiTypography-root': {
-              color: '#14cdc8'
-            }
-          }
+          "&:hover": {
+            "& .MuiTypography-root": {
+              color: "#14cdc8",
+            },
+          },
         }}
       >
         <Typography
           noWrap
           variant="body1"
           component="div"
-          sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, textTransform: 'initial' }}
+          sx={{
+            flexGrow: 1,
+            display: { xs: "none", sm: "block" },
+            textTransform: "initial",
+          }}
         >
           Danh mục
         </Typography>
       </Button>
-      <Link to="/product/laptops">
+      <Link to="/product/laptops" sx={{ textDecoration: "none" }}>
         <Button
           disableRipple
           sx={{
-            '&:hover': {
-              '& .MuiTypography-root': {
-                color: '#14cdc8'
-              }
-            }
+            "&:hover": {
+              "& .MuiTypography-root": {
+                color: "#14cdc8",
+              },
+            },
           }}
         >
           <Typography
             noWrap
             variant="body1"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, textTransform: 'initial' }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "block" },
+              textTransform: "initial",
+            }}
           >
             Laptop
           </Typography>
@@ -70,18 +82,22 @@ export default function MenuHeader({ secondState }) {
       <Button
         disableRipple
         sx={{
-          '&:hover': {
-            '& .MuiTypography-root': {
-              color: '#14cdc8'
-            }
-          }
+          "&:hover": {
+            "& .MuiTypography-root": {
+              color: "#14cdc8",
+            },
+          },
         }}
       >
         <Typography
           noWrap
           variant="body1"
           component="div"
-          sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, textTransform: 'initial' }}
+          sx={{
+            flexGrow: 1,
+            display: { xs: "none", sm: "block" },
+            textTransform: "initial",
+          }}
         >
           Linh kiện PC
         </Typography>
