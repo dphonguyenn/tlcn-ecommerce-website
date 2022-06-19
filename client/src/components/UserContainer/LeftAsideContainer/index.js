@@ -1,6 +1,6 @@
 import { Avatar, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { styles } from "./styles.js";
 import { userState } from "../../../redux/selectors";
 import { dataButton } from "../../Header/BoxUser/dataButton.js";
@@ -8,13 +8,13 @@ import ButtonItemMenuBox from "../../elements/ButtonItemBoxUser/index.js";
 import BoxLogin from "../../Header/BoxLogin/index.js";
 function LeftAsideContainer() {
   const [openBoxLogin, setOpenBoxLogin] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const isLogin = useSelector(userState);
   const isLogin = useSelector(userState);
 
-  const handleClickBtnClose = () => {
-    setOpenBoxLogin(false);
-  };
+  // const handleClickBtnClose = () => {
+  //   setOpenBoxLogin(false);
+  // };
   const handleOpenBoxLogin = () => {
     setOpenBoxLogin(true);
   };

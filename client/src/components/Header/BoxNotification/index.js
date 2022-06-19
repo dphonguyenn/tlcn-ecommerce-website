@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState } from "react";
 // import { useDispatch } from 'react-redux';
-import { Button, Paper, Typography, Popover, IconButton } from '@mui/material';
-import { BiBell } from 'react-icons/bi';
-import { GrClose } from 'react-icons/gr';
-import { styles } from './styles.js';
-import { userState } from '../../../redux/selectors';
-import BoxLogin from '../BoxLogin';
+import { Button, Paper, Typography, Popover, IconButton } from "@mui/material";
+import { BiBell } from "react-icons/bi";
+import { GrClose } from "react-icons/gr";
+import { styles } from "./styles.js";
+import { userState } from "../../../redux/selectors";
+import BoxLogin from "../BoxLogin";
 // import { hoverOnComponent } from '../../../redux/actions';
-import img_intro from '../../../media/img/selections/user01.png';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import img_intro from "../../../media/img/selections/user01.png";
+import { useSelector } from "react-redux";
+// import { Link } from 'react-router-dom';
 function BoxNotification({ style_icon }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openBoxLogin, setOpenBoxLogin] = useState(false);
@@ -23,7 +23,7 @@ function BoxNotification({ style_icon }) {
   //     }));
   // }, [dispatch]);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -36,7 +36,7 @@ function BoxNotification({ style_icon }) {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? "simple-popover" : undefined;
 
   const handleOpenBoxLogin = () => {
     setOpenBoxLogin(true);
@@ -66,7 +66,9 @@ function BoxNotification({ style_icon }) {
           <BiBell style={styles.icon_bell} />
         </IconButton>
         <Typography style={styles.text01}>Chưa có thông báo</Typography>
-        <Typography style={styles.text02}>Hãy đăng nhập để tối ưu hóa trải nghiệm trên</Typography>
+        <Typography style={styles.text02}>
+          Hãy đăng nhập để tối ưu hóa trải nghiệm trên
+        </Typography>
         <Typography style={styles.text02}>LapDarker.vn bạn nhé</Typography>
         <Button sx={styles.btn_login} onClick={handleOpenBoxLogin}>
           <Typography sx={styles.text_login}>Đăng nhập</Typography>
@@ -83,11 +85,11 @@ function BoxNotification({ style_icon }) {
       <IconButton
         onClick={handleClick}
         sx={{
-          margin: '0 6px',
-          '&:hover': {
-            backgroundColor: '#14cdc8',
-            transition: '0.5s ease-in-out'
-          }
+          margin: "0 6px",
+          "&:hover": {
+            backgroundColor: "#14cdc8",
+            transition: "0.5s ease-in-out",
+          },
         }}
       >
         <BiBell style={style_icon} />
@@ -99,21 +101,21 @@ function BoxNotification({ style_icon }) {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right'
+          vertical: "bottom",
+          horizontal: "right",
         }}
         transformOrigin={{
-          horizontal: 'right',
-          vertical: 'bottom'
+          horizontal: "right",
+          vertical: "bottom",
         }}
         sx={{
-          '& .MuiPaper-root': {
-            overflowY: 'hidden',
-            borderRadius: '16px'
+          "& .MuiPaper-root": {
+            overflowY: "hidden",
+            borderRadius: "16px",
           },
-          '& .MuiPopover-paper': {
-            top: '80px !important'
-          }
+          "& .MuiPopover-paper": {
+            top: "80px !important",
+          },
         }}
       >
         <Paper
@@ -122,13 +124,22 @@ function BoxNotification({ style_icon }) {
           // onMouseLeave={() => handleOnHoverBoxNotification(false)}
         >
           <div style={styles.paper_header}>
-            <Typography sx={{ fontWeight: 'bold', fontSize: '20px' }}>Thông báo</Typography>
-            <IconButton sx={{ fontSize: '18px', fontWeight: '600' }} onClick={() => handleClickBtnClose()}>
+            <Typography sx={{ fontWeight: "bold", fontSize: "20px" }}>
+              Thông báo
+            </Typography>
+            <IconButton
+              sx={{ fontSize: "18px", fontWeight: "600" }}
+              onClick={() => handleClickBtnClose()}
+            >
               <GrClose />
             </IconButton>
           </div>
           <div style={styles.wrap_main_paper}>
-            {isLogin ? isAuthenticatedUser : <div style={styles.part1_paper}>{isUnauthenticatedUser}</div>}
+            {isLogin ? (
+              isAuthenticatedUser
+            ) : (
+              <div style={styles.part1_paper}>{isUnauthenticatedUser}</div>
+            )}
           </div>
         </Paper>
       </Popover>

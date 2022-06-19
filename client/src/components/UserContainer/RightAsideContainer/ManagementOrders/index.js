@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Box, Button, Paper, Tab, Tabs, Typography } from '@mui/material';
-import { styles } from './styles.js';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Link, useNavigate } from 'react-router-dom';
-import { ordersState } from '../../../../redux/selectors';
-import { ordersActions } from '../../../../redux/actions';
-import OrderItem from '../../../../components/elements/OrderItem';
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Button, Paper, Tab, Tabs, Typography } from "@mui/material";
+import { styles } from "./styles.js";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import { ordersState } from "../../../../redux/selectors";
+import { ordersActions } from "../../../../redux/actions";
+import OrderItem from "../../../../components/elements/OrderItem";
 function ManagementOrders() {
   const [currentIdx, setCurrentIdx] = useState(0);
   const navigate = useNavigate();
@@ -27,67 +27,82 @@ function ManagementOrders() {
       type1: ordersOwn.type1.length > 0 ? true : false,
       type2: ordersOwn.type2.length > 0 ? true : false,
       type3: ordersOwn.type3.length > 0 ? true : false,
-      type4: ordersOwn.type4.length > 0 ? true : false
+      type4: ordersOwn.type4.length > 0 ? true : false,
     };
   }, [
     ordersOwn.type0.length,
     ordersOwn.type1.length,
     ordersOwn.type2.length,
     ordersOwn.type3.length,
-    ordersOwn.type4.length
+    ordersOwn.type4.length,
   ]);
 
   function TextElmPanel({ text }) {
     let numOrder;
     switch (text) {
-      case 'Chờ thanh toán':
+      case "Chờ thanh toán":
         numOrder = ordersOwn.type0.length;
         break;
-      case 'Chờ xác nhận':
+      case "Chờ xác nhận":
         numOrder = ordersOwn.type1.length;
         break;
-      case 'Đang xử lý':
+      case "Đang xử lý":
         numOrder = ordersOwn.type2.length;
         break;
-      case 'Đang vận chuyển':
+      case "Đang vận chuyển":
         numOrder = ordersOwn.type3.length;
         break;
-      case 'Đã giao':
+      case "Đã giao":
         numOrder = ordersOwn.type4.length;
         break;
       default:
         break;
     }
     return (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
         <Typography>{text}</Typography>
-        <Typography sx={{ color: '#b4b7c6 !important', pl: '6px' }}>{numOrder}</Typography>
+        <Typography sx={{ color: "#b4b7c6 !important", pl: "6px" }}>
+          {numOrder}
+        </Typography>
       </div>
     );
   }
 
   const HaveNotOrders = () => {
     return (
-      <Paper sx={Object.assign({ ...styles.paper }, { m: '0' })}>
+      <Paper sx={Object.assign({ ...styles.paper }, { m: "0" })}>
         <div style={styles.part1}>
           <div>
             <AiOutlineShoppingCart style={styles.icon} />
           </div>
-          <Typography sx={{ fontWeight: 'bold', p: '4px' }}>Chưa có đơn hàng</Typography>
-          <Typography sx={{ p: '4px' }}>Mời bạn quẹo lựa sản phẩm giá tốt</Typography>
+          <Typography sx={{ fontWeight: "bold", p: "4px" }}>
+            Chưa có đơn hàng
+          </Typography>
+          <Typography sx={{ p: "4px" }}>
+            Mời bạn quẹo lựa sản phẩm giá tốt
+          </Typography>
           <div style={styles.group_btn}>
-            <Link to="/product/laptops" style={{ textDecoration: 'none' }}>
-              <Button sx={styles.btn} onClick={() => navigate('/product/laptops')}>
+            <Link to="/product/laptops" style={{ textDecoration: "none" }}>
+              <Button
+                sx={styles.btn}
+                onClick={() => navigate("/product/laptops")}
+              >
                 <Typography sx={styles.text_btn}>Laptop</Typography>
               </Button>
             </Link>
-            <Link to="/product/monitors" style={{ textDecoration: 'none' }}>
-              <Button sx={styles.btn} onClick={() => navigate('/product/monitors')}>
+            <Link to="/product/monitors" style={{ textDecoration: "none" }}>
+              <Button
+                sx={styles.btn}
+                onClick={() => navigate("/product/monitors")}
+              >
                 <Typography sx={styles.text_btn}>Màn hình máy tính</Typography>
               </Button>
             </Link>
-            <Link to="/product/keyboards" style={{ textDecoration: 'none' }}>
-              <Button sx={styles.btn} onClick={() => navigate('/product/keyboards')}>
+            <Link to="/product/keyboards" style={{ textDecoration: "none" }}>
+              <Button
+                sx={styles.btn}
+                onClick={() => navigate("/product/keyboards")}
+              >
                 <Typography sx={styles.text_btn}>Bàn phím</Typography>
               </Button>
             </Link>
@@ -100,7 +115,7 @@ function ManagementOrders() {
   const HaveOrders = ({ idx }) => {
     return (
       <div style={styles.part2}>
-        {ordersOwn[`type${idx}`].map(_order => (
+        {ordersOwn[`type${idx}`].map((_order) => (
           <OrderItem key={_order._id} data={_order} />
         ))}
       </div>
@@ -112,8 +127,12 @@ function ManagementOrders() {
       <Paper sx={styles.paper}>
         <div style={styles.wrap_paper}>
           <Typography sx={styles.text1}>Quản lý đơn hàng</Typography>
-          <Box sx={{ width: '100%', pt: '16px' }}>
-            <Tabs value={currentIdx} onChange={handleChangeIdxPanel} aria-label="tabs">
+          <Box sx={{ width: "100%", pt: "16px" }}>
+            <Tabs
+              value={currentIdx}
+              onChange={handleChangeIdxPanel}
+              aria-label="tabs"
+            >
               <Tab
                 // onClick={() => handleClickTab('1')}
                 disableRipple
@@ -158,7 +177,11 @@ function ManagementOrders() {
           </Box>
         </div>
       </Paper>
-      {checkOrders[`type${currentIdx}`] ? <HaveOrders idx={currentIdx} /> : <HaveNotOrders />}
+      {checkOrders[`type${currentIdx}`] ? (
+        <HaveOrders idx={currentIdx} />
+      ) : (
+        <HaveNotOrders />
+      )}
     </>
   );
 }
