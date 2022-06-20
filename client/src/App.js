@@ -126,10 +126,10 @@ function App() {
               element={<SpecifyTypeProduct />}
             />
             <Route
-              path="product/:type_product/:id_product"
+              path="product/:type/:id_product"
               element={<DetailedProduct />}
             />
-            <Route path="*" element={{}} />
+            <Route path="*" element={<Home />} />
           </Route>
           <Route path="/dashboard" element={<DashboardAdmin />}>
             <Route path="orders" element={<MainOrders />} />

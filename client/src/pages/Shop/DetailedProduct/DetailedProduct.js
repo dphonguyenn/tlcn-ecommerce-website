@@ -1,25 +1,30 @@
-import { Suspense, lazy, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { Suspense, lazy, useEffect, useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getDetailedDevice } from "../../../redux/actions";
 // import { detailedDeviceState } from '../../../redux/selectors';
 import { getAbsolutePath } from "../../../helpers";
+import { detailedDeviceState } from "../../../redux/selectors/index.js";
+// import MainDetailedProduct from "../../../components/MainDetailedProduct/index.js";
 
 const ReadyMainDetailedProduct = lazy(() =>
   import("../../../components/MainDetailedProduct/index.js")
 );
 
 function DetailedProduct() {
-  // const [products, setProducts] = useState(null);
   const dispatch = useDispatch();
   const location = useLocation();
-  useEffect(() => {
+  const getData = useCallback(() => {
     dispatch(
       getDetailedDevice.getDetailedDeviceRequest(
         getAbsolutePath(location.pathname)
       )
     );
   }, [dispatch, location.pathname]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
   return (
     <div>

@@ -1,14 +1,6 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import * as actions from "../actions";
 import * as apis from "../../apis";
-// import devicesSaga from './devices.js';
-// import userSaga from './user.js';
-// function* mySaga() {
-//     yield all([
-//         fork(devicesSaga),
-//         fork(userSaga)
-//     ])
-// }
 
 function* fetchDevicesSaga(action) {
   try {

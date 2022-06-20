@@ -1,17 +1,21 @@
-import { Button, Typography } from '@mui/material';
-import CameraIcon from '@mui/icons-material/Camera';
-import { BsCpu, BsBatteryCharging } from 'react-icons/bs';
-import { FcAbout } from 'react-icons/fc';
-import { RiCpuLine } from 'react-icons/ri';
-import { FiMonitor } from 'react-icons/fi';
-import { MdOutlineDeveloperBoard, MdStorage, MdLineWeight } from 'react-icons/md';
-import { SiGithubactions } from 'react-icons/si';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import { styles } from './styles.js';
+import { Button, Typography } from "@mui/material";
+import CameraIcon from "@mui/icons-material/Camera";
+import { BsCpu, BsBatteryCharging } from "react-icons/bs";
+import { FcAbout } from "react-icons/fc";
+import { RiCpuLine } from "react-icons/ri";
+import { FiMonitor } from "react-icons/fi";
+import {
+  MdOutlineDeveloperBoard,
+  MdStorage,
+  MdLineWeight,
+} from "react-icons/md";
+import { SiGithubactions } from "react-icons/si";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import { styles } from "./styles.js";
 
 function InfoDetailedProduct({ data }) {
-  const checkLaptopPath = localStorage.getItem('_pathname').includes('laptop');
-  const laptopDetail = (
+  const checkLaptopPath = localStorage.getItem("_pathname").includes("laptop");
+  const LaptopDetail = () => (
     <>
       <div style={styles.side_info}>
         <div style={styles.wrap_elm_info}>
@@ -19,7 +23,7 @@ function InfoDetailedProduct({ data }) {
             <BsCpu style={styles.icon_elm} />
           </div>
           <div style={styles.main_elm_info}>
-            <Typography sx={{ fontWeight: '600' }}>
+            <Typography sx={{ fontWeight: "600" }}>
               Vi xử lý (CPU) <FcAbout />
             </Typography>
             <Typography>{data.configuration.CPU}</Typography>
@@ -31,7 +35,7 @@ function InfoDetailedProduct({ data }) {
             <RiCpuLine style={styles.icon_elm} />
           </div>
           <div style={styles.main_elm_info}>
-            <Typography sx={{ fontWeight: '600' }}>
+            <Typography sx={{ fontWeight: "600" }}>
               RAM <FcAbout />
             </Typography>
             <Typography>{data.configuration.RAM}</Typography>
@@ -46,7 +50,7 @@ function InfoDetailedProduct({ data }) {
             <FiMonitor style={styles.icon_elm} />
           </div>
           <div style={styles.main_elm_info}>
-            <Typography sx={{ fontWeight: '600' }}>
+            <Typography sx={{ fontWeight: "600" }}>
               Màn hình <FcAbout />
             </Typography>
             <Typography>{data.configuration.monitor}</Typography>
@@ -58,7 +62,7 @@ function InfoDetailedProduct({ data }) {
             <MdOutlineDeveloperBoard style={styles.icon_elm} />
           </div>
           <div style={styles.main_elm_info}>
-            <Typography sx={{ fontWeight: '600' }}>
+            <Typography sx={{ fontWeight: "600" }}>
               Card đồ họa (GPU) <FcAbout />
             </Typography>
             <Typography>{data.configuration.card_graphic}</Typography>
@@ -73,7 +77,7 @@ function InfoDetailedProduct({ data }) {
             <MdStorage style={styles.icon_elm} />
           </div>
           <div style={styles.main_elm_info}>
-            <Typography sx={{ fontWeight: '600' }}>
+            <Typography sx={{ fontWeight: "600" }}>
               Lưu trữ <FcAbout />
             </Typography>
             <Typography>{data.configuration.storage}</Typography>
@@ -85,7 +89,7 @@ function InfoDetailedProduct({ data }) {
             <BsBatteryCharging style={styles.icon_elm} />
           </div>
           <div style={styles.main_elm_info}>
-            <Typography sx={{ fontWeight: '600' }}>
+            <Typography sx={{ fontWeight: "600" }}>
               PIN <FcAbout />
             </Typography>
             <Typography>{data.configuration.PIN}</Typography>
@@ -100,7 +104,7 @@ function InfoDetailedProduct({ data }) {
             <SiGithubactions style={styles.icon_elm} />
           </div>
           <div style={styles.main_elm_info}>
-            <Typography sx={{ fontWeight: '600' }}>
+            <Typography sx={{ fontWeight: "600" }}>
               Kết nối chính <FcAbout />
             </Typography>
             <Typography>{data.configuration.ports}</Typography>
@@ -112,7 +116,7 @@ function InfoDetailedProduct({ data }) {
             <MdLineWeight style={styles.icon_elm} />
           </div>
           <div style={styles.main_elm_info}>
-            <Typography sx={{ fontWeight: '600' }}>
+            <Typography sx={{ fontWeight: "600" }}>
               Trọng lượng <FcAbout />
             </Typography>
             <Typography>{data.configuration.weight}</Typography>
@@ -122,15 +126,20 @@ function InfoDetailedProduct({ data }) {
     </>
   );
   const arrValueConfig = Object.values(data.configuration);
-  const anotherDetail = (
+  const AnotherDetail = () => (
     <>
       {Object.keys(data.configuration).map((config, index) => {
+        console.log(arrValueConfig[index]);
         return (
           <div key={config} style={styles.side_info}>
             <div style={styles.wrap_elm_info}>
               <div style={styles.main_elm_info}>
-                <Typography sx={{ fontWeight: '600', textTransform: 'capitalize' }}>{config}</Typography>
-                <Typography>{arrValueConfig[index]}</Typography>
+                <Typography
+                  sx={{ fontWeight: "600", textTransform: "capitalize" }}
+                >
+                  {config}
+                </Typography>
+                {/* <Typography>{arrValueConfig[index]}</Typography> */}
               </div>
             </div>
           </div>
@@ -142,27 +151,33 @@ function InfoDetailedProduct({ data }) {
   return (
     <div style={styles.container_info_prd}>
       {/* 1 */}
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: "flex", alignItems: "center" }}>
         <CameraIcon />
-        <Typography variant="h6" sx={{ fontWeight: 'bold', pl: '8px' }}>
+        <Typography variant="h6" sx={{ fontWeight: "bold", pl: "8px" }}>
           Cấu hình đặc điểm
         </Typography>
       </div>
       {/*  */}
       {/* 2 */}
-      {checkLaptopPath ? laptopDetail : anotherDetail}
+      {checkLaptopPath ? <LaptopDetail /> : <AnotherDetail />}
       {/*  */}
       {/* 6 */}
       <div>
         <Button
           disableRipple
           sx={{
-            '&:hover': {
-              bgcolor: 'transparent'
-            }
+            "&:hover": {
+              bgcolor: "transparent",
+            },
           }}
         >
-          <Typography sx={{ color: '#0065ee', fontSize: '13px', textTransform: 'initial' }}>
+          <Typography
+            sx={{
+              color: "#0065ee",
+              fontSize: "13px",
+              textTransform: "initial",
+            }}
+          >
             Xem cấu hình chi tiết
           </Typography>
           <ArrowRightIcon />
