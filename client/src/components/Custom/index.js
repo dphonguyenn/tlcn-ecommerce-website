@@ -50,11 +50,15 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const StyledAppBar = styled(AppBar)({
   background: 'linear-gradient(to right, #0f2027, #203a43, #2c5364)',
   padding: '8px 32px',
-  '& .MuiButtonBase-root': {
-    color: 'white'
+  '& .MuiButton-root': {
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'transparent'
+    }
   },
   '& .MuiIconButton-root': {
-    padding: '6px'
+    padding: '6px',
+    color: 'white'
   }
 });
 

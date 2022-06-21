@@ -1,16 +1,12 @@
-import { Suspense, lazy, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { getDevices } from "../../../redux/actions";
+import { Suspense, lazy, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { getDevices } from '../../../redux/actions';
 // import { devicesFiltersState } from '../../../redux/selectors';
-import { getEndPointURL } from "../../../helpers";
-import SubHeader from "../../../components/SubHeader/index.js";
-const ReadyIntroTypeProduct = lazy(() =>
-  import("../../../components/Intro/IntroTypeProduct/index.js")
-);
-const ReadyMainPage = lazy(() =>
-  import("../../../components/MainPage/index.js")
-);
+import { getEndPointURL } from '../../../helpers';
+import SubHeader from '../../../components/SubHeader/index.js';
+const ReadyIntroTypeProduct = lazy(() => import('../../../components/Intro/IntroTypeProduct/index.js'));
+const ReadyMainPage = lazy(() => import('../../../components/MainPage/index.js'));
 
 function SpecifyTypeProduct() {
   const dispatch = useDispatch();

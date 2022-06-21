@@ -5,4 +5,5 @@ Link website: https://lapdarker-clone-thinkpro.netlify.app/
 
 - I just build APIs and DB for three types of devices: Laptop, Monitor, Keyboard
 - You need to login to perform order management functions
+- Missing <Skeleton/> at some page
 - The website is still in the process of being updated

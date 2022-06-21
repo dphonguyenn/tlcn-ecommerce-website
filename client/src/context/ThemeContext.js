@@ -33,7 +33,8 @@ export const ContextProvider = ({ children }) => {
 
   // declare
   const globalState = {
-    isScrollDown: isScrollDown
+    isScrollDown: isScrollDown,
+    setIsScrollDown: setIsScrollDown
   };
 
   return <ThemeContext.Provider value={globalState}>{children}</ThemeContext.Provider>;
