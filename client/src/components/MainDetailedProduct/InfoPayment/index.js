@@ -8,17 +8,61 @@ import BoltIcon from '@mui/icons-material/Bolt';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import { FcApproval } from 'react-icons/fc';
 import { styles } from './styles.js';
+import { useCart } from 'react-use-cart';
+import { toast, ToastContainer } from 'react-toastify';
+import { BiCheck } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 
 function InfoPayment({ data }) {
   const [onHoverDrawer, setOnHoverDrawer] = useState(true);
   const handleOnHoverDrawer = bool => {
     setOnHoverDrawer(bool);
   };
-
-  let cart = localStorage.getItem('cart');
+  const { addItem } = useCart();
+  const navigate = useNavigate();
   const handleAddToCart = () => {
-    localStorage.setItem('cart', [...cart, data]);
+    const { _id, sale_price, video, img, suit, configuration, ...newData } = data;
+    const { detailed_size, ...newConfiguration } = configuration;
+    addItem(
+      {
+        ...newData,
+        id: _id,
+        price: sale_price,
+        _img: img[0],
+        configuration: newConfiguration
+      },
+      1
+    );
+    toast.dismiss();
+    toast(<ToastContent />, {
+      toastId: data._id,
+      position: 'bottom-left',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: { width: 'auto', backgroundColor: 'rgba(2,1,36,.85)' }
+    });
   };
+  const ToastContent = () => (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}
+    >
+      <div style={{ display: 'flex' }}>
+        <BiCheck style={{ fontSize: '24px' }} />
+        <Typography> Thêm thành công</Typography>
+      </div>
+      <Button sx={{ marginLeft: '24px' }} onClick={() => navigate('/cart')}>
+        <Typography sx={{ textTransform: 'initial', color: '#66f1ff' }}>Xem giỏ hàng</Typography>
+      </Button>
+    </div>
+  );
 
   return (
     <div style={styles.container_info_payment}>
@@ -114,7 +158,13 @@ function InfoPayment({ data }) {
               <Typography sx={styles.text10}>{data.color}</Typography>
               <div style={styles.info_part04_1}>
                 <div style={Object.assign({ backgroundColor: data.color }, styles.box_color)}></div>
-                <div style={{ width: '24px', height: '2px', backgroundColor: data.color }}></div>
+                <div
+                  style={{
+                    width: '24px',
+                    height: '2px',
+                    backgroundColor: data.color
+                  }}
+                ></div>
               </div>
             </div>
             <div>
@@ -153,6 +203,20 @@ function InfoPayment({ data }) {
           </Button>
         </div>
       </div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        theme="dark"
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        limit={1}
+        style={{ width: 'auto' }}
+      />
     </div>
   );
 }
