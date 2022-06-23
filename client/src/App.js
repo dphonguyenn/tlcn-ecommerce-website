@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { CartProvider } from 'react-use-cart';
 import Home from './pages/Shop/Home/Home.js';
 import SpecifyTypeProduct from './pages/Shop/SpecifyTypeProduct/SpecifyTypeProduct.js';
@@ -35,7 +35,7 @@ import { Button, Typography } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { stateRequestAuth } from './redux/selectors/index.js';
-import { ThemeContext } from './context/ThemeContext.js';
+// import { ThemeContext } from './context/ThemeContext.js';
 // import ErrorBoundary from './pages/ErrorBoundary.js';
 const theme = createTheme({
   breakpoints: {
@@ -54,16 +54,16 @@ const theme = createTheme({
 
 function App() {
   const [path, setPath] = useState('/');
-  const { setIsScrollDown } = useContext(ThemeContext);
+  // const { setIsScrollDown } = useContext(ThemeContext);
   // go to the top of page whenever redirect
   const location = useLocation();
   localStorage.setItem('_pathname', path);
   const state_request = useSelector(stateRequestAuth);
   useEffect(() => {
     window.scrollTo(0, 0);
-    setIsScrollDown(false);
+    // setIsScrollDown(false);
     setPath(location.pathname);
-  }, [location.pathname, setIsScrollDown]);
+  }, [location.pathname]);
   const navigate = useNavigate();
   const ToastContent = () => (
     <div

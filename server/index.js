@@ -10,11 +10,13 @@ const app = express();
 
 // * config
 connectDB();
-app.use(bodyParser.json({ limit:'30mb' }));
-app.use(bodyParser.urlencoded({
+app.use(bodyParser.json({ limit: '30mb' }));
+app.use(
+  bodyParser.urlencoded({
     extended: true,
     limit: '30mb'
-}));
+  })
+);
 app.use(cors());
 app.use(methodOverride('_method'));
 
@@ -23,5 +25,5 @@ route(app);
 
 // * Access port
 app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server is running at http://localhost:${port}`);
 });

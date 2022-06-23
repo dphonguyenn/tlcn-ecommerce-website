@@ -1,5 +1,5 @@
 import express from 'express';
-import { addOrders, getOrdersFollowType, updateOrders, getOrders } from '../app/controllers/OrdersController.js';
+import { addOrders, updateOrders, getOrders } from '../app/controllers/OrdersController.js';
 import { verifyToken } from '../app/middlewares/index.js';
 const router = express.Router();
 router.post('/post', addOrders);
