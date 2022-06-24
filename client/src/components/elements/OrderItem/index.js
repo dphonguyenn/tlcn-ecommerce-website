@@ -157,7 +157,7 @@ function OrderItem({ data }) {
               <Button sx={styles.btn1} onClick={handleOpenModal}>
                 <Typography sx={styles.text8}>Thanh Toán</Typography>
               </Button>
-              <Button sx={styles.btn2}>
+              <Button sx={styles.btn2} onClick={handleOpenModal}>
                 <Typography sx={styles.text9}>Chi tiết</Typography>
               </Button>
             </div>
