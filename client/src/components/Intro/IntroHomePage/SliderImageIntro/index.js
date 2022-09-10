@@ -3,7 +3,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { ToggleButton, Typography } from '@mui/material';
 import { data } from './data.js';
 import useStyles from './styles.js';
-
+import './styles.css';
 const styles = {
   btn: {
     overflow: 'hidden',
@@ -41,6 +41,7 @@ function SliderImageIntro() {
   };
   return (
     <Carousel
+      className="carousel-app"
       selectedItem={index}
       showStatus={false}
       showThumbs={false}
