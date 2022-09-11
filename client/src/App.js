@@ -10,14 +10,10 @@ import InfoOrders from './pages/Shop/InfoOrders/InfoOrders.js';
 import Payment from './pages/Shop/Payment/Payment.js';
 import User from './pages/Shop/User/User.js';
 import InfoContact from './components/UserContainer/RightAsideContainer/InfoContact/index.js';
-import Insurance from './components/UserContainer/RightAsideContainer/Insurance/index.js';
-import Policies from './components/UserContainer/RightAsideContainer/Policies/index.js';
 import Saving from './components/UserContainer/RightAsideContainer/Saving/index.js';
-import ServiceCost from './components/UserContainer/RightAsideContainer/ServiceCost/index.js';
 import Stores from './components/UserContainer/RightAsideContainer/Stores/index.js';
 import AccountUser from './components/UserContainer/RightAsideContainer/AccountUser/index.js';
 import ManagementOrders from './components/UserContainer/RightAsideContainer/ManagementOrders/index.js';
-import Deliver from './components/UserContainer/RightAsideContainer/Deliver/index.js';
 import Shop from './pages/Shop/Shop.js';
 import DashboardAdmin from './pages/DashboardAdmin/index.js';
 import MainOrders from './components/MainDashboard/MainOrders';
@@ -35,6 +31,8 @@ import { Button, Typography } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { stateRequestAuth } from './redux/selectors/index.js';
+import Policy from './components/UserContainer/RightAsideContainer/Policy/index.js';
+
 // import { ThemeContext } from './context/ThemeContext.js';
 // import ErrorBoundary from './pages/ErrorBoundary.js';
 const theme = createTheme({
@@ -112,12 +110,14 @@ function App() {
               <Route path="management-orders" element={<ManagementOrders />} />
               <Route path="account" element={<AccountUser />} />
               <Route path="contact" element={<InfoContact />} />
-              <Route path="insurance" element={<Insurance />} />
-              <Route path="policies" element={<Policies />} />
               <Route path="saving" element={<Saving />} />
-              <Route path="service-cost" element={<ServiceCost />} />
               <Route path="stores" element={<Stores />} />
-              <Route path="deliver" element={<Deliver />} />
+              <Route path="policy" element={<Policy />}>
+                {/* <Route path="insurance" element={<Insurance />} />
+                <Route path="policies" element={<Policies />} />
+                <Route path="service-cost" element={<ServiceCost />} />
+                <Route path="deliver" element={<Deliver />} /> */}
+              </Route>
             </Route>
             <Route path="product/:type_product" element={<SpecifyTypeProduct />} />
             <Route path="product/:type/:id_product" element={<DetailedProduct />} />
