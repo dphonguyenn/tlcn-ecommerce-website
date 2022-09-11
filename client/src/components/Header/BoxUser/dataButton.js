@@ -24,7 +24,7 @@ export const dataButton = [
   {
     icon: <HiOutlineLocationMarker style={{ fontSize: '24px', color: '#0e0e0e' }} />,
     text: 'Tra cứu bảo hành',
-    path: 'user/insurance'
+    path: 'user/search-insurance'
   },
   {
     icon: <HiOutlineClipboardList style={{ fontSize: '24px', color: 'rgba(0, 101, 238,1)' }} />,
@@ -39,17 +39,17 @@ export const dataButton = [
   {
     icon: <FiMap style={{ fontSize: '24px', color: 'rgba(27, 203, 161,1)' }} />,
     text: 'Bảo hành đổi trả',
-    path: 'user/policies'
+    path: 'user/policy/insurance'
   },
   {
     icon: <FiPhoneCall style={{ fontSize: '24px', color: 'rgba(254, 52, 100,1)' }} />,
     text: 'Vận chuyển, thanh toán',
-    path: 'user/deliver'
+    path: 'user/policy/deliver'
   },
   {
     icon: <BsBookmark style={{ fontSize: '24px', color: 'rgba(57, 91, 238,1)' }} />,
     text: 'Bảng giá dịch vụ',
-    path: 'user/service-cost'
+    path: 'user/policy/service-cost'
   },
   {
     icon: <RiTruckLine style={{ fontSize: '24px', color: 'rgba(254, 52, 100,1)' }} />,

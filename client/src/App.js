@@ -32,7 +32,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { stateRequestAuth } from './redux/selectors/index.js';
 import Policy from './components/UserContainer/RightAsideContainer/Policy/index.js';
-
+import InsurancePolicy from './components/UserContainer/RightAsideContainer/Policy/InsurancePolicy/index.js';
+import ServiceCost from './components/UserContainer/RightAsideContainer/Policy/ServiceCost/index.js';
+import DeliverPolicy from './components/UserContainer/RightAsideContainer/Policy/DeliverPolicy/index.js';
+import PaymentPolicy from './components/UserContainer/RightAsideContainer/Policy/PaymentPolicy/index.js';
 // import { ThemeContext } from './context/ThemeContext.js';
 // import ErrorBoundary from './pages/ErrorBoundary.js';
 const theme = createTheme({
@@ -113,10 +116,10 @@ function App() {
               <Route path="saving" element={<Saving />} />
               <Route path="stores" element={<Stores />} />
               <Route path="policy" element={<Policy />}>
-                {/* <Route path="insurance" element={<Insurance />} />
-                <Route path="policies" element={<Policies />} />
+                <Route path="insurance" element={<InsurancePolicy />} />
+                <Route path="payment" element={<PaymentPolicy />} />
                 <Route path="service-cost" element={<ServiceCost />} />
-                <Route path="deliver" element={<Deliver />} /> */}
+                <Route path="deliver" element={<DeliverPolicy />} />
               </Route>
             </Route>
             <Route path="product/:type_product" element={<SpecifyTypeProduct />} />
