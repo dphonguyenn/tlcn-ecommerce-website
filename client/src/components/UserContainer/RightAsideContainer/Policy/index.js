@@ -20,7 +20,7 @@ function Policy() {
     <>
       <Paper sx={styles.paper}>
         <div style={styles.wrap_paper}>
-          <Typography sx={styles.text1}>Chính sách</Typography>
+          <Typography sx={styles.text1}>Chính sách cửa hàng</Typography>
           <Box sx={{ width: '100%', pt: '16px' }}>
             <Tabs value={currentIdx} onChange={handleChangeIdxPanel} aria-label="tabs">
               <Tab
