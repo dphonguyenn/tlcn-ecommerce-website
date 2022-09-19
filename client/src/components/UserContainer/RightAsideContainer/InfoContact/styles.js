@@ -15,13 +15,13 @@ export const styles = {
     fontSize: '26px'
   },
   text2:{
-    fontSize: '20px',
+    fontSize: '23px',
     fontWeight: 'bold',
     display: 'block',
     text: 'body',
   },
   text3:{
-    fontSize: ' 22px'
+    fontSize: '20px'
   },
   part1: {
     display: 'flex',
@@ -77,6 +77,15 @@ export const styles = {
     height: '60px',
     marginTop: '40px',
     marginBottom: '10px',
+  },
+  btn3:{
+    marginTop: '40px',
+    borderRadius: '10px',
+    width: '250px',
+    height: '50px',
+    backgroundColor: 'blue',
+    color: 'white',
+
   },
   text_btn: {
     textTransform: 'initial',

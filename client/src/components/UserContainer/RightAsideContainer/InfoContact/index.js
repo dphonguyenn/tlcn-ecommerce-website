@@ -7,15 +7,15 @@ function InfoContact() {
   return <Paper sx={Object.assign({ ...styles.paper }, { m: '0' })}>
     <div style={styles.part1}>
       <Typography style={styles.text1}>
-          Thông tin liên hệ & Sổ địa chỉ
+          Thông tin liên lạc & Sổ địa chỉ
       </Typography>
       <div style={styles.part2}>
         <Button style={styles.btn2}>
           <FiMap style={styles.btn} />
         </Button>
         <p style={styles.text2}>Chưa thêm địa chỉ</p>
-        <p > Hãy thêm địa chỉ để dễ dàng nhận hàng bạn nhé</p>
-        <Button></Button>
+        <p style={styles.text3}> Hãy thêm địa chỉ để dễ dàng nhận hàng bạn nhé</p>
+        <Button style={styles.btn3}>Thêm địa chỉ mới</Button>
       </div>
     </div>
   </Paper>;
