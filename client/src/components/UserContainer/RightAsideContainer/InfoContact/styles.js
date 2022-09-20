@@ -1,3 +1,4 @@
+import { TableRow } from "@mui/material";
 import { height } from "@mui/system";
 
 export const styles = {
@@ -34,7 +35,8 @@ export const styles = {
   },
   part3: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'end'
   },
   icon: {
     padding: '12px',
@@ -42,6 +44,10 @@ export const styles = {
     backgroundColor: '#f8fafc',
     borderRadius: '50%',
     color: 'rgba(254, 52, 100,1)'
+  },
+  icon2: {
+    marginTop: '30px',
+    height: '250px',
   },
   tab: {
     color: '#0e0e0e',
