@@ -13,16 +13,17 @@ export const styles = {
     flexDirection: 'column'
   },
   text1: {
-    fontSize: '26px'
+    fontSize: '20px'
   },
   text2:{
-    fontSize: '23px',
+    fontSize: '18px',
     fontWeight: 'bold',
     display: 'block',
     text: 'body',
+    textTransform: 'initial !important',
   },
   text3:{
-    fontSize: '20px'
+    fontSize: '16px'
   },
   part1: {
     display: 'flex',
@@ -48,6 +49,7 @@ export const styles = {
   icon2: {
     marginTop: '30px',
     height: '250px',
+    marginRight: '50px',
   },
   tab: {
     color: '#0e0e0e',
@@ -72,26 +74,25 @@ export const styles = {
   btn: {
     borderRadius: '0.1rem',
     margin: '4px',
-    padding: '8px 8px',
+    padding: '0.5rem',
     height: '30px',
     width: '30px'
   },
   btn2:{
     borderRadius: '50%',
-    margin: 'auto',
-    width: '60px',
-    height: '60px',
-    marginTop: '40px',
-    marginBottom: '10px',
+    width: '65px',
+    height: '65px',
+    marginTop: '20px',
+    backgroundColor: '#f8fafc',
   },
   btn3:{
     marginTop: '40px',
     borderRadius: '10px',
-    width: '250px',
-    height: '50px',
-    backgroundColor: 'blue',
+    width: '300px',
+    height: '45px',
+    backgroundColor: '#342fd4',
     color: 'white',
-
+    '&:hover': { bgcolor: '#0702a6' }
   },
   text_btn: {
     textTransform: 'initial',

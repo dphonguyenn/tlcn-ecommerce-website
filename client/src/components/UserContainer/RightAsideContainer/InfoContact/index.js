@@ -12,15 +12,16 @@ function InfoContact() {
       </Typography>
 
       <div style={styles.part2}>
-        <Button style={styles.btn2}>;
+        <Button style={styles.btn2}>
           <FiMap style={styles.btn} />
         </Button>
         
         <p style={styles.text2}>Chưa thêm địa chỉ</p>
         <p style={styles.text3}> Hãy thêm địa chỉ để dễ dàng nhận hàng bạn nhé</p>
         
-        <Button style={styles.btn3}>Thêm địa chỉ mới</Button>
-
+        <Button sx={styles.btn3}>
+        <Typography sx={{ textTransform: 'initial' }}>Thêm địa chỉ</Typography>
+        </Button>
       </div>
 
       <div style={styles.part3}>

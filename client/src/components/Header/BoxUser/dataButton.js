@@ -21,11 +21,11 @@ export const dataButton = [
     text: 'Lịch sử mua hàng',
     path: 'user/management-orders'
   },
-  {
-    icon: <HiOutlineLocationMarker style={{ fontSize: '24px', color: '#0e0e0e' }} />,
-    text: 'Tra cứu bảo hành',
-    path: 'user/search-insurance'
-  },
+  // {
+  //   icon: <HiOutlineLocationMarker style={{ fontSize: '24px', color: '#0e0e0e' }} />,
+  //   text: 'Tra cứu bảo hành',
+  //   path: 'user/search-insurance'
+  // },
   {
     icon: <HiOutlineClipboardList style={{ fontSize: '24px', color: 'rgba(0, 101, 238,1)' }} />,
     text: 'Đã lưu / đã xem',
