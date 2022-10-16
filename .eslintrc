@@ -16,5 +16,21 @@
         "jsxSingleQuote": false
       }
     ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./client/src"],
+        "alias": {
+          "apis": "./src/apis",
+          "components": "./src/components",
+          "context": "./src/context",
+          "helpers": "./src/helpers",
+          "assets": "./src/assets",
+          "pages": "./src/pages",
+          "redux": "./src/redux"
+        }
+      }
+    }
   }
 }

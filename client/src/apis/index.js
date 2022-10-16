@@ -21,11 +21,13 @@ export const fetchDetailedDevice = async path => {
   const response = await API.get(`/${path}`);
   return response;
 };
+
 export const fetchOrdersFollowType = async (order, token) => {
   API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   const response = await API.get(`/orders/get?type=${order}`);
   return response;
 };
+
 export const fetchAllOrders = async token => {
   API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   const response = await API.get('/orders/get-all');
