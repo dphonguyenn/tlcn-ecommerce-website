@@ -1,4 +1,4 @@
-import { getType, getDevices } from '../actions/index.js';
+import { getType, getDevices } from '../actions';
 import { INIT_STATE } from '../constants';
 
 export default function devicesReducer(state = INIT_STATE.devices, action) {

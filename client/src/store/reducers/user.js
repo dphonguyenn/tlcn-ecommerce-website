@@ -1,4 +1,4 @@
-import { INIT_STATE } from '../constants/index.js';
+import { INIT_STATE } from '../constants';
 import { getType, postInfoLogin, postLogout, postAccessToken } from '../actions';
 
 export default function userReducer(state = INIT_STATE.user, action) {

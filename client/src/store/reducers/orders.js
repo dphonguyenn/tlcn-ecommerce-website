@@ -1,4 +1,4 @@
-import { getType, ordersActions } from '../actions/index.js';
+import { getType, ordersActions } from '../actions';
 import { INIT_STATE } from '../constants';
 export default function ordersReducer(state = INIT_STATE.orders, action) {
   switch (action.type) {
