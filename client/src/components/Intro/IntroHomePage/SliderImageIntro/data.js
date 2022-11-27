@@ -1,4 +1,4 @@
-import { intro } from '../../../../media/img';
+import { intro } from '~/assets/img';
 
 export const data = [
   {

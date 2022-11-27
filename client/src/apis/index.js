@@ -9,35 +9,57 @@ const API = axios.create({
 
 export const fetchLaptops = async () => {
   const response = await API.get('/');
-  return response;
+  if (response) {
+    return response;
+  }
+  else return false;
 };
 
 export const fetchDevices = async type => {
   const response = await API.get(`/product/${type}`);
-  return response;
+  if (response) {
+    return response;
+  }
+  else return false;
 };
 
 export const fetchDetailedDevice = async path => {
   const response = await API.get(`/${path}`);
-  return response;
+  if (response) {
+    return response;
+  }
+  else return false;
 };
+
 export const fetchOrdersFollowType = async (order, token) => {
   API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   const response = await API.get(`/orders/get?type=${order}`);
-  return response;
+  if (response) {
+    return response;
+  }
+  else return false;
 };
+
 export const fetchAllOrders = async token => {
   API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   const response = await API.get('/orders/get-all');
-  return response;
+  if (response) {
+    return response;
+  }
+  else return false;
 };
+
 export const postOrders = async data => await API.post('/orders/post', data);
+
 export const updateOrders = async (data, token) => {
-  console.log(data);
   API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   const response = await API.patch('/orders/update', data);
-  return response;
+  if (response) {
+    return response;
+  }
+  else return false;
 };
+
 export const postInfoLogin = async info => await API.post('/user/post-login', info);
 
 export const postLogout = async token => {

@@ -1,4 +1,4 @@
-import { brand_devices } from '../../../../media/img';
+import { brand_devices } from '~/assets/img';
 
 export const brand = [
   {

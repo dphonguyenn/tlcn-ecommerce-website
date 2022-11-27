@@ -19,21 +19,25 @@ const collections = [
     model: KeyboardModel
   }
 ];
+
 // * [POST] /orders/post
 export const addOrders = async (req, res, next) => {
   let { fullname, phone, address, items, cartTotal, payment, state, token, totalItems } = req.body;
   let idUser = '';
+
   if (address.store.length > 0) {
     address = address.store;
   } else {
     address = `${address.personal.city}, ${address.personal.district}, ${address.personal.ward} / ${address.personal.specifyAdr}`;
   }
+
   if (token.length > 0) {
     jwt.verify(token, SECRECT_KEY, (err, data) => {
       if (err) console.log(err);
       else idUser = data.id;
     });
   } else idUser = 'Khách lẻ';
+
   try {
     const savedOrder = {
       products: items,
@@ -46,11 +50,14 @@ export const addOrders = async (req, res, next) => {
       state,
       idUser
     };
+    
     const newOrders = new BillModel(savedOrder);
     const respondOrders = await newOrders.save();
+
     if (idUser !== 'Khách lẻ') {
       await UserModel.findByIdAndUpdate(idUser, { $push: { bill: respondOrders._id } }, { upsert: true });
     }
+    
     res.status(200).json(respondOrders._id);
   } catch (error) {
     res.status(500).json(error);

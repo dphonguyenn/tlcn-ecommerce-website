@@ -5,10 +5,13 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { BrowserRouter } from "react-router-dom";
 import createSagaMiddleware from "redux-saga";
+
 import { ContextProvider } from "./context/ThemeContext.js";
-import App from "./App";
-import mySaga from "./redux/sagas";
-import reducers from "./redux/reducers";
+import App from "./App.jsx";
+
+import mySaga from "~/store/sagas";
+import reducers from "~/store/reducers";
+
 import "./index.css";
 
 const sagaMiddleware = createSagaMiddleware();
