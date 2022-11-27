@@ -6,8 +6,9 @@ import { devicesFiltersState } from '~/store/selectors';
 
 import { styles } from './styles.js';
 
-function IntroTypeProduct() {
-  const data = useSelector(devicesFiltersState);
+function IntroTypeProduct(props) {
+  const { data } = props;
+  // const data = useSelector(devicesFiltersState);
   return (
     <div style={styles.container_intro}>
       <Container maxWidth="lg" sx={styles.container}>

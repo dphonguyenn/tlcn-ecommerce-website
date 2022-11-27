@@ -193,7 +193,7 @@ function ProductsList({ data }) {
         </div>
       </div>
       <Grid container sx={{ m: "0", width: "100% !important" }} spacing={1.5}>
-        {data.map((device, index) => {
+        {data?.length > 0 && data.map((device, index) => {
           return (
             <Grid key={device._id} item xs={6} md={4}>
               {/* <Link to={`/product/${device.type}s/${device._id}`} style={{textDecoration: 'none'}}> */}

@@ -28,6 +28,7 @@ function DetailedProduct() {
   }, [data]);
   const dispatch = useDispatch();
   const location = useLocation();
+  
   const getData = useCallback(() => {
     dispatch(getDetailedDevice.getDetailedDeviceRequest(getAbsolutePath(location.pathname)));
   }, [dispatch, location.pathname]);

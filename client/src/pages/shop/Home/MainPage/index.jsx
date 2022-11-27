@@ -5,9 +5,10 @@ import MenuSearchProducts from './MenuSearchProducts';
 import ProductsList from './ProductsList';
 import { useSelector } from 'react-redux';
 import { devicesFiltersState } from '~/store/selectors';
-function MainPage() {
+function MainPage(props) {
+  const { data } = props;
   const location = useLocation();
-  const data = useSelector(devicesFiltersState);
+  // const data = useSelector(devicesFiltersState);
   return (
     <div style={{ backgroundColor: 'rgba(248, 250, 252, 1)', padding: '24px 0 24px 0' }}>
       <Container maxWidth="lg">
