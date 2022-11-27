@@ -4,14 +4,15 @@ import { Link, useLocation } from 'react-router-dom';
 import { Container, Grid, Typography } from '@mui/material';
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-import MainDetailedProduct from '~/components/MainDetailedProduct';
+// import MainDetailedProduct from '~/components/MainDetailedProduct';
 import SkeletonTable from '~/components/elements/Skeleton/SkeletonTable.js';
-import InfoMediaProduct from '~/components/MainDetailedProduct/InfoMediaProduct';
-import InfoDetailedProduct from '~/components/MainDetailedProduct/InfoDetailedProduct';
-import InfoPayment from '~/components/MainDetailedProduct/InfoPayment';
+import InfoMediaProduct from './MainDetailedProduct/InfoMediaProduct/index.js';
 import { getDetailedDevice } from '~/store/actions';
 import { detailedDeviceState } from '~/store/selectors';
 import { getAbsolutePath } from '~/helpers';
+
+import InfoDetailedProduct from './MainDetailedProduct/InfoDetailedProduct';
+import InfoPayment from './MainDetailedProduct/InfoPayment/index.js';
 
 function DetailedProduct() {
   const [loading, setLoading] = useState(false);

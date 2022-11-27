@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+
 import { getDevices } from '~/store/actions';
 import { getEndPointURL } from '~/helpers';
-import IntroTypeProduct from '~/components/Intro/IntroTypeProduct';
-import MainPage from '~/components/MainPage/index.js';
+import IntroTypeProduct from '~/components/intro/IntroTypeProduct';
+import MainPage from '~/pages/Shop/Home/MainPage';
 
 function SpecifyTypeProduct() {
   const dispatch = useDispatch();

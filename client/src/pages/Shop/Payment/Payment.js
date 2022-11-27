@@ -1,5 +1,5 @@
 import React from 'react';
-import PaymentContainer from '../../../components/PaymentContainer';
+import PaymentContainer from './PaymentContainer';
 import confetti from 'canvas-confetti';
 function Payment() {
   var count = 200;

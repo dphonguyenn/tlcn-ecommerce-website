@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 
 import { devicesFiltersState } from '~/store/selectors';
 import { getDevices } from '~/store/actions';
-import IntroHomePage from '~/components/Intro/IntroHomePage/index.js';
-import MainPage from '~/components/MainPage';
+import IntroHomePage from '~/components/intro/IntroHomePage/index.js';
+import MainPage from './MainPage';
 
 function Home() {
   const [loading, setLoading] = useState(false);

@@ -2,8 +2,9 @@ import { Container, Grid } from "@mui/material";
 import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link, Outlet } from "react-router-dom";
-import LeftAsideContainer from "../../../components/UserContainer/LeftAsideContainer/index.js";
-import RightAsideContainer from "../../../components/UserContainer/RightAsideContainer/index.js";
+
+import LeftAsideContainer from "./UserContainer/LeftAsideContainer";
+import RightAsideContainer from "./UserContainer/RightAsideContainer";
 
 function User() {
   return (

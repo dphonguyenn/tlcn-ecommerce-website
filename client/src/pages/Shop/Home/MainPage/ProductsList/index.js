@@ -13,7 +13,7 @@ import {
   Radio,
   Button,
 } from "@mui/material";
-import { Search, SearchIconWrapper, StyledInputBase } from "../../Custom";
+import { Search, SearchIconWrapper, StyledInputBase } from "~/components/custom";
 import { useNavigate } from "react-router-dom";
 import { styles } from "./styles.js";
 import { useCallback, useState } from "react";

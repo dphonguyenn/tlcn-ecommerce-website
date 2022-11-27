@@ -1,5 +1,5 @@
 import React from 'react';
-import InfoOrdersContainer from '../../../components/InfoOrdersContainer/index.js';
+import InfoOrdersContainer from './InfoOrdersContainer/index.js';
 
 function InfoOrders() {
   return (

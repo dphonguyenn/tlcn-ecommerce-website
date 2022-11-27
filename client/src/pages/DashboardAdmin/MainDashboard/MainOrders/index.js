@@ -2,10 +2,9 @@ import { Button, Typography } from '@mui/material';
 import { IoMdAdd } from 'react-icons/io';
 import * as React from 'react';
 // import { DataGrid } from '@mui/x-data-grid';
-import { fetchAllOrdersOfCusomers } from '../../../apis/Admin/index.js';
-// import { classifyDataToTable } from '../../../helpers/index.js';
-import SkeletonTable from '../../elements/Skeleton/SkeletonTable.js';
-import DataGridTable from '../../elements/DataGridTable/index.js';
+import SkeletonTable from '~/components/elements/Skeleton/SkeletonTable.js';
+import DataGridTable from '~/components/elements/DataGridTable/index.js';
+import { fetchAllOrdersOfCusomers } from '~/apis/Admin/index.js';
 function MainOrders() {
   const [ordersFetch, setOrdersFetch] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
