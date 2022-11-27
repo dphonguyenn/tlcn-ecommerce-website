@@ -15,19 +15,20 @@ import {
 import React, { useState } from "react";
 import { MdOutlinePayment, MdKeyboardArrowRight } from "react-icons/md";
 import { styles } from "./styles.js";
-import { lastestOrder } from "../../redux/selectors";
+import { lastestOrder } from "~/store/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { style } from "@mui/system";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { BsCheck } from "react-icons/bs";
 // import { useCart } from 'react-use-cart';
 import { useNavigate } from "react-router-dom";
-import { ordersActions } from "../../redux/actions";
-import vietcombank from "../../media/img/selections/vietcombank.png";
-import check from "../../media/img/selections/check.png";
-import vnpay from "../../media/img/selections/vnpay.png";
-import momo from "../../media/img/selections/momo.png";
-import creadit from "../../media/img/selections/credits.png";
+
+import { ordersActions } from "~/store/actions";
+import vietcombank from "~/assets/img/selections/vietcombank.png";
+import check from "~/assets/img/selections/check.png";
+import vnpay from "~/assets/img/selections/vnpay.png";
+import momo from "~/assets/img/selections/momo.png";
+import creadit from "~/assets/img/selections/credits.png";
 function PaymentContainer() {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [valueRadio, setValueRadio] = useState("Chuyển khoản");

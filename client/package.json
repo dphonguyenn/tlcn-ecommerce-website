@@ -12,10 +12,9 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
-    "babel-plugin-module-resolver": "^4.1.0",
     "canvas-confetti": "^1.5.1",
     "clsx": "^1.1.1",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "react": "^17.0.2",
     "react-custom-scrollbars": "^4.2.1",
     "react-data-table-component": "^7.5.2",
@@ -37,9 +36,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,jsx src/",
     "lint:fix": "eslint --fix --ext js,jsx src/",
@@ -65,8 +64,15 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.20.2",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.0",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "customize-cra": "^1.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "react-app-rewired": "^2.2.1",
+    "webpack": "^5.75.0"
   }
 }

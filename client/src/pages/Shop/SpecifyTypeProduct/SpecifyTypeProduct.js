@@ -1,12 +1,10 @@
-import { Suspense, lazy, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getDevices } from '../../../redux/actions';
-// import { devicesFiltersState } from '../../../redux/selectors';
-import { getEndPointURL } from '../../../helpers';
-import SubHeader from '../../../components/SubHeader/index.js';
-const ReadyIntroTypeProduct = lazy(() => import('../../../components/Intro/IntroTypeProduct/index.js'));
-const ReadyMainPage = lazy(() => import('../../../components/MainPage/index.js'));
+import { getDevices } from '~/store/actions';
+import { getEndPointURL } from '~/helpers';
+import IntroTypeProduct from '~/components/Intro/IntroTypeProduct';
+import MainPage from '~/components/MainPage/index.js';
 
 function SpecifyTypeProduct() {
   const dispatch = useDispatch();
@@ -17,25 +15,8 @@ function SpecifyTypeProduct() {
 
   return (
     <div>
-      <SubHeader />
-      <Suspense
-        fallback={
-          <>
-            <h1>Loading data...</h1>
-          </>
-        }
-      >
-        <ReadyIntroTypeProduct />
-      </Suspense>
-      <Suspense
-        fallback={
-          <>
-            <h1>Loading data...</h1>
-          </>
-        }
-      >
-        <ReadyMainPage />
-      </Suspense>
+      <IntroTypeProduct />
+      <MainPage />
     </div>
   );
 }

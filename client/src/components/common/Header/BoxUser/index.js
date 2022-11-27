@@ -5,10 +5,11 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
 import { styles } from './styles.js';
 import { dataButton } from './dataButton.js';
-import { userState } from '../../../redux/selectors';
 import BoxLogin from '../BoxLogin';
-import ButtonItemMenuBox from '../../elements/ButtonItemBoxUser';
-import { hoverOnComponent } from '../../../redux/actions';
+import ButtonItemMenuBox from '~/components/elements/ButtonItemBoxUser/index.js';
+import { hoverOnComponent } from '~/store/actions/index.js';
+import { userState } from '~/store/selectors/index.js';
+
 function BoxUser({ style_icon }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openBoxLogin, setOpenBoxLogin] = useState(false);

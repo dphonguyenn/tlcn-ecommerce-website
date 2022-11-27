@@ -4,7 +4,7 @@ import { Container, Grid, Typography } from '@mui/material';
 import MenuSearchProducts from './MenuSearchProducts/index.js';
 import ProductsList from './ProductsList/index.js';
 import { useSelector } from 'react-redux';
-import { devicesFiltersState } from '../../redux/selectors';
+import { devicesFiltersState } from '~/store/selectors';
 function MainPage() {
   const location = useLocation();
   const data = useSelector(devicesFiltersState);

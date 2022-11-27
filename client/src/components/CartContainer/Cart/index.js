@@ -1,6 +1,5 @@
 import { Alert, Button, Grid, OutlinedInput, Paper, Typography } from '@mui/material';
 import React, { useCallback } from 'react';
-import { styles } from './styles';
 import { MdOutlineInfo, MdAdd, MdKeyboardArrowRight } from 'react-icons/md';
 import { RiCoupon2Line, RiMoneyDollarCircleLine } from 'react-icons/ri';
 import { HiMinus } from 'react-icons/hi';
@@ -9,10 +8,13 @@ import { useCart } from 'react-use-cart';
 import { BiCheck } from 'react-icons/bi';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import promo from '../../../media/img/selections/promo.png';
 import { style } from '@mui/system';
 import { Link, useNavigate } from 'react-router-dom';
+
+import promo from '~/assets/img/selections/promo.png';
+
+import { styles } from './styles';
+import 'react-toastify/dist/ReactToastify.css';
 function Cart() {
   const { items, updateItemQuantity, removeItem, cartTotal } = useCart();
   const ToastContent = () => (

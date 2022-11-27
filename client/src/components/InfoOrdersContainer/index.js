@@ -21,15 +21,17 @@ import { FiPhone } from 'react-icons/fi';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { MdKeyboardArrowRight, MdOutlineLocationOn } from 'react-icons/md';
 import { AiOutlineLike } from 'react-icons/ai';
-import { styles } from './styles.js';
-import { userState } from '../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import img_order from '../../media/img/selections/user02.png';
 import { style } from '@mui/system';
-import { HiOutlineClipboardList } from 'react-icons/hi';
 import { useCart } from 'react-use-cart';
+import { HiOutlineClipboardList } from 'react-icons/hi';
 import axios from 'axios';
-import { ordersActions } from '../../redux/actions';
+
+import { userState } from '~/store/selectors';
+import img_order from '~/assets/img/selections/user02.png'
+import { ordersActions } from '~/store/actions';
+
+import { styles } from './styles.js';
 function InfoOrdersContainer() {
   const isLogin = useSelector(userState);
   const [currentIdx, setCurrentIdx] = useState(0);

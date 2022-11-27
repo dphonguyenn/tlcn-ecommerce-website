@@ -1,6 +1,6 @@
 import { Button, Paper, Typography } from '@mui/material';
 import React from 'react';
-import img_intro from '../../../media/img/selections/user01.png';
+import img_intro from '~/assets/img/selections/user01.png';
 import { styles } from './styles.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineShoppingCart } from 'react-icons/ai';

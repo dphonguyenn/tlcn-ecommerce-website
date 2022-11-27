@@ -1,19 +1,22 @@
+import { useContext, useEffect, useState } from 'react';
+import { Toolbar, Typography, Button, Container, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 import { BsTruck } from 'react-icons/bs';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Toolbar, Typography, Button, Container, IconButton } from '@mui/material';
-import { Search, StyledInputBase, SearchIconWrapper, StyledAppBar } from '../Custom';
-import { brand_img_png } from '../../media/img';
+import { useSelector } from 'react-redux';
+import { useCart } from 'react-use-cart';
+
 import MenuHeader from './MenuHeader';
 import BoxUser from './BoxUser/index.js';
 import { styles } from './styles.js';
 import BoxNotification from './BoxNotification/index.js';
-import { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from '../../context/ThemeContext.js';
-import { useSelector } from 'react-redux';
-import { hoverComponentState } from '../../redux/selectors';
-import { useCart } from 'react-use-cart';
+
+import { Search, StyledInputBase, SearchIconWrapper, StyledAppBar } from '~/components/Custom';
+import { brand_img_png } from '~/assets/img';
+import { ThemeContext } from '~/context/ThemeContext.js';
+import { hoverComponentState } from '~/store/selectors';
+
 export default function Header() {
   const [isScrollDown, setIsScrollDown] = useState(false);
   const globalState = useContext(ThemeContext);

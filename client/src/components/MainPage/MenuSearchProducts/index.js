@@ -14,10 +14,9 @@ import Switch from '@mui/material/Switch';
 import { styles } from './styles.js';
 import { data } from './data.js';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { hoverOnComponent } from '../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { hoverOnMenuSearchBar } from '../../../redux/selectors';
-import { softDevices } from '../../../redux/actions';
+import { hoverOnMenuSearchBar } from '~/store/selectors';
+import { softDevices, hoverOnComponent } from '~/store/actions';
 export default function MenuSearchProducts() {
   const [arrTag, setArrTag] = useState([]);
   const dispatch = useDispatch();

@@ -15,11 +15,13 @@ import { GrClose } from "react-icons/gr";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import img_box_login from "../../../media/img/selections/12.jpg";
-import cursor_error from "../../../media/img/cursor/cursor06.png";
+
+import img_box_login from "~/assets/img/selections/12.jpg";
+import cursor_error from "~/assets/img/cursor/cursor06.png";
+import { postInfoLogin } from "~/store/actions";
+import { stateRequestAuth } from "~/store/selectors";
+
 import { styles } from "./styles.js";
-import { postInfoLogin } from "../../../redux/actions";
-import { stateRequestAuth } from "../../../redux/selectors";
 
 function BoxLogin({ isShow, handleClose }) {
   const [textPhone, setTextPhone] = useState("");

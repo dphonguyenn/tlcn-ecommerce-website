@@ -7,13 +7,13 @@ import { BsJournalCheck, BsMap } from 'react-icons/bs';
 import { AiOutlineCodeSandbox } from 'react-icons/ai';
 import { RiFacebookCircleLine } from 'react-icons/ri';
 import { BiNotepad } from 'react-icons/bi';
-import fb_png from '../../media/img/social/fb.png';
-import insta_png from '../../media/img/social/insta.png';
-import ytb_png from '../../media/img/social/youtube.png';
-import tiktok_png from '../../media/img/social/tiktok.png';
-import img_store from '../../media/img/selections/04.jpg';
-import brang_img from '../../media/img/subheader_item/brand1.png';
-import customer_img from '../../media/img/selections/13.jpg';
+import fb_png from '~/assets/img/social/fb.png';
+import insta_png from '~/assets/img/social/insta.png';
+import ytb_png from '~/assets/img/social/youtube.png';
+import tiktok_png from '~/assets/img/social/tiktok.png';
+import img_store from '~/assets/img/selections/04.jpg';
+import brang_img from '~/assets/img/subheader_item/brand1.png';
+import customer_img from '~/assets/img/selections/13.jpg';
 import { styles } from './styles.js';
 
 function Footer() {

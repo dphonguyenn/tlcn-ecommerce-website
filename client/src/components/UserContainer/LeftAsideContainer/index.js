@@ -1,20 +1,18 @@
-import { Avatar, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { styles } from "./styles.js";
-import { userState } from "../../../redux/selectors";
-import { dataButton } from "../../Header/BoxUser/dataButton.js";
-import ButtonItemMenuBox from "../../elements/ButtonItemBoxUser/index.js";
-import BoxLogin from "../../Header/BoxLogin/index.js";
+import { Avatar, Button, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { styles } from './styles.js';
+
+import { userState } from '~/store/selectors';
+import { dataButton } from '~/components/common/Header/BoxUser/dataButton.js';
+import ButtonItemMenuBox from '~/components/elements/ButtonItemBoxUser';
+import BoxLogin from '~/components/common/Header/BoxLogin';
+
 function LeftAsideContainer() {
   const [openBoxLogin, setOpenBoxLogin] = useState(false);
-  // const dispatch = useDispatch();
-  // const isLogin = useSelector(userState);
   const isLogin = useSelector(userState);
 
-  // const handleClickBtnClose = () => {
-  //   setOpenBoxLogin(false);
-  // };
   const handleOpenBoxLogin = () => {
     setOpenBoxLogin(true);
   };
@@ -31,26 +29,20 @@ function LeftAsideContainer() {
     </div>
   );
   const isUnauthenticatedUser = (
-    <div style={{ padding: "16px", display: "flex" }}>
+    <div style={{ padding: '16px', display: 'flex' }}>
       <div>
-        <img
-          src="https://thinkpro.vn/_nuxt/img/person-laptop.0220751.png"
-          alt="img user"
-          style={styles.img}
-        />
+        <img src="https://thinkpro.vn/_nuxt/img/person-laptop.0220751.png" alt="img user" style={styles.img} />
       </div>
       <div style={styles.wrap_part1_paper}>
         <Typography sx={styles.text01}>LapDarker xin chào</Typography>
-        <Typography sx={{ fontSize: "14px" }}>
-          Hãy đăng nhập để theo dõi đơn hàng và bảo hành dễ dàng nhé
-        </Typography>
+        <Typography sx={{ fontSize: '14px' }}>Hãy đăng nhập để theo dõi đơn hàng và bảo hành dễ dàng nhé</Typography>
         <Button sx={styles.btn_login} onClick={handleOpenBoxLogin}>
           <Typography sx={styles.text_login}>Đăng nhập</Typography>
         </Button>
         <div
           onClick={handleOpenBoxLogin}
           style={{
-            display: "flex",
+            display: 'flex'
           }}
         >
           <Typography sx={styles.text02}>Chưa có tài khoản?</Typography>
@@ -64,11 +56,7 @@ function LeftAsideContainer() {
   return (
     <div>
       <div style={styles.wrap_main_paper}>
-        {isLogin ? (
-          isAuthenticatedUser
-        ) : (
-          <div style={styles.part1_paper}>{isUnauthenticatedUser}</div>
-        )}
+        {isLogin ? isAuthenticatedUser : <div style={styles.part1_paper}>{isUnauthenticatedUser}</div>}
         <div>
           {dataButton.map((data, index) => {
             return (

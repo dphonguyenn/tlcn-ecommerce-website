@@ -1,8 +1,10 @@
 import { Button, Container, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { img_intro_bg } from '../../../media/img';
+
+import { img_intro_bg } from '~/assets/img';
+import { devicesFiltersState } from '~/store/selectors';
+
 import { styles } from './styles.js';
-import { devicesFiltersState } from '../../../redux/selectors';
 
 function IntroTypeProduct() {
   const data = useSelector(devicesFiltersState);

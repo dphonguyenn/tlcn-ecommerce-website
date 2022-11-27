@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { styles } from "./styles.js";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { softDevices } from "../../../redux/actions";
+import { softDevices } from "~/store/actions";
 // import { getAbsolutePath } from '../../../helpers/index.js';
 import { BiBookmark, BiCart, BiCheck } from "react-icons/bi";
 import { ToastContainer, toast } from "react-toastify";

@@ -1,4 +1,4 @@
-import img from '../../media/img';
+import img from '~/assets/img';
 
 export const devices = [
   {

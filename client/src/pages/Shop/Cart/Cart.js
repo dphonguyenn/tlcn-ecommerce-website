@@ -1,11 +1,9 @@
 import React from 'react';
-import CartContainer from '../../../components/CartContainer/index.js';
-import SubHeader from '../../../components/SubHeader/index.js';
+import CartContainer from '~/components/CartContainer';
 
 function Cart() {
   return (
     <div>
-      <SubHeader />
       <CartContainer />
     </div>
   );

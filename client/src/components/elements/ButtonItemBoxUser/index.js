@@ -1,10 +1,11 @@
 import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { IoIosArrowForward } from 'react-icons/io';
-import useStyles from './styles.js';
-import cursor_error from '../../../media/img/cursor/cursor06.png';
 import { useDispatch } from 'react-redux';
-import { postLogout } from '../../../redux/actions';
+import { IoIosArrowForward } from 'react-icons/io';
+
+import useStyles from './styles.js';
+import cursor_error from '~/assets/img/cursor/cursor06.png';
+import { postLogout } from '~/store/actions';
 
 function ButtonItemMenuBox({ iconButton, text, slice, auth, path, closeBox }) {
   const classes = useStyles();
@@ -20,6 +21,7 @@ function ButtonItemMenuBox({ iconButton, text, slice, auth, path, closeBox }) {
       e.preventDefault();
     }
     closeBox();
+    console.log(_path, auth);
   };
   if (localStorage.getItem('_pathname')) {
     var currentBtn = localStorage.getItem('_pathname').includes(path);

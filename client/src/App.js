@@ -30,7 +30,7 @@ import { MdOutlineWavingHand } from 'react-icons/md';
 import { Button, Typography } from '@mui/material';
 import { toast, ToastContainer } from 'react-toastify';
 import { useSelector } from 'react-redux';
-import { stateRequestAuth } from './redux/selectors/index.js';
+import { stateRequestAuth } from './store/selectors/index.js';
 import Policy from './components/UserContainer/RightAsideContainer/Policy/index.js';
 import InsurancePolicy from './components/UserContainer/RightAsideContainer/Policy/InsurancePolicy/index.js';
 import ServiceCost from './components/UserContainer/RightAsideContainer/Policy/ServiceCost/index.js';

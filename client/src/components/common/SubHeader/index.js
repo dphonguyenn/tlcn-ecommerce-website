@@ -1,17 +1,17 @@
 import { useState, useContext, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Box } from '@mui/system';
-import { devices } from './data.js';
+import { useSelector } from 'react-redux';
 import { Button, Typography, IconButton, Container } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+
+import { ThemeContext } from '~/context/ThemeContext.js';
+import { hoverComponentState } from '~/store/selectors';
+
 import useStyles from './styles.js';
-import { ThemeContext } from '../../context/ThemeContext.js';
-import { hoverComponentState } from '../../redux/selectors';
-import { useSelector } from 'react-redux';
-// import { getDetailedDevice, getDevices } from '../../redux/actions/index.js';
-// import { getAbsolutePath, getEndPointURL } from '../../helpers/index.js';
+import { devices } from './data.js';
 
 const styles = {
   box: {

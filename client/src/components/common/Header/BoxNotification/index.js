@@ -3,13 +3,13 @@ import { useState } from "react";
 import { Button, Paper, Typography, Popover, IconButton } from "@mui/material";
 import { BiBell } from "react-icons/bi";
 import { GrClose } from "react-icons/gr";
-import { styles } from "./styles.js";
-import { userState } from "../../../redux/selectors";
-import BoxLogin from "../BoxLogin";
-// import { hoverOnComponent } from '../../../redux/actions';
-import img_intro from "../../../media/img/selections/user01.png";
 import { useSelector } from "react-redux";
-// import { Link } from 'react-router-dom';
+
+import { userState } from "~/store/selectors";
+import img_intro from "~/assets/img/selections/user01.png";
+
+import BoxLogin from "../BoxLogin";
+import { styles } from "./styles.js";
 function BoxNotification({ style_icon }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openBoxLogin, setOpenBoxLogin] = useState(false);

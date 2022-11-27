@@ -17,7 +17,6 @@ function Policy() {
   useLayoutEffect(() => {
     switch (location.pathname) {
       case '/user/policy/insurance':
-        console.log('vao day');
         setCurrentIdx(0);
         break;
       case '/user/policy/deliver':

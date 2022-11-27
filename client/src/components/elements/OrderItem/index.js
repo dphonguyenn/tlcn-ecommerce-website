@@ -4,16 +4,18 @@ import { BiHome } from 'react-icons/bi';
 import { MdKeyboardArrowRight, MdOutlineInfo } from 'react-icons/md';
 import { RiMoneyDollarCircleLine } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
-import { styles } from './styles.js';
 import { AiOutlineFieldNumber } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
 import moment from 'moment';
-import vietcombank from '../../../media/img/selections/vietcombank.png';
-import vnpay from '../../../media/img/selections/vnpay.png';
-import momo from '../../../media/img/selections/momo.png';
-import creadit from '../../../media/img/selections/credits.png';
 import { useDispatch } from 'react-redux';
-import { ordersActions } from '../../../redux/actions';
+
+import vietcombank from '~/assets/img/selections/vietcombank.png';
+import vnpay from '~/assets/img/selections/vnpay.png';
+import momo from '~/assets/img/selections/momo.png';
+import creadit from '~/assets/img/selections/credits.png';
+import { ordersActions } from '~/store/actions';
+
+import { styles } from './styles.js';
 function OrderItem({ data }) {
   console.log(data);
   const prd = data.products[0];

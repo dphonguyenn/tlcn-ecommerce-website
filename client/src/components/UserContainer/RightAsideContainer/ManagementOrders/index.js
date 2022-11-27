@@ -4,9 +4,9 @@ import { Box, Button, Paper, Tab, Tabs, Typography } from '@mui/material';
 import { styles } from './styles.js';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
-import { ordersState } from '../../../../redux/selectors';
-import { ordersActions } from '../../../../redux/actions';
-import OrderItem from '../../../../components/elements/OrderItem';
+import { ordersState } from '~/store/selectors';
+import { ordersActions } from '~/store/actions';
+import OrderItem from '~/components/elements/OrderItem';
 function ManagementOrders() {
   const [currentIdx, setCurrentIdx] = useState(0);
   const navigate = useNavigate();

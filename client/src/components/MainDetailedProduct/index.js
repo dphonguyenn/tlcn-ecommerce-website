@@ -1,12 +1,14 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container, Grid, Typography } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import InfoMediaProduct from "./InfoMediaProduct";
+
 import InfoPayment from "./InfoPayment";
 import InfoDetailedProduct from "./InfoDetailedProduct";
-import { useSelector } from "react-redux";
-import { detailedDeviceState } from "../../redux/selectors";
-import { useEffect, useState } from "react";
+import InfoMediaProduct from "./InfoMediaProduct";
+
+import { detailedDeviceState } from "~/store/selectors";
 import SkeletonTable from "../elements/Skeleton/SkeletonTable.js";
 const styles = {
   container_page: {
