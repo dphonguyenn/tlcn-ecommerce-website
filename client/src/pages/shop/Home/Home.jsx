@@ -7,7 +7,7 @@ import { PuffLoader } from 'react-spinners';
 // import { getDevices } from '~/store/actions';
 import IntroHomePage from '~/components/intro/IntroHomePage';
 import MainPage from './MainPage';
-import { fetchLaptops } from '~/apis/index.js';
+import { fetchLaptops } from '~/apis';
 import SpinnerLoader from '~/components/common/SpinnerLoader/Spinner.jsx';
 
 function Home() {
