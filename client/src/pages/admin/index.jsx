@@ -17,7 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-import { AppBarDashboard, DrawerDashboard, DrawerHeader } from '~/components/custom/Dashboard';
+import { AppBarDashboard, DrawerDashboard, DrawerHeader } from '~/components/Custom/Dashboard/index.js';
 import { dataDrawerPart1, dataDrawerPart2 } from '~/components/elements/ElementDrawer/data.js';
 const isSelect = {
   bgcolor: '#242A38',

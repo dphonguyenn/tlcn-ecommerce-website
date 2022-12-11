@@ -5,7 +5,7 @@ import { PuffLoader } from 'react-spinners';
 
 // import { getDevices } from '~/store/actions';
 import { getEndPointURL } from '~/utils';
-import IntroTypeProduct from '~/components/intro/IntroTypeProduct';
+import IntroTypeProduct from '~/components/Intro/IntroTypeProduct';
 import MainPage from '~/pages/shop/Home/MainPage';
 import { fetchDevices } from '~/apis/index.js';
 import SpinnerLoader from '~/components/common/SpinnerLoader/Spinner.jsx';

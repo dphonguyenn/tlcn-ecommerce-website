@@ -12,7 +12,7 @@ import BoxUser from './BoxUser';
 import { styles } from './styles.js';
 import BoxNotification from './BoxNotification';
 
-import { Search, StyledInputBase, SearchIconWrapper, StyledAppBar } from '~/components/custom';
+import { Search, StyledInputBase, SearchIconWrapper, StyledAppBar } from '~/components/Custom';
 import { brand_img_png } from '~/assets/img';
 import { ThemeContext } from '~/context/ThemeContext.js';
 import { hoverComponentState } from '~/store/selectors';

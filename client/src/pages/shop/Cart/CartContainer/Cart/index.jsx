@@ -13,7 +13,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import promo from '~/assets/img/selections/promo.png';
 
-import { styles } from './styles';
+import { styles } from './styles.js';
 import 'react-toastify/dist/ReactToastify.css';
 function Cart() {
   const { items, updateItemQuantity, removeItem, cartTotal } = useCart();

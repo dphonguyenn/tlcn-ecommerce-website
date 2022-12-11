@@ -5,9 +5,9 @@ import { PuffLoader } from 'react-spinners';
 
 // import { devicesFiltersState } from '~/store/selectors';
 // import { getDevices } from '~/store/actions';
-import IntroHomePage from '~/components/intro/IntroHomePage';
 import MainPage from './MainPage';
 import { fetchLaptops } from '~/apis';
+import IntroHomePage from '~/components/Intro/IntroHomePage';
 import SpinnerLoader from '~/components/common/SpinnerLoader/Spinner.jsx';
 
 function Home() {
