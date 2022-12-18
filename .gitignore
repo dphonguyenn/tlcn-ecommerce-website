@@ -1,6 +1,8 @@
 server/node_modules
+server/package-lock.json
 server/.env
 build
 node_modules
 .env
 .git/info/exclude
+package-lock.json
