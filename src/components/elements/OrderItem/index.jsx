@@ -18,7 +18,6 @@ import { ordersActions } from '~/store/actions';
 import { styles } from './styles.js';
 
 function OrderItem({ data }) {
-  console.log(data);
   const prd = data.products[0];
   const [openModal, setOpenModal] = useState(false);
   const [valueRadio, setValueRadio] = useState('Chuyển khoản');
@@ -244,9 +243,9 @@ function OrderItem({ data }) {
                     <BiHome style={styles.icon2} />
                     <Typography sx={styles.text3}>Có sẵn tại cửa hàng</Typography>
                   </div>
-                  {data.products.map(product => {
+                  {data.products.map((product, index) => {
                     return (
-                      <div style={Object.assign({ ...styles.part3 }, { marginBottom: '8px' })}>
+                      <div key={index} style={Object.assign({ ...styles.part3 }, { marginBottom: '8px' })}>
                         <div style={styles.wrap_part3}>
                           <div style={styles.wrap_img}>
                             <img src={product._img} alt="" style={styles.img} />

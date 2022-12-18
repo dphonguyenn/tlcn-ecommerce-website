@@ -15,7 +15,7 @@ function SpecifyTypeProduct() {
   const [products, setProducts] = useState(null);
 
   // const dispatch = useDispatch();
-  const location = useLocation();
+  const {pathname} = useLocation();
   const fetchDataPage = async (type) => {
     const rs = await fetchDevices(type);
     if (rs && rs?.data) {
@@ -29,16 +29,19 @@ function SpecifyTypeProduct() {
   
   useEffect(() => {
     // dispatch(getDevices.getDevicesRequest(getEndPointURL(location.pathname)));
-    fetchDataPage(getEndPointURL(location.pathname))
+    fetchDataPage(getEndPointURL(pathname))
       .then(() => setLoading(false))
       .catch(err => {
         console.log('error at SpecifyTypeProduct()', err);
         setLoading(false);
       })
-  }, []);
+  }, [pathname]);
   
   if (loading) {
-    return <SpinnerLoader open={loading} />
+    return <>
+      <IntroTypeProduct data={null} />
+      <SpinnerLoader open={loading} />
+    </>
   }
 
   return (

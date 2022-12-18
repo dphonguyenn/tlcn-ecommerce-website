@@ -1,8 +1,8 @@
 export const styles = {
   wrapper: {
     position: 'fixed',
-    right: '1.5rem',
-    bottom: '1.5rem',
+    right: '1.3rem',
+    bottom: '5.1rem',
     zIndex: 50,
     display: 'flex',
     flexDirection: 'column',

@@ -131,7 +131,7 @@ function InfoDetailedProduct({ data }) {
       {Object.keys(data.configuration).map((config, index) => {
         console.log(arrValueConfig[index]);
         return (
-          <div key={config} style={styles.side_info}>
+          <div key={index} style={styles.side_info}>
             <div style={styles.wrap_elm_info}>
               <div style={styles.main_elm_info}>
                 <Typography

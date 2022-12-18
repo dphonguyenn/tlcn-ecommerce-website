@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
 import { PuffLoader } from 'react-spinners';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useLocation } from 'react-router-dom';
-
-// import { devicesFiltersState } from '~/store/selectors';
-// import { getDevices } from '~/store/actions';
 import MainPage from './MainPage';
 import { fetchLaptops } from '~/apis';
 import IntroHomePage from '~/components/Intro/IntroHomePage';
@@ -13,10 +8,6 @@ import SpinnerLoader from '~/components/common/SpinnerLoader/Spinner.jsx';
 function Home() {
   const [loading, setLoading] = useState(true);
   const [laptops, setLaptops] = useState(null);
-  
-  // const location = useLocation();
-  // // const dispatch = useDispatch();
-  // // const laptops = useSelector(devicesFiltersState);
 
   const fetchDataPage = async () => {
     const rs = await fetchLaptops();
@@ -29,8 +20,8 @@ function Home() {
   }
 
   useEffect(() => {
-    // dispatch(getDevices.getDevicesRequest('laptops'));
-    fetchDataPage().then(() => setLoading(false))
+    fetchDataPage()
+      .then(() => setLoading(false))
       .catch(err => {
         console.log('error at Home()', err);
         setLoading(false);
@@ -38,7 +29,10 @@ function Home() {
   }, []);
 
   if (loading) {
-    return <SpinnerLoader open={loading} />
+    return <>
+      <IntroHomePage />
+      <SpinnerLoader open={loading} />
+    </>
   }
 
   return (

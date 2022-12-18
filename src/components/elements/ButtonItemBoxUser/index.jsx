@@ -30,9 +30,7 @@ function ButtonItemMenuBox({ iconButton, text, slice, auth, path, closeBox }) {
     <Link to={`/${path}`} className={classes.a} onClick={e => handleClickOnBtn(e, path, auth)}>
       <Button
         className={classes.btn}
-        style={{
-          borderBottom: slice ? '1px solid rgba(240, 242, 244,1)' : '0px'
-        }}
+        style={{borderBottom: slice ? '1px solid rgba(240, 242, 244,1)' : '0px'}}
         disabled={auth}
         sx={{
           border: currentBtn ? '1px solid #0065ee !important' : '0px',
