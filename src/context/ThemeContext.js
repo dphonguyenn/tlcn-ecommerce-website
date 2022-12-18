@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { hoverComponentState } from '~/store/selectors';
+import { hoverComponentState } from '~/store/selectors/index.js';
 export const ThemeContext = createContext();
 export const ContextProvider = ({ children }) => {
   // state scroll trên toàn bộ ứng dụng

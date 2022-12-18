@@ -23,15 +23,15 @@
       "settings": {
         "import/resolver": {
           "node": {
-            "paths": ["client/src"],
+            "paths": ["src"],
             "alias": {
-              "apis": "./client/src/apis",
-              "components": "./client/src/components",
-              "context": "./client/src/context",
-              "helpers": "./client/src/helpers",
-              "assets": "./client/src/assets",
-              "pages": "./client/src/pages",
-              "redux": "./client/src/redux"
+              "apis": "./src/apis",
+              "components": "./src/components",
+              "context": "./src/context",
+              "helpers": "./src/helpers",
+              "assets": "./src/assets",
+              "pages": "./src/pages",
+              "redux": "./src/redux"
             }
           }
         }
