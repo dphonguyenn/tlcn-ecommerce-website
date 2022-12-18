@@ -17,17 +17,17 @@ export const devices = [
     img: img.keyboard_img
   },
   {
-    url: '',
+    url: 'ergonomics',
     name: 'Ghế công thái học',
     img: img.ghe_img
   },
   {
-    url: '',
+    url: 'casepc',
     name: 'Case máy tính',
     img: img.casepc_img
   },
   {
-    url: '',
+    url: 'balo',
     name: 'Balo túi',
     img: img.balo_img
   },
@@ -37,12 +37,12 @@ export const devices = [
   //     img: img.ban_img
   // },
   {
-    url: '',
+    url: 'playstation',
     name: 'Máy chơi game',
     img: img.playstation_img
   },
   {
-    url: '',
+    url: 'headphone',
     name: 'Tai nghe',
     img: img.headphone_img
   },
@@ -52,17 +52,17 @@ export const devices = [
   //     img: img.loa_img
   // },
   {
-    url: '',
+    url: 'charger',
     name: 'Sạc',
     img: img.sac_img
   },
   {
-    url: '',
+    url: 'harddrive',
     name: 'Ô cứng',
     img: img.harddrive_img
   },
   {
-    url: '',
+    url: 'ram',
     name: 'RAM',
     img: img.ram_img
   },
@@ -72,12 +72,12 @@ export const devices = [
     img: img.mouse_img
   },
   {
-    url: '',
+    url: 'software',
     name: 'Phần mềm',
     img: img.software_img
   },
   {
-    url: '',
+    url: 'pc',
     name: 'PC',
     img: img.pc_img
   }

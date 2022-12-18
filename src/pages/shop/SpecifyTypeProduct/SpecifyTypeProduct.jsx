@@ -9,10 +9,12 @@ import IntroTypeProduct from '~/components/Intro/IntroTypeProduct';
 import MainPage from '~/pages/shop/Home/MainPage';
 import { fetchDevices } from '~/apis/index.js';
 import SpinnerLoader from '~/components/common/SpinnerLoader/Spinner.jsx';
+import UnreadyProductPage from './UnreadyProduct/index.jsx';
 
 function SpecifyTypeProduct() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState(null);
+  const [showUnreadyProductPage, setShowUnreadyProducePage] = useState(false);
 
   // const dispatch = useDispatch();
   const {pathname} = useLocation();
@@ -28,12 +30,13 @@ function SpecifyTypeProduct() {
 
   
   useEffect(() => {
-    // dispatch(getDevices.getDevicesRequest(getEndPointURL(location.pathname)));
+    setShowUnreadyProducePage(false);
     fetchDataPage(getEndPointURL(pathname))
       .then(() => setLoading(false))
       .catch(err => {
         console.log('error at SpecifyTypeProduct()', err);
         setLoading(false);
+        setShowUnreadyProducePage(true);
       })
   }, [pathname]);
   
@@ -42,6 +45,10 @@ function SpecifyTypeProduct() {
       <IntroTypeProduct data={null} />
       <SpinnerLoader open={loading} />
     </>
+  }
+
+  if (showUnreadyProductPage) {
+    return <UnreadyProductPage />
   }
 
   return (
