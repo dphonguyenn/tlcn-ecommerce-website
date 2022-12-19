@@ -14,7 +14,7 @@ import {
   Button,
 } from "@mui/material";
 import { Search, SearchIconWrapper, StyledInputBase } from "~/components/Custom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { styles } from "./styles.js";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -26,16 +26,35 @@ import { useCart } from "react-use-cart";
 import { softDevices } from "~/store/actions";
 import "react-toastify/dist/ReactToastify.css";
 
+const TAG_OBJ = {
+  REMARKABLE: {
+    field: 'name',
+    ascSort: 'false',
+    name: 'REMARKABLE'
+  },
+  LOW_TO_HIGH: {
+    field: 'original_price',
+    ascSort: 'true',
+    name: 'LOW_TO_HIGH'
+  },
+  HIGH_TO_LOW: {
+    field: 'original_price',
+    ascSort: 'false',
+    name: 'HIGH_TO_LOW'
+  }
+};
+
 function ProductsList({ data }) {
-  const [checkedSoft, setCheckedSoft] = useState("REMARKABLE");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const checkedSoft = Object.values(TAG_OBJ).find(i => i.field === searchParams.get('field') && i.ascSort === searchParams.get('ascSort'))?.name || 'REMARKABLE';
   const [textSearch, setTextSearch] = useState("");
   const [showGroupBtnCard, setShowBtnGroupCard] = useState("");
   const dispatch = useDispatch();
   let canRedirect = true;
 
   const handleCheckedSoftDevices = (tag) => {
-    setCheckedSoft(tag);
     dispatch(softDevices.priorityFilter(tag));
+    setSearchParams(TAG_OBJ[tag] || {});
   };
 
   const handleSearchDevices = (e) => {
@@ -77,8 +96,7 @@ function ProductsList({ data }) {
 
   const handleClickToBtnCart = (data) => {
     canRedirect = false;
-    const { _id, sale_price, video, img, suit, configuration, ...newData } =
-      data;
+    const { _id, sale_price, video, img, suit, configuration, ...newData } = data;
     const { detailed_size, ...newConfiguration } = configuration;
     addItem(
       {
@@ -189,7 +207,7 @@ function ProductsList({ data }) {
           </FormControl>
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <Typography>{data.length} sản phẩm</Typography>
+          <Typography>{data?.length} sản phẩm</Typography>
         </div>
       </div>
       <Grid container sx={{ m: "0", width: "100% !important" }} spacing={1.5}>

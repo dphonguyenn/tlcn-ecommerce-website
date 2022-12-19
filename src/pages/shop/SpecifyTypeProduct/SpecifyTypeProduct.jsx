@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { PuffLoader } from 'react-spinners';
 
 // import { getDevices } from '~/store/actions';
@@ -14,10 +14,15 @@ function SpecifyTypeProduct() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState(null);
 
+  const [query] = useSearchParams();
+  const search = query.get('search') || '';
+  const field = query.get('field') || '';
+  const ascSort = query.get('ascSort') || 'false';
+
   // const dispatch = useDispatch();
   const location = useLocation();
   const fetchDataPage = async (type) => {
-    const rs = await fetchDevices(type);
+    const rs = await fetchDevices(type, search, field, ascSort);
     if (rs && rs?.data) {
       setProducts(rs?.data);
     }
@@ -25,7 +30,6 @@ function SpecifyTypeProduct() {
       return <h1>Something wrong</h1>
     }
   }
-
   
   useEffect(() => {
     // dispatch(getDevices.getDevicesRequest(getEndPointURL(location.pathname)));
@@ -35,7 +39,7 @@ function SpecifyTypeProduct() {
         console.log('error at SpecifyTypeProduct()', err);
         setLoading(false);
       })
-  }, []);
+  }, [search, field, ascSort]);
   
   if (loading) {
     return <SpinnerLoader open={loading} />

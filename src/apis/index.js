@@ -1,22 +1,34 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: `${process.env.REACT_APP_API_KEY}`,
+  baseURL:
+    !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000'
+      : `${process.env.REACT_APP_API_KEY}`,
   headers: {
     'Content-Type': 'application/json'
   }
 });
+export const fetchLaptops = async (search, field, ascSort) => {
+  const queryObj = new URLSearchParams({
+    search,
+    field,
+    ascSort
+  });
 
-export const fetchLaptops = async () => {
-  const response = await API.get('/');
+  const response = await API.get('/products', { params: queryObj });
   if (response) {
     return response;
-  }
-  else return false;
+  } else return false;
 };
 
-export const fetchDevices = async type => {
-  const response = await API.get(`/product/${type}`);
+export const fetchDevices = async (type, search, field, ascSort) => {
+  const queryObj = new URLSearchParams({
+    search,
+    field,
+    ascSort
+  });
+  const response = await API.get(`/product/${type}`, { params: queryObj });
   if (response) {
     return response;
   }

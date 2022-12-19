@@ -3,5 +3,5 @@ import { getDetailedProduct, getProductsFollowType, getLaptops } from '../app/co
 const router = express.Router();
 router.get('/product/:type_product/:id_product', getDetailedProduct);
 router.get('/product/:type_product', getProductsFollowType);
-router.get('/', getLaptops)
+router.get('/products', getLaptops);
 export default router;
