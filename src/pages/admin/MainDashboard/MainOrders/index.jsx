@@ -22,8 +22,10 @@ function MainOrders() {
     return () => clearTimeout(timing);
   }, []);
 
+  console.log('data fetched ------> ', ordersFetch);
+
   return (
-    <div>
+    <div className=''>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Typography sx={{ fontSize: '28px', fontWeight: 'bold' }}>Đơn hàng</Typography>
         <Button
@@ -44,7 +46,7 @@ function MainOrders() {
           >
             Thêm
           </Typography>
-          <IoMdAdd style={{ fontSize: '19px', color: '#fff', fontWeight: 'bold' }} />
+          {/* <IoMdAdd style={{ fontSize: '19px', color: '#fff', fontWeight: 'bold' }} /> */}
         </Button>
       </div>
       <div style={{ height: '520px', width: '100%', padding: '24px 0' }}>
