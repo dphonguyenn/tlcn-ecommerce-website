@@ -16,8 +16,18 @@ import { Search, StyledInputBase, SearchIconWrapper, StyledAppBar } from '~/comp
 import { brand_img_png } from '~/assets/img';
 import { ThemeContext } from '~/context/ThemeContext.js';
 import { hoverComponentState } from '~/store/selectors';
+import { DropDown } from '~/components/elements/DropDown';
+import { useDebounce } from '~/hook';
+import { fetchLaptops } from '~/apis';
 
 export default function Header() {
+  const [searchInput, setSearchInput] = useState('');
+  const debouncedSearch = useDebounce(searchInput, 700);
+  const [rsData, setRsData] = useState(null);
+  const hideDropdown = () => {
+    setRsData(null);
+  };
+
   const [isScrollDown, setIsScrollDown] = useState(false);
   const globalState = useContext(ThemeContext);
   const isHoverComponent = useSelector(hoverComponentState);
@@ -30,6 +40,18 @@ export default function Header() {
       setIsScrollDown(false);
     }
   }, [globalState.isScrollDown, isHoverComponent, isScrollDown]);
+
+  useEffect(() => {
+    if (debouncedSearch.trim()) {
+      fetchLaptops(debouncedSearch)
+        .then(data => {
+          if (data.status === 200) setRsData(data.data);
+        })
+        .catch(e => console.log('fetchLaptops error', e));
+    } else {
+      hideDropdown();
+    }
+  }, [debouncedSearch]);
 
   return (
     <StyledAppBar sx={styles.app_bar}>
@@ -66,10 +88,14 @@ export default function Header() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+                value={searchInput}
+                onChange={e => setSearchInput(e.target.value)}
                 placeholder="Tìm kiếm…"
                 inputProps={{ 'aria-label': 'search' }}
                 style={{ width: isScrollDown ? '272px' : '372px' }}
               />
+
+              <DropDown products={rsData} callback={hideDropdown} />
             </Search>
           </div>
           <Link to="/cart" style={{ textDecoration: 'none' }}>

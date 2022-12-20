@@ -15,6 +15,95 @@ import promo from '~/assets/img/selections/promo.png';
 
 import { styles } from './styles.js';
 import 'react-toastify/dist/ReactToastify.css';
+
+export function CartItem({ item, index, itemLength, showControl, showDetail, callback }) {
+  return (
+    <Paper key={item.id} sx={Object.assign({ ...styles.paper }, index === itemLength - 1 && { margin: '0' })}>
+      <div style={styles.wrap_paper}>
+        <div style={styles.part1}>
+          <img src={item._img} alt={item.name} style={styles.img} />
+        </div>
+        <div style={styles.part2}>
+          <div style={{ display: 'flex' }}>
+            <Link to={`/product/${item.type}s/${item.id}`} style={{ textDecoration: 'none' }} onClick={callback}>
+              <Typography sx={styles.text1}>{item.name}</Typography>
+            </Link>
+          </div>
+          {showDetail && (
+            <div style={styles.part2_1}>
+              <div>
+                <MdOutlineInfo style={styles.icon1} />
+              </div>
+              <div>
+                {Object.values(item.configuration).map((config, index) => {
+                  return (
+                    <Typography key={index} component="span" sx={{ fontSize: '14px' }}>
+                      {index < 3 && `• ${config.toString()} `}
+                    </Typography>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          <div style={styles.part2_2}>
+            <RiMoneyDollarCircleLine style={styles.icon1} />
+            <Typography sx={styles.text2}>
+              {parseInt(item.price)
+                .toString()
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+            </Typography>
+            {item.sale !== 0 && (
+              <Typography>
+                <del style={styles.del}>
+                  {parseInt(item.original_price)
+                    .toString()
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </del>
+              </Typography>
+            )}
+            {item.sale !== 0 && <Typography sx={styles.text3}> -{item.sale}%</Typography>}
+          </div>
+        </div>
+        {showControl && (
+          <>
+            <div style={{ display: 'flex' }}>
+              <Button
+                disabled={item.quantity === 1}
+                disableRipple
+                sx={styles.btn}
+                onClick={() => handleReduceItem(item.id, item.quantity)}
+              >
+                <HiMinus />
+              </Button>
+              <Typography>{item.quantity}</Typography>
+              <Button
+                disableRipple
+                sx={styles.btn}
+                onClick={() => {
+                  handleAddItem(item.id, item.quantity);
+                }}
+              >
+                <MdAdd />
+              </Button>
+            </div>
+            <div style={styles.part3}>
+              <Typography sx={styles.text4}>
+                {parseInt(item.price)
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+              </Typography>
+              <Button disableRipple sx={styles.btn1} onClick={() => removeItemInCart(item.id)}>
+                <Typography sx={styles.text5}>Xoá</Typography>
+                <CgCloseO style={{ padding: '4px' }} />
+              </Button>
+            </div>
+          </>
+        )}
+      </div>
+    </Paper>
+  );
+}
+
 function Cart() {
   const { items, updateItemQuantity, removeItem, cartTotal } = useCart();
   const ToastContent = () => (
@@ -57,91 +146,13 @@ function Cart() {
     <Grid columnSpacing={4} container>
       <Grid item md={8}>
         {items.map((item, index) => (
-          <Paper key={item.id} sx={Object.assign({ ...styles.paper }, index === items.length - 1 && { margin: '0' })}>
-            <div style={styles.wrap_paper}>
-              <div style={styles.part1}>
-                <img src={item._img} alt="" style={styles.img} />
-              </div>
-              <div style={styles.part2}>
-                <div style={{ display: 'flex' }}>
-                  <Link to={`/product/${item.type}s/${item.id}`} style={{ textDecoration: 'none' }}>
-                    <Typography sx={styles.text1}>{item.name}</Typography>
-                  </Link>
-                </div>
-                <div style={styles.part2_1}>
-                  <div>
-                    <MdOutlineInfo style={styles.icon1} />
-                  </div>
-                  <div>
-                    {Object.values(item.configuration).map((config, index) => {
-                      return (
-                        <Typography key={index} component="span" sx={{ fontSize: '14px' }}>
-                          {index < 3 && `• ${config.toString()} `}
-                        </Typography>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div style={styles.part2_2}>
-                  <div>
-                    <RiMoneyDollarCircleLine style={styles.icon1} />
-                  </div>
-                  <Typography sx={styles.text2}>
-                    {parseInt(item.price)
-                      .toString()
-                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
-                  </Typography>
-                  {item.sale !== 0 && (
-                    <Typography>
-                      <del style={styles.del}>
-                        {parseInt(item.original_price)
-                          .toString()
-                          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
-                      </del>
-                    </Typography>
-                  )}
-                  {item.sale !== 0 && <Typography sx={styles.text3}> -{item.sale}%</Typography>}
-                </div>
-              </div>
-              <div style={{ display: 'flex' }}>
-                <Button
-                  disabled={item.quantity === 1}
-                  disableRipple
-                  sx={styles.btn}
-                  onClick={() => handleReduceItem(item.id, item.quantity)}
-                >
-                  <HiMinus />
-                </Button>
-                <Typography>{item.quantity}</Typography>
-                <Button
-                  disableRipple
-                  sx={styles.btn}
-                  onClick={() => {
-                    handleAddItem(item.id, item.quantity);
-                  }}
-                >
-                  <MdAdd />
-                </Button>
-              </div>
-              <div style={styles.part3}>
-                <Typography sx={styles.text4}>
-                  {parseInt(item.price)
-                    .toString()
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
-                </Typography>
-                <Button disableRipple sx={styles.btn1} onClick={() => removeItemInCart(item.id)}>
-                  <Typography sx={styles.text5}>Xoá</Typography>
-                  <CgCloseO style={{ padding: '4px' }} />
-                </Button>
-              </div>
-            </div>
-          </Paper>
+          <CartItem item={item} index={index} itemLength={items.length} showControl showDetail />
         ))}
       </Grid>
       <Grid item md={4}>
         <div style={styles.wrap_aside}>
           <Paper sx={Object.assign({ ...styles.paper }, { padding: '16px', margin: '0 0 16px 0' })}>
-            <div>
+            <dziv>
               <div style={styles.part4}>
                 <RiCoupon2Line style={styles.icon2} />
                 <Typography sx={styles.text6}>Mã khuyến mại</Typography>
@@ -152,7 +163,7 @@ function Cart() {
                   <OutlinedInput sx={styles.outlined_input} placeholder="Nhập mã khuyến mại" />
                 </div>
               </div>
-            </div>
+            </dziv>
           </Paper>
           <Paper sx={Object.assign({ ...styles.paper }, { padding: '16px', margin: '0 0 16px 0' })}>
             <div>

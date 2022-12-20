@@ -7,7 +7,7 @@ export const styles = {
   },
   wrap_paper: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   wrap_aside: {
     position: 'sticky',
@@ -30,7 +30,8 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     padding: '0 12px',
-    flex: '1 1 0%'
+    flex: '1 1 0%',
+    justifyContent: 'center'
   },
   part2_1: {
     display: 'flex',
