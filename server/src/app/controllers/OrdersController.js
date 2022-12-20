@@ -131,4 +131,20 @@ export const updateOrders = async (req, res, next) => {
   } catch (error) {
     res.status(500).json(error);
   }
+  
+};
+
+export const getDetailOrder = async (req, res, next) => {
+  console.log('req--------------------------------->',req.params);
+  const id = req.params.id;
+  try {
+        const detailOrder = await BillModel.findOne(
+          { _id: id },
+        );
+        if (!detailOrder) res.status(500).json('ORDER NOT EXIST');
+        else res.status(200).json(detailOrder);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+  
 };

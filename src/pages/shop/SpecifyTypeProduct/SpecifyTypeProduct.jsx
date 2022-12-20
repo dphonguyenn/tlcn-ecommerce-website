@@ -9,10 +9,12 @@ import IntroTypeProduct from '~/components/Intro/IntroTypeProduct';
 import MainPage from '~/pages/shop/Home/MainPage';
 import { fetchDevices } from '~/apis/index.js';
 import SpinnerLoader from '~/components/common/SpinnerLoader/Spinner.jsx';
+import UnreadyProductPage from './UnreadyProduct/index.jsx';
 
 function SpecifyTypeProduct() {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState(null);
+  const [showUnreadyProductPage, setShowUnreadyProducePage] = useState(false);
 
   const [query] = useSearchParams();
   const search = query.get('search') || '';
@@ -20,7 +22,7 @@ function SpecifyTypeProduct() {
   const ascSort = query.get('ascSort') || 'false';
 
   // const dispatch = useDispatch();
-  const location = useLocation();
+  const {pathname} = useLocation();
   const fetchDataPage = async (type) => {
     const rs = await fetchDevices(type, search, field, ascSort);
     if (rs && rs?.data) {
@@ -32,17 +34,25 @@ function SpecifyTypeProduct() {
   }
   
   useEffect(() => {
-    // dispatch(getDevices.getDevicesRequest(getEndPointURL(location.pathname)));
-    fetchDataPage(getEndPointURL(location.pathname))
+    setShowUnreadyProducePage(false);
+    fetchDataPage(getEndPointURL(pathname))
       .then(() => setLoading(false))
       .catch(err => {
         console.log('error at SpecifyTypeProduct()', err);
         setLoading(false);
+        setShowUnreadyProducePage(true);
       })
-  }, [search, field, ascSort]);
+  }, [search, field, ascSort, pathname]);
   
   if (loading) {
-    return <SpinnerLoader open={loading} />
+    return <>
+      <IntroTypeProduct data={null} />
+      <SpinnerLoader open={loading} />
+    </>
+  }
+
+  if (showUnreadyProductPage) {
+    return <UnreadyProductPage />
   }
 
   return (

@@ -36,7 +36,7 @@ function ManagementOrders() {
     ordersOwn.type3.length,
     ordersOwn.type4.length
   ]);
-
+  
   function TextElmPanel({ text }) {
     let numOrder;
     switch (text) {
@@ -97,7 +97,7 @@ function ManagementOrders() {
     );
   };
 
-  const HaveOrders = ({ idx }) => {
+   const HaveOrders = ({ idx }) => {
     return (
       <div style={styles.part2}>
         {ordersOwn[`type${idx}`].map((_order, index) => (

@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { Button, Typography, IconButton, Container } from '@mui/material';
@@ -12,6 +12,7 @@ import { hoverComponentState } from '~/store/selectors';
 
 import useStyles from './styles.js';
 import { devices } from './data.js';
+import { productTypes } from '~/utils/contants.js';
 
 const styles = {
   box: {
@@ -39,6 +40,7 @@ function SubHeader() {
   const [selectedItemSubmenu, setSelectedItemSubmenu] = useState('Laptop');
   const [showSubHeader, setShowSubHeader] = useState(true);
   const [idxSlider, setIdxSlider] = useState(0);
+  const { pathname } = useLocation();
   const globalState = useContext(ThemeContext);
   const isHoverComponent = useSelector(hoverComponentState);
 
@@ -46,26 +48,20 @@ function SubHeader() {
     if (globalState.isScrollDown === true) {
       setShowSubHeader(false);
     } else {
+      if (productTypes.includes(pathname.split('/').pop())) {
+        setSelectedItemSubmenu(pathname.split('/').pop());
+      }
+      else setSelectedItemSubmenu('laptops')
       setShowSubHeader(true);
     }
-  }, [globalState.isScrollDown, isHoverComponent, showSubHeader]);
+  }, [globalState.isScrollDown, isHoverComponent, showSubHeader, pathname]);
 
   const elm_slider1 = devices.slice(0, 7);
   const elm_slider2 = devices.slice(6);
 
-  // const dispatch = useDispatch();
-  // const location = useLocation();
-  // const navigate = useNavigate();
-
-  // const pathname = localStorage.getItem('_pathname');
-
-  const redirectTypeProductPage = useCallback(
-    (name, url) => {
+  const redirectTypeProductPage = useCallback((name) => {
       setSelectedItemSubmenu(name);
-      // dispatch(getDevices.getDevicesRequest(getEndPointURL(location.pathname)));
-      // navigate(`/product/${url}`);
-    },
-    [setSelectedItemSubmenu]
+    }, [setSelectedItemSubmenu]
   );
 
   const subheader = (
@@ -101,10 +97,10 @@ function SubHeader() {
                         padding: '0',
                         margin: '0 4px',
                         borderRadius: '8px',
-                        bgcolor: device.name === selectedItemSubmenu ? '#ECF0F4' : 'transparent',
+                        bgcolor: device.url === selectedItemSubmenu ? '#ECF0F4' : 'transparent',
                         display: 'flex'
                       }}
-                      onClick={() => redirectTypeProductPage(device.name, device.url)}
+                      onClick={() => redirectTypeProductPage(device.url)}
                     >
                       <img className={classes.img} src={device.img} alt={device.name} />
                       <Typography sx={styles.text_btn_device} variant="body2">
@@ -124,9 +120,9 @@ function SubHeader() {
                         padding: '0',
                         margin: '0 4px',
                         borderRadius: '8px',
-                        bgcolor: device.name === selectedItemSubmenu ? '#ECF0F4' : 'transparent'
+                        bgcolor: device.url === selectedItemSubmenu ? '#ECF0F4' : 'transparent'
                       }}
-                      onClick={() => redirectTypeProductPage(device.name, device.url)}
+                      onClick={() => redirectTypeProductPage(device.url)}
                     >
                       <img className={classes.img} src={device.img} alt={device.name} />
                       <Typography sx={styles.text_btn_device} variant="body2">

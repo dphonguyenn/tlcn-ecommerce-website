@@ -207,7 +207,7 @@ function ProductsList({ data }) {
           </FormControl>
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <Typography>{data?.length} sản phẩm</Typography>
+          {data?.length && <Typography>{data?.length} sản phẩm</Typography>}
         </div>
       </div>
       <Grid container sx={{ m: "0", width: "100% !important" }} spacing={1.5}>

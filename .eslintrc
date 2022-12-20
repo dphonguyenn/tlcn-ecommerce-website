@@ -18,7 +18,8 @@
             "printWidth": 120,
             "jsxSingleQuote": false
           }
-        ]
+        ],
+        "no-undef": 0
       },
       "settings": {
         "import/resolver": {
