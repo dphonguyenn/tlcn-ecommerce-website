@@ -1,4 +1,4 @@
-import { statusOrder } from '~/utils/index';
+import { statusOrder } from "~/utils/contants.js";
 import { useState } from 'react';
 
 export const SelectStateOrder = props => {

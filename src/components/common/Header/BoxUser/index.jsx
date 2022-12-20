@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Paper, Typography, Popover, IconButton, Avatar } from '@mui/material';
 import { AiOutlineUser } from 'react-icons/ai';
@@ -12,9 +12,14 @@ import { userState } from '~/store/selectors';
 
 function BoxUser({ style_icon }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [userInfo, setUserInfo] = useState({});
   const [openBoxLogin, setOpenBoxLogin] = useState(false);
   const dispatch = useDispatch();
   const isLogin = useSelector(userState);
+
+  useEffect(() => {
+    setUserInfo(JSON.parse(localStorage.getItem('user')));
+  }, [isLogin]);
 
   const handleOnHoverBoxUser = useCallback(
     boolean => {
@@ -50,10 +55,16 @@ function BoxUser({ style_icon }) {
   const handleCloseBoxLogin = () => setOpenBoxLogin(false);
   const isAuthenticatedUser = (
     <div style={styles.part_avt}>
-      <Avatar sx={styles.avt}>A</Avatar>
+      <Avatar sx={styles.avt}>
+        {userInfo?.fullname ? userInfo?.fullname.split()[0].upperCase() : 'A'}
+      </Avatar>
       <div style={styles.part_avt_content}>
-        <Typography sx={styles.text03}>Duy Phong Nguyễn</Typography>
-        <Typography sx={styles.text04}>0947443064</Typography>
+        {userInfo?.fullname && <Typography sx={styles.text03}>
+          {userInfo?.fullname}
+        </Typography>}
+        <Typography sx={styles.text04} style={{...!userInfo?.fullname && {fontSize: '20px', fontWeight: 'bold'}}}>
+          {userInfo?.phone ? userInfo?.phone : '09**-***-***'}
+        </Typography>
       </div>
     </div>
   );
@@ -141,6 +152,7 @@ function BoxUser({ style_icon }) {
               {dataButton.map((data, index) => {
                 return (
                   <ButtonItemMenuBox
+                    useFor={'MENU'}
                     closeBox={() => handleClose()}
                     path={data.path}
                     key={data.text}

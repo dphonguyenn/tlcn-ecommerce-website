@@ -24,7 +24,7 @@ export default makeStyles({
   },
   text_btn: {
     fontSize: '16px',
-    color: '#4a4f52',
+    color: '#0e0e0e',
     fontWeight: 'bold',
     paddingLeft: '12px',
     textTransform: 'initial'

@@ -5,13 +5,13 @@ import Footer from '~/components/common/Footer';
 import Header from '~/components/common/Header';
 import SubHeader from '~/components/common/SubHeader';
 import SocialContact from '~/components/social/SocialContact.jsx';
-import { routesNotIncludeSubHeader } from '~/utils/contants.js';
+import { ignoreSubHeader } from '~/utils/index.js';
 function Shop() {
   const [includeSubHeader, setIncludeSubHeader] = useState(true);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (pathname?.includes(routesNotIncludeSubHeader)) {
+    if (ignoreSubHeader(pathname)) {
       setIncludeSubHeader(false);
     }
     else setIncludeSubHeader(true);

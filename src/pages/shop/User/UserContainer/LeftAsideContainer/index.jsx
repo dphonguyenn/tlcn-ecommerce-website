@@ -16,7 +16,7 @@ function LeftAsideContainer() {
 
   useEffect(() => {
     setUserInfo(JSON.parse(localStorage.getItem('user')));
-  },[])
+  }, [isLogin]);
 
   const handleOpenBoxLogin = () => {
     setOpenBoxLogin(true);
@@ -69,11 +69,14 @@ function LeftAsideContainer() {
   return (
     <div>
       <div style={styles.wrap_main_paper}>
-        {isLogin ? isAuthenticatedUser : <div style={styles.part1_paper}>{isUnauthenticatedUser}</div>}
+        {isLogin ? isAuthenticatedUser : <div style={styles.part1_paper}>
+          {isUnauthenticatedUser}
+        </div>}
         <div>
           {dataButton.map((data, index) => {
             return (
               <ButtonItemMenuBox
+                useFor={'USER_PAGE'}
                 path={data.path}
                 key={data.text}
                 iconButton={data.icon}
