@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Paper, Tab, Tabs, Typography } from '@mui/material';
 import { styles } from './styles.js';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import { ordersState, userState } from '~/store/selectors';
 import { ordersActions } from '~/store/actions';
 import OrderItem from '~/components/elements/OrderItem';
@@ -11,44 +11,22 @@ import { fetchAllOrders } from '~/apis/index.js';
 import SpinnerLoader from '~/components/common/SpinnerLoader/Spinner.jsx';
 
 function ManagementOrders() {
-  const [loading, setLoading] = useState(false);
-  const [ordersOwn, setOrdersOwn] = useState({});
+  const { userOrders, loading } = useOutletContext();
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [userInfo, setUserInfo] = useState({});
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const isLogin = useSelector(userState);
 
   const handleChangeIdxPanel = useCallback((event, newValue) => {
     setCurrentIdx(newValue);
   }, []);
 
-  const fetchUserOrders = async (token) => {
-    setLoading(true);
-    const rs = await fetchAllOrders(token);
-    if (rs) {
-      setOrdersOwn(rs?.data);
-    }
-  }
-
-  useEffect(() => {
-    const tokenUser = localStorage.getItem("token");
-    if (tokenUser) {
-      // dispatch(ordersActions.fetchAllOrdersRequest());
-      fetchUserOrders(tokenUser)
-        .then(() => setLoading(false))
-        .catch(() => setLoading(false));
-    }
-  }, []);
-
   const checkOrders = () => {
     return {
-      type0: ordersOwn.type0.length > 0 ? true : false,
-      type1: ordersOwn.type1.length > 0 ? true : false,
-      type2: ordersOwn.type2.length > 0 ? true : false,
-      type3: ordersOwn.type3.length > 0 ? true : false,
-      type4: ordersOwn.type4.length > 0 ? true : false
+      type0: userOrders.type0.length > 0 ? true : false,
+      type1: userOrders.type1.length > 0 ? true : false,
+      type2: userOrders.type2.length > 0 ? true : false,
+      type3: userOrders.type3.length > 0 ? true : false,
+      type4: userOrders.type4.length > 0 ? true : false
     };
   };
   
@@ -56,19 +34,19 @@ function ManagementOrders() {
     let numOrder;
     switch (text) {
       case 'Chờ thanh toán':
-        numOrder = ordersOwn.type0.length;
+        numOrder = userOrders.type0.length;
         break;
       case 'Chờ xác nhận':
-        numOrder = ordersOwn.type1.length;
+        numOrder = userOrders.type1.length;
         break;
       case 'Đang xử lý':
-        numOrder = ordersOwn.type2.length;
+        numOrder = userOrders.type2.length;
         break;
       case 'Đang vận chuyển':
-        numOrder = ordersOwn.type3.length;
+        numOrder = userOrders.type3.length;
         break;
       case 'Đã giao':
-        numOrder = ordersOwn.type4.length;
+        numOrder = userOrders.type4.length;
         break;
       default:
         break;
@@ -115,7 +93,7 @@ function ManagementOrders() {
   const HaveOrders = ({ idx }) => {
     return (
       <div style={styles.part2}>
-        {ordersOwn[`type${idx}`].map((_order, index) => (
+        {userOrders[`type${idx}`].map((_order, index) => (
           <OrderItem key={_order._id} data={_order} />
         ))}
       </div>
@@ -123,12 +101,8 @@ function ManagementOrders() {
   };
 
   if (loading) {
-    return <>
-      <SpinnerLoader open={loading} />
-    </>
+    return <SpinnerLoader />
   }
-
-  console.log('info order', ordersOwn);
 
   return (
     <>
