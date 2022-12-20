@@ -134,10 +134,7 @@ function* postAgainClientRequestSaga(type) {
 
 function* fetchAllOrdersSaga() {
   try {
-    const orders = yield call(
-      apis.fetchAllOrders,
-      localStorage.getItem("token")
-    );
+    const orders = yield call(apis.fetchAllOrders, localStorage.getItem("token"));
     yield put(actions.ordersActions.fetchAllOrdersSuccess(orders.data));
   } catch (error) {
     console.error(error);
@@ -147,28 +144,13 @@ function* fetchAllOrdersSaga() {
 
 function* mySaga() {
   yield takeLatest(actions.getDevices.getDevicesRequest, fetchDevicesSaga);
-  yield takeLatest(
-    actions.getDetailedDevice.getDetailedDeviceRequest,
-    fetchDetailedDeviceSaga
-  );
-  yield takeLatest(
-    actions.postInfoLogin.postInfoLoginAccountRequest,
-    postInfoLoginAccountSaga
-  );
-  yield takeLatest(
-    actions.postInfoLogin.postInfoLoginPasswordRequest,
-    postInfoLoginPasswordSaga
-  );
+  yield takeLatest(actions.getDetailedDevice.getDetailedDeviceRequest,fetchDetailedDeviceSaga);
+  yield takeLatest(actions.postInfoLogin.postInfoLoginAccountRequest,postInfoLoginAccountSaga);
+  yield takeLatest(actions.postInfoLogin.postInfoLoginPasswordRequest,postInfoLoginPasswordSaga);
   yield takeLatest(actions.postLogout.postLogoutRequest, postLogoutSaga);
   yield takeLatest(actions.ordersActions.postOrdersRequest, postOrdersSaga);
-  yield takeLatest(
-    actions.ordersActions.fetchOrdersFollowTypeRequest,
-    fetchOrdersFollowTypeSaga
-  );
-  yield takeLatest(
-    actions.ordersActions.fetchAllOrdersRequest,
-    fetchAllOrdersSaga
-  );
+  yield takeLatest(actions.ordersActions.fetchOrdersFollowTypeRequest,fetchOrdersFollowTypeSaga);
+  yield takeLatest(actions.ordersActions.fetchAllOrdersRequest,fetchAllOrdersSaga);
   yield takeLatest(actions.ordersActions.updateOrdersRequest, updateOrdersSaga);
 }
 

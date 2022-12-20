@@ -41,6 +41,7 @@ import PaymentPolicy from './pages/shop/User/UserContainer/RightAsideContainer/P
 // import { ThemeContext } from './context/ThemeContext.js';
 // import ErrorBoundary from './pages/ErrorBoundary.js';
 import { stateRequestAuth } from './store/selectors';
+import SearchInsurance from './pages/shop/User/UserContainer/RightAsideContainer/SearchInsurance/index.jsx';
 
 const theme = createTheme({
   breakpoints: {
@@ -59,7 +60,7 @@ const theme = createTheme({
 
 function App() {
   const [path, setPath] = useState('/');
-  // const { setIsScrollDown } = useContext(ThemeContext);
+  
   // go to the top of page whenever redirect
   const location = useLocation();
   localStorage.setItem('_pathname', path);
@@ -114,10 +115,11 @@ function App() {
             <Route path="checkout/infoOrders" element={<InfoOrders />} />
             <Route path="checkout/payment" element={<Payment />} />
             <Route path="user" element={<User />}>
-              <Route path="management-orders" element={<ManagementOrders />} />
               <Route path="account" element={<AccountUser />} />
+              <Route path="management-orders" element={<ManagementOrders />} />
               <Route path="contact" element={<InfoContact />} />
               <Route path="saving" element={<Saving />} />
+              <Route path="search-insurance" element={<SearchInsurance />} />
               <Route path="stores" element={<Stores />} />
               <Route path="policy" element={<Policy />}>
                 <Route path="insurance" element={<InsurancePolicy />} />

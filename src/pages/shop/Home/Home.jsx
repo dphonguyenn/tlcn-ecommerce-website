@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-// import { PuffLoader } from 'react-spinners';
+import { PuffLoader } from 'react-spinners';
 // import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
@@ -44,7 +44,10 @@ function Home() {
   }, [search, field, ascSort]);
 
   if (loading) {
-    return <SpinnerLoader open={loading} />;
+    return <>
+      <IntroHomePage />
+      <SpinnerLoader open={loading} />
+    </>
   }
 
   return (

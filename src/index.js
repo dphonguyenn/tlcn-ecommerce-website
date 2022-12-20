@@ -1,7 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import * as ReactDOMClient from 'react-dom/client';
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { legacy_createStore  as createReduxStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { BrowserRouter } from "react-router-dom";
 import createSagaMiddleware from "redux-saga";
@@ -13,16 +13,16 @@ import mySaga from "./store/sagas/index.js";
 import reducers from "./store/reducers/index.js";
 
 import "./index.css";
-
+const root = ReactDOMClient.createRoot(document.getElementById("root"));
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(
+const store = createReduxStore(
   reducers,
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(mySaga);
 
-ReactDOM.render(
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ContextProvider>
@@ -31,6 +31,5 @@ ReactDOM.render(
         </BrowserRouter>
       </ContextProvider>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );

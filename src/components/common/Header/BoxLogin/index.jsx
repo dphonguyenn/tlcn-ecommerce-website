@@ -22,6 +22,7 @@ import { postInfoLogin } from "~/store/actions";
 import { stateRequestAuth } from "~/store/selectors";
 
 import { styles } from "./styles.js";
+import { isVietnamesePhoneNumber } from "~/utils/index.js";
 
 function BoxLogin({ isShow, handleClose }) {
   const [textPhone, setTextPhone] = useState("");
@@ -37,9 +38,6 @@ function BoxLogin({ isShow, handleClose }) {
 
   const isPostedInfoAcc = state_request.length > 0 ? true : false;
   const hasExistAcc = state_request === "CREATE_PASSWORD" ? false : true;
-
-  const isVietnamesePhoneNumber = (number) =>
-    /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
 
   const handleChangeTextPhone = useCallback(
     (event) => {

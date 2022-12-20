@@ -7,7 +7,7 @@ export default makeStyles({
   btn: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     backgroundColor: 'transparent',
     width: '100%',
     border: '0px',
@@ -19,11 +19,12 @@ export default makeStyles({
   },
   wrap_btn: {
     display: 'flex',
-    padding: '12px 8px'
+    padding: '12px 8px',
+    flex: 1
   },
   text_btn: {
     fontSize: '16px',
-    color: '#4a4f52',
+    color: '#0e0e0e',
     fontWeight: 'bold',
     paddingLeft: '12px',
     textTransform: 'initial'

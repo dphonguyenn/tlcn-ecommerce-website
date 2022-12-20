@@ -3,25 +3,46 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Paper, Tab, Tabs, Typography } from '@mui/material';
 import { styles } from './styles.js';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { Link, useNavigate } from 'react-router-dom';
-import { ordersState } from '~/store/selectors';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ordersState, userState } from '~/store/selectors';
 import { ordersActions } from '~/store/actions';
 import OrderItem from '~/components/elements/OrderItem';
+import { fetchAllOrders } from '~/apis/index.js';
+import SpinnerLoader from '~/components/common/SpinnerLoader/Spinner.jsx';
+
 function ManagementOrders() {
+  const [loading, setLoading] = useState(false);
+  const [ordersOwn, setOrdersOwn] = useState({});
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [userInfo, setUserInfo] = useState({});
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLogin = useSelector(userState);
 
   const handleChangeIdxPanel = useCallback((event, newValue) => {
     setCurrentIdx(newValue);
   }, []);
 
-  useEffect(() => {
-    dispatch(ordersActions.fetchAllOrdersRequest());
-  }, [dispatch]);
+  const fetchUserOrders = async (token) => {
+    setLoading(true);
+    const rs = await fetchAllOrders(token);
+    if (rs) {
+      setOrdersOwn(rs?.data);
+    }
+  }
 
-  const ordersOwn = useSelector(ordersState);
-  const checkOrders = useMemo(() => {
+  useEffect(() => {
+    const tokenUser = localStorage.getItem("token");
+    if (tokenUser) {
+      // dispatch(ordersActions.fetchAllOrdersRequest());
+      fetchUserOrders(tokenUser)
+        .then(() => setLoading(false))
+        .catch(() => setLoading(false));
+    }
+  }, []);
+
+  const checkOrders = () => {
     return {
       type0: ordersOwn.type0.length > 0 ? true : false,
       type1: ordersOwn.type1.length > 0 ? true : false,
@@ -29,15 +50,9 @@ function ManagementOrders() {
       type3: ordersOwn.type3.length > 0 ? true : false,
       type4: ordersOwn.type4.length > 0 ? true : false
     };
-  }, [
-    ordersOwn.type0.length,
-    ordersOwn.type1.length,
-    ordersOwn.type2.length,
-    ordersOwn.type3.length,
-    ordersOwn.type4.length
-  ]);
-
-  function TextElmPanel({ text }) {
+  };
+  
+  const TextElmPanel = ({ text }) => {
     let numOrder;
     switch (text) {
       case 'Chờ thanh toán':
@@ -106,6 +121,14 @@ function ManagementOrders() {
       </div>
     );
   };
+
+  if (loading) {
+    return <>
+      <SpinnerLoader open={loading} />
+    </>
+  }
+
+  console.log('info order', ordersOwn);
 
   return (
     <>

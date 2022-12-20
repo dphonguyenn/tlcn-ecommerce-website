@@ -2,6 +2,7 @@ import { Container, Grid } from "@mui/material";
 import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link, Outlet } from "react-router-dom";
+import BoxUser from "~/components/common/Header/BoxUser/index.jsx";
 
 import LeftAsideContainer from "./UserContainer/LeftAsideContainer";
 import RightAsideContainer from "./UserContainer/RightAsideContainer";
@@ -25,6 +26,7 @@ function User() {
         <Grid columnSpacing={4} container sx={{ pt: "16px" }}>
           <Grid item md={4.2}>
             <LeftAsideContainer />
+            {/* <BoxUser/> */}
           </Grid>
           <Grid item md={7.8}>
             <RightAsideContainer outlet={<Outlet />} />

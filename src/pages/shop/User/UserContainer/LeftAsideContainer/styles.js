@@ -17,6 +17,7 @@ export const styles = {
   part_avt_content: {
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'center',
     paddingLeft: '12px'
   },
   avt: {

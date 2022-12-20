@@ -35,6 +35,7 @@ import { styles } from './styles.js';
 function InfoOrdersContainer() {
   const isLogin = useSelector(userState);
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [isFilledAllInput, setIsFilledAllInput] = useState(false);
   const [valueForm, setValueForm] = useState({
     fullname: '',
@@ -188,10 +189,19 @@ function InfoOrdersContainer() {
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
+  const fetchLocation = async () => {
+    setLoading(false);
     const result = await axios('https://provinces.open-api.vn/api/?depth=3');
-    setCities(result.data);
+    if (result) {
+      setCities(result.data);
+    }
+  }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    fetchLocation()
+      .then(() => setLoading(true))
+      .catch(() => setLoading(true));
   }, []);
 
   const handleSetDistricts = data => {
@@ -246,7 +256,7 @@ function InfoOrdersContainer() {
   const TabPanel1 = () => {
     return (
       <div tabIndex={1} style={{ display: 'flex', padding: '20px 0' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
+        {!loading && <div style={{ display: 'flex', flexDirection: 'column', width: '50%' }}>
           <div style={styles.part5}>
             <Typography sx={styles.text4}>Tỉnh / Thành phố</Typography>
             <Select
@@ -392,13 +402,14 @@ function InfoOrdersContainer() {
               <Typography sx={styles.text10}>Miễn phí vận chuyển khi thanh toán trước</Typography>
             </div>
           </div>
-        </div>
+        </div>}
         <div style={{ width: '50%' }}>
           <img src={img_order} alt="img order" style={styles.img}></img>
         </div>
       </div>
     );
   };
+
   const TabPanel0 = () => {
     return (
       <div tabIndex={0}>

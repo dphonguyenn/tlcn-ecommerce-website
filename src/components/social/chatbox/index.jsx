@@ -16,7 +16,7 @@ export default function ChatBox() {
   return (<div>
     <div
       onClick={handleClick}
-      style={{ width: '60px', height: '60px', backgroundColor: '#ff7d1f', borderRadius: 999, display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '6px 0 6px 0', cursor: 'pointer' }}>
+      style={{ width: '56px', height: '56px', backgroundColor: '#ff7d1f', borderRadius: 999, display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '6px 0 6px 0', cursor: 'pointer' }}>
       <TbHeadset color='#fff' size={30} />
     </div>
       <Popover
@@ -57,12 +57,6 @@ export default function ChatBox() {
         
         </Paper>
     </Popover>
-    <df-messenger
-      intent="WELCOME"
-      chat-title="LapDarker xin chào"
-      agent-id="e0621a4b-7b11-4e49-a0bb-10cfcef7dadf"
-      language-code="vi"
-    ></df-messenger>
     </div>
   )
 }

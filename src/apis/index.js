@@ -1,10 +1,9 @@
 import axios from 'axios';
+import { Config } from '~/config/config';
 
 const API = axios.create({
-  baseURL:
-    !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
-      ? 'http://localhost:4000'
-      : `${process.env.REACT_APP_API_KEY}`,
+  // baseURL: `${process.env.REACT_APP_API_KEY}`,
+  baseURL: Config.SERVER_URL,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -82,3 +81,4 @@ export const postLogout = async token => {
 export const refreshAccessToken = async id => {
   return await API.post('/user/refresh-access-token', { id: id });
 };
+
