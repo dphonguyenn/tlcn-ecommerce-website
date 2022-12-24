@@ -16,11 +16,21 @@ import momo from '~/assets/img/selections/momo.png';
 import creadit from '~/assets/img/selections/credits.png';
 import { SelectStateOrder } from './SelectStatusOrder.jsx';
 import { ordersActions } from '~/store/actions';
+import { updateOrderStatus } from '~/apis/Admin';
+import {useGetAllOrders} from '~/hook';
 
 import { styles } from './styles.js';
 
 function SingleDetailOrder(props) {
   const { data = [] } = props;
+  const { refetch } = useGetAllOrders()
+
+  const [ state, setState ] = useState({
+    status: data?.state
+  })
+
+  console.log('selected state', state.status);
+
   const prd = data.products[0];
   const [openModal, setOpenModal] = useState(false);
   const handleOpenModal = () => setOpenModal(true);
@@ -40,6 +50,28 @@ function SingleDetailOrder(props) {
     }
   };
 
+  const handleupdateOrderStatus = async () => {
+    try {
+      const body = {
+        id : data?._id,
+        state: state?.status
+      };
+      const response = await updateOrderStatus(body,localStorage.getItem('token'));
+      console.log('response', response);
+      if(response?.data?.statusCode === 200) {
+        alert('Update OK !');
+        refetch();
+        handleCloseModal();
+      }
+      else {
+        alert('Update fail')
+        handleCloseModal();
+      }
+    } catch (e) {
+      console.log(e)
+      handleCloseModal();
+    }
+  };
 
   return (
     <div>
@@ -166,12 +198,8 @@ function SingleDetailOrder(props) {
                             borderRadius: '8px'
                           }}
                         >
-                          <Typography sx={styles.text14}>{statusOrder?.[data?.state]}</Typography>
-
-                          <SelectStateOrder
-                            type={data?.state}
-                          />
-
+                          {/* <Typography sx={styles.text14}>{statusOrder?.[data?.state]}</Typography> */}
+                          
                         </div>
                       </div>
                     </Grid>
@@ -191,6 +219,10 @@ function SingleDetailOrder(props) {
                       <Typography sx={{ fontSize: '14px' }}>{data?.address}</Typography>
                     </div>
                   </div>
+                  <SelectStateOrder
+                      type={data?.state}
+                      selectedStatus={(value)=>setState({...state,status: value})}
+                    />
                 </div>
                 <div style={styles.container}>
                   <Typography sx={styles.text1}>Chi tiết đơn hàng</Typography>
@@ -347,7 +379,7 @@ function SingleDetailOrder(props) {
           </div>
           <div style={{ backgroundColor: '#fff' }}>
             <div style={{ padding: '12px 24px', display: 'flex' }}>
-              <Button sx={Object.assign({ ...styles.btn1 }, { flex: 1 })}>
+              <Button sx={Object.assign({ ...styles.btn1 }, { flex: 1 })} onClick={handleupdateOrderStatus}>
                 <Typography sx={styles.text8}>Cập nhật đơn hàng</Typography>
               </Button>
               <Button onClick={handleCloseModal} sx={Object.assign({ ...styles.btn2 }, { flex: 1 })}>

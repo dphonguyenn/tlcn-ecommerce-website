@@ -56,17 +56,20 @@ const ExpandedComponent = ({ data }) => {
 )
 }
 
-function DataGridTable({ data }) {
+function DataGridTable({ data, getDataAllOrders }) {
+  
   const [_data, setData] = useState({ rows: [], columns: [] });
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    if (data.length !== 0) {
-      data.then(result => {
+    if (data?.length !== 0) {
+      data?.then(result => {
         setData(classifyDataToTable(result));
         setLoading(true);
       });
     }
   }, [data]);
+
   return (
     <div>
       {loading === true && (

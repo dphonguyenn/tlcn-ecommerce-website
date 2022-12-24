@@ -4,7 +4,9 @@ import { BillModel } from '../models/BillModel.js';
 import { LaptopModel } from '../models/LaptopModel.js';
 import { MonitorModel } from '../models/MonitorModel.js';
 import { KeyboardModel } from '../models/KeyboardModel.js';
+import { mongooseTypeData } from '../../util/mongoose.js';
 import { SECRECT_KEY } from '../middlewares/index.js';
+
 const collections = [
   {
     name: LaptopModel.collection.collectionName,
@@ -113,21 +115,86 @@ export const getOrders = async (req, res, next) => {
 
 export const updateOrders = async (req, res, next) => {
   console.log(req.body);
+  console.log('running api >>>>>>>>>');
   const request = req.body;
   try {
-    switch (request.type) {
+    switch (request?.state) {
       case 'UPDATE_STATE_ORDER':
         const updated = await BillModel.findOneAndUpdate(
-          { _id: request.data.id },
-          { state: request.data.state },
+          { _id: request?.id },
+          { state: request?.state },
           { upsert: true }
         );
         if (!updated) res.status(500).json('UPDATE_STATUS_ORDERS_FAILURE');
-        else res.status(200).json('UPDATE_STATUS_ORDERS_SUCCESS');
+        else res.status(200).json({
+          statusCode: 200,
+          message: 'UPDATED SUCCESS !'
+        });
         break;
+      case 'TRANSPORTING':
+        const transporting = await BillModel.findOneAndUpdate(
+          { _id: request?.id },
+          { state: 'TRANSPORTING' },
+        );
+
+        if (!transporting) res.status(500).json('UPDATE_STATUS_ORDERS_FAILURE');
+        else res.status(200).json({
+          statusCode: 200,
+          message: 'UPDATED SUCCESS !'
+        });
+      break;
+
+      case 'PROCESSING':
+        const processing = await BillModel.findOneAndUpdate(
+          { _id: request?.id },
+          { state: 'PROCESSING' },
+        )
+        if (!processing) res.status(500).json('UPDATE_STATUS_ORDERS_FAILURE');
+        else res.status(200).json({
+          statusCode: 200,
+          message: 'UPDATED SUCCESS !'
+        });
+      break;
+
+      case 'DELIVERED':
+        const deleiverd = await BillModel.findOneAndUpdate(
+          { _id: request?.id },
+          { state: 'DELIVERED' },
+        )
+        if (!deleiverd) res.status(500).json('UPDATE_STATUS_ORDERS_FAILURE');
+        else res.status(200).json({
+          statusCode: 200,
+          message: 'UPDATED SUCCESS !'
+        });
+      break;
+
+      case 'WAIT_FOR_PAY':
+        const waitForPay = await BillModel.findOneAndUpdate(
+          { _id: request?.id },
+          { state: 'WAIT_FOR_PAY' },
+        )
+        if (!waitForPay) res.status(500).json('UPDATE_STATUS_ORDERS_FAILURE');
+        else res.status(200).json({
+          statusCode: 200,
+          message: 'UPDATED SUCCESS !'
+        });
+      break;
+
+      case 'WAIT_FOR_CONFIRM':
+        const waitForConfirm = await BillModel.findOneAndUpdate(
+          { _id: request?.id },
+          { state: 'WAIT_FOR_CONFIRM' },
+        )
+        if (!waitForConfirm) res.status(500).json('UPDATE_STATUS_ORDERS_FAILURE');
+        else res.status(200).json({
+          statusCode: 200,
+          message: 'UPDATED SUCCESS !'
+        });
+      break;
       default:
-        next();
+        return res.status(500).json('INVALID TYPE UPDATE');
     }
+
   } catch (error) {
     res.status(500).json(error);
   }
@@ -146,5 +213,46 @@ export const getDetailOrder = async (req, res, next) => {
   } catch (error) {
     res.status(500).json(error);
   }
-  
+};
+
+export const deleteOrders = async (req, res,next) => {
+  const id = req?.body?.id;
+  try {
+
+    if (mongooseTypeData.checkType(id) === 'array') {
+      const deleteOrders = await BillModel.deleteMany({
+        _id: { $in: id}
+      });
+      console.log('deleteOrders >>>>>>>>' ,deleteOrders);
+      if (deleteOrders.deletedCount > 0) {
+        return res.status(200).json({
+          message: 'Delete Sucessful !',
+          statusCode: 200
+        });
+      }
+      return  res.status(500).json({
+        message: 'Delete fail !',
+        statusCode: 500
+      }); 
+    }
+
+    if (mongooseTypeData.checkType(id) === 'string') {
+      const deleteOrder = await BillModel.deleteOne({
+        _id: id
+      });     
+      if (deleteOrder.deletedCount > 0) {
+        return res.status(200).json({
+          message: 'Delete Sucessful !',
+          statusCode: 200
+        });
+      }
+      return  res.status(500).json({
+        message: 'Delete fail !',
+        statusCode: 500
+      }); 
+    }
+
+  } catch(e) {
+    res.status(500).json('Server Error !');
+  }
 };

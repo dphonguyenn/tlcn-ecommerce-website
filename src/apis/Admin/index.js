@@ -20,3 +20,11 @@ export const getOrderDetail = async (id, token) => {
   return await API.get(`/orders/${id}`);
 };
 
+export const updateOrderStatus = async (data, token) => {
+  API.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  return await API.patch(`/orders/update`,{
+    id: data?.id,
+    state: data?.state
+  });
+};
+
