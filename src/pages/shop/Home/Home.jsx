@@ -44,10 +44,12 @@ function Home() {
   }, [search, field, ascSort]);
 
   if (loading) {
-    return <>
-      <IntroHomePage />
-      <SpinnerLoader open={loading} />
-    </>
+    return (
+      <>
+        <IntroHomePage />
+        <SpinnerLoader open={loading} />
+      </>
+    );
   }
 
   return (

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Toolbar, Typography, Button, Container, IconButton } from '@mui/material';
+import { Toolbar, Typography, Button, Container, IconButton, ClickAwayListener } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 import { BsTruck } from 'react-icons/bs';
@@ -15,37 +15,39 @@ import BoxNotification from './BoxNotification';
 import { Search, StyledInputBase, SearchIconWrapper, StyledAppBar } from '~/components/Custom';
 import { brand_img_png } from '~/assets/img';
 import { ThemeContext } from '~/context/ThemeContext.js';
-import { hoverComponentState } from '~/store/selectors';
+import { focusComponentState } from '~/store/selectors';
 import { DropDown } from '~/components/elements/DropDown';
 import { useDebounce } from '~/hook';
 import { fetchLaptops } from '~/apis';
+// import { useOutsideClick } from '~/hook/useOutsideClick.js';
 
 export default function Header() {
-  const [searchInput, setSearchInput] = useState('');
-  const debouncedSearch = useDebounce(searchInput, 700);
-  const [rsData, setRsData] = useState(null);
-  const hideDropdown = () => {
-    setRsData(null);
-  };
-
   const [isScrollDown, setIsScrollDown] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+  const [rsSearch, setRsSearch] = useState(null);
+
+  const isFocusComponent = useSelector(focusComponentState);
+  const debouncedSearch = useDebounce(searchInput, 700);
   const globalState = useContext(ThemeContext);
-  const isHoverComponent = useSelector(hoverComponentState);
   const { totalItems, isEmpty } = useCart();
 
+  const hideDropdown = () => {
+    setRsSearch(null);
+  };
+
   useEffect(() => {
-    if (globalState.isScrollDown === true) {
+    if (globalState.isScrollDown && !isFocusComponent) {
       setIsScrollDown(true);
     } else {
       setIsScrollDown(false);
     }
-  }, [globalState.isScrollDown, isHoverComponent, isScrollDown]);
+  }, [globalState.isScrollDown, isFocusComponent]);
 
   useEffect(() => {
     if (debouncedSearch.trim()) {
       fetchLaptops(debouncedSearch)
         .then(data => {
-          if (data.status === 200) setRsData(data.data);
+          if (data.status === 200) setRsSearch(data.data);
         })
         .catch(e => console.log('fetchLaptops error', e));
     } else {
@@ -76,28 +78,31 @@ export default function Header() {
               <Typography sx={styles.text_promote}>Khuyến mãi</Typography>
             </Button>
           </Link>
-          <div
-            style={{
-              flexGrow: '1',
-              display: 'flex',
-              justifyContent: 'flex-end'
-            }}
-          >
-            <Search style={{ width: isScrollDown ? '300px' : '462px' }}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                value={searchInput}
-                onChange={e => setSearchInput(e.target.value)}
-                placeholder="Tìm kiếm…"
-                inputProps={{ 'aria-label': 'search' }}
-                style={{ width: isScrollDown ? '272px' : '372px' }}
-              />
 
-              <DropDown products={rsData} callback={hideDropdown} />
-            </Search>
-          </div>
+          <ClickAwayListener onClickAway={hideDropdown}>
+            <div
+              style={{
+                flexGrow: '1',
+                display: 'flex',
+                justifyContent: 'flex-end'
+              }}
+            >
+              <Search style={{ width: isScrollDown ? '300px' : '462px' }}>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  value={searchInput}
+                  onChange={e => setSearchInput(e.target.value)}
+                  placeholder="Tìm kiếm…"
+                  inputProps={{ 'aria-label': 'search' }}
+                  style={{ width: isScrollDown ? '272px' : '372px' }}
+                />
+
+                <DropDown products={rsSearch} callback={hideDropdown} />
+              </Search>
+            </div>
+          </ClickAwayListener>
           <Link to="/cart" style={{ textDecoration: 'none' }}>
             <IconButton
               sx={{

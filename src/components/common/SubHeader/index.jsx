@@ -8,7 +8,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 import { ThemeContext } from '~/context/ThemeContext.js';
-import { hoverComponentState } from '~/store/selectors';
+import { focusComponentState } from '~/store/selectors';
 
 import useStyles from './styles.js';
 import { devices } from './data.js';
@@ -42,26 +42,29 @@ function SubHeader() {
   const [idxSlider, setIdxSlider] = useState(0);
   const { pathname } = useLocation();
   const globalState = useContext(ThemeContext);
-  const isHoverComponent = useSelector(hoverComponentState);
+  const isFocusComponent = useSelector(focusComponentState);
 
   useEffect(() => {
-    if (globalState.isScrollDown === true) {
+    console.log(isFocusComponent);
+    if (globalState.isScrollDown === true && !isFocusComponent) {
       setShowSubHeader(false);
     } else {
       if (productTypes.includes(pathname.split('/').pop())) {
         setSelectedItemSubmenu(pathname.split('/').pop());
-      }
-      else setSelectedItemSubmenu('laptops')
+      } else setSelectedItemSubmenu('laptops');
+      // if (!showSubHeader) return;
       setShowSubHeader(true);
     }
-  }, [globalState.isScrollDown, isHoverComponent, showSubHeader, pathname]);
+  }, [globalState.isScrollDown, isFocusComponent, showSubHeader, pathname]);
 
   const elm_slider1 = devices.slice(0, 7);
   const elm_slider2 = devices.slice(6);
 
-  const redirectTypeProductPage = useCallback((name) => {
+  const redirectTypeProductPage = useCallback(
+    name => {
       setSelectedItemSubmenu(name);
-    }, [setSelectedItemSubmenu]
+    },
+    [setSelectedItemSubmenu]
   );
 
   const subheader = (
@@ -151,9 +154,7 @@ function SubHeader() {
     </Box>
   );
 
-  const none_subheader = <div></div>;
-
-  return showSubHeader ? subheader : none_subheader;
+  return showSubHeader ? subheader : <></>;
 }
 
 export default SubHeader;

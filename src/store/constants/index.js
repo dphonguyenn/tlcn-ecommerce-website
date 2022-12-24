@@ -7,13 +7,8 @@ export const INIT_STATE = {
     isLoading: false,
     data: {}
   },
-  hover_component: {
-    menu_searchbar: {
-      isHover: false
-    },
-    box_user: {
-      isHover: false
-    }
+  focus_component: {
+    isFocus: false
   },
   filters: {
     search: '',

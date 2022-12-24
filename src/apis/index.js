@@ -2,8 +2,8 @@ import axios from 'axios';
 import { Config } from '~/config/config';
 
 const API = axios.create({
-  // baseURL: `${process.env.REACT_APP_API_KEY}`,
-  baseURL: Config.SERVER_URL,
+  baseURL: `${process.env.REACT_APP_API_KEY}`,
+  // baseURL: Config.SERVER_URL,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -30,16 +30,14 @@ export const fetchDevices = async (type, search, field, ascSort) => {
   const response = await API.get(`/product/${type}`, { params: queryObj });
   if (response) {
     return response;
-  }
-  else return false;
+  } else return false;
 };
 
 export const fetchDetailedDevice = async path => {
   const response = await API.get(`/${path}`);
   if (response) {
     return response;
-  }
-  else return false;
+  } else return false;
 };
 
 export const fetchOrdersFollowType = async (order, token) => {
@@ -47,8 +45,7 @@ export const fetchOrdersFollowType = async (order, token) => {
   const response = await API.get(`/orders/get?type=${order}`);
   if (response) {
     return response;
-  }
-  else return false;
+  } else return false;
 };
 
 export const fetchAllOrders = async token => {
@@ -56,8 +53,7 @@ export const fetchAllOrders = async token => {
   const response = await API.get('/orders/get-all');
   if (response) {
     return response;
-  }
-  else return false;
+  } else return false;
 };
 
 export const postOrders = async data => await API.post('/orders/post', data);
@@ -67,8 +63,7 @@ export const updateOrders = async (data, token) => {
   const response = await API.patch('/orders/update', data);
   if (response) {
     return response;
-  }
-  else return false;
+  } else return false;
 };
 
 export const postInfoLogin = async info => await API.post('/user/post-login', info);
@@ -81,4 +76,3 @@ export const postLogout = async token => {
 export const refreshAccessToken = async id => {
   return await API.post('/user/refresh-access-token', { id: id });
 };
-

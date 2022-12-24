@@ -16,8 +16,8 @@ export const getDetailedDevice = createActions({
   getDetailedDeviceFailure: err => err
 });
 
-export const hoverOnComponent = createActions({
-  setHoverOnComponent: payload => payload
+export const focusOnComponent = createActions({
+  setFocusOnComponent: payload => payload
 });
 
 export const postInfoLogin = createActions({

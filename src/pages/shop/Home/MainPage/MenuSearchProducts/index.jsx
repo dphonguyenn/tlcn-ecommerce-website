@@ -15,19 +15,18 @@ import { styles } from './styles.js';
 import { data } from './data.js';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { useDispatch, useSelector } from 'react-redux';
-import { hoverOnMenuSearchBar } from '~/store/selectors';
-import { softDevices, hoverOnComponent } from '~/store/actions';
+import { focusComponentState } from '~/store/selectors';
+import { softDevices, focusOnComponent } from '~/store/actions';
 export default function MenuSearchProducts() {
-  const [arrTag, setArrTag] = useState([]);
-  const dispatch = useDispatch();
   let _data = data;
-  const isHover = useSelector(hoverOnMenuSearchBar);
-  const handleOnHoverDrawer = useCallback(
-    boolean => {
+  const dispatch = useDispatch();
+  const [arrTag, setArrTag] = useState([]);
+  const isFocusComponent = useSelector(focusComponentState);
+  const handleOnFocusDrawer = useCallback(
+    focus => {
       dispatch(
-        hoverOnComponent.setHoverOnComponent({
-          component: 'MENU_SEARCH_BAR',
-          state: boolean
+        focusOnComponent.setFocusOnComponent({
+          state: focus
         })
       );
     },
@@ -58,11 +57,11 @@ export default function MenuSearchProducts() {
     <div style={styles.wrap_menu_search}>
       <Scrollbars
         style={styles.scrollbars}
-        autoHide={!isHover}
+        autoHide={!isFocusComponent}
         autoHideTimeout={100}
         autoHideDuration={100}
-        onMouseOver={() => handleOnHoverDrawer(true)}
-        onMouseLeave={() => handleOnHoverDrawer(false)}
+        onMouseOver={() => handleOnFocusDrawer(true)}
+        onMouseLeave={() => handleOnFocusDrawer(false)}
       >
         <Drawer sx={styles.drawer} variant="permanent">
           <div style={{ display: 'flex' }}>
