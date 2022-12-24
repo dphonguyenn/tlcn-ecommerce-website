@@ -45,7 +45,6 @@ function SubHeader() {
   const isFocusComponent = useSelector(focusComponentState);
 
   useEffect(() => {
-    console.log(isFocusComponent);
     if (globalState.isScrollDown === true && !isFocusComponent) {
       setShowSubHeader(false);
     } else {

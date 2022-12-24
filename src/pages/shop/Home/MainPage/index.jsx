@@ -6,7 +6,7 @@ import ProductsList from './ProductsList';
 import { useSelector } from 'react-redux';
 import { devicesFiltersState } from '~/store/selectors';
 function MainPage(props) {
-  const { data } = props;
+  const { data, isLoading } = props;
   const location = useLocation();
   // const data = useSelector(devicesFiltersState);
   return (
@@ -26,7 +26,7 @@ function MainPage(props) {
                 <MenuSearchProducts />
               </Grid>
               <Grid item md={9} sx={{ pl: '16px' }}>
-                <ProductsList data={data} />
+                <ProductsList data={data} isLoading={isLoading} />
               </Grid>
             </div>
           </Grid>

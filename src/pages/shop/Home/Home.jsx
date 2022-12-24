@@ -48,6 +48,7 @@ function Home() {
       <>
         <IntroHomePage />
         <SpinnerLoader open={loading} />
+        <MainPage data={null} isLoading={loading} />
       </>
     );
   }
