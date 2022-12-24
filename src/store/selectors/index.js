@@ -1,15 +1,14 @@
 import { createSelector } from 'reselect';
-export const detailedDeviceState = state => state.detailed_device.data;
-export const hoverComponentState = state =>
-  state.hover_component.menu_searchbar.isHover || state.hover_component.box_user.isHover ? true : false;
-export const hoverOnMenuSearchBar = state => state.hover_component.menu_searchbar.isHover;
-export const userState = state => state.user.isLogin;
-export const stateRequestAuth = state => state.user.stateRequest;
-export const dataUserState = state => state.user.data;
-export const textSearchState = state => state.filters.search;
-export const priorityState = state => state.filters.priority;
-export const tagState = state => state.filters.tag;
-export const devicesState = state => state.devices.data;
+export const detailedDeviceState = state => state.detailedDevice?.data;
+export const focusComponentState = state => state.focusComponent?.isFocus;
+
+export const userState = state => state.user?.isLogin;
+export const stateRequestAuth = state => state.user?.stateRequest;
+export const dataUserState = state => state.user?.data;
+export const textSearchState = state => state.filters?.search;
+export const priorityState = state => state.filters?.priority;
+export const tagState = state => state.filters?.tag;
+export const devicesState = state => state.devices?.data;
 export const ordersState = state => {
   let ordersTypes = {
     type0: state.orders.data.filter(order => order.state === 'WAIT_FOR_PAY'),

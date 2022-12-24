@@ -1,32 +1,34 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Paper, Typography, Popover, IconButton, Avatar } from '@mui/material';
+import { Button, Paper, Typography, Popover, IconButton, Avatar, ClickAwayListener } from '@mui/material';
 import { AiOutlineUser } from 'react-icons/ai';
 import { GrClose } from 'react-icons/gr';
 import { styles } from './styles.js';
 import { dataButton } from './dataButton.js';
 import BoxLogin from '../BoxLogin';
 import ButtonItemMenuBox from '~/components/elements/ButtonItemBoxUser';
-import { hoverOnComponent } from '~/store/actions';
+import { focusOnComponent } from '~/store/actions';
 import { userState } from '~/store/selectors';
 
 function BoxUser({ style_icon }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [userInfo, setUserInfo] = useState({});
   const [openBoxLogin, setOpenBoxLogin] = useState(false);
+
   const dispatch = useDispatch();
+  const open = Boolean(anchorEl);
   const isLogin = useSelector(userState);
+  const arrayItemButtonAuth = [0, 1, 10];
 
   useEffect(() => {
     setUserInfo(JSON.parse(localStorage.getItem('user')));
   }, [isLogin]);
 
-  const handleOnHoverBoxUser = useCallback(
-    boolean => {
+  const handleOnFocus = useCallback(
+    focus => {
       dispatch(
-        hoverOnComponent.setHoverOnComponent({
-          component: 'BOX_USER',
-          state: boolean
+        focusOnComponent.setFocusOnComponent({
+          state: focus
         })
       );
     },
@@ -35,41 +37,33 @@ function BoxUser({ style_icon }) {
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleClickBtnClose = () => {
-    setAnchorEl(null);
+    handleOnFocus(true);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    handleOnFocus(false);
   };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
 
   const handleOpenBoxLogin = () => {
     setOpenBoxLogin(true);
+    handleOnFocus(true);
     setAnchorEl(null);
   };
-  const handleCloseBoxLogin = () => setOpenBoxLogin(false);
+  const handleCloseBoxLogin = () => {
+    setOpenBoxLogin(false);
+  };
   const isAuthenticatedUser = (
     <div style={styles.part_avt}>
-      <Avatar sx={styles.avt}>
-        {userInfo?.fullname ? userInfo?.fullname.split()[0].upperCase() : 'A'}
-      </Avatar>
+      <Avatar sx={styles.avt}>{userInfo?.fullname ? userInfo?.fullname.split()[0].upperCase() : 'A'}</Avatar>
       <div style={styles.part_avt_content}>
-        {userInfo?.fullname && <Typography sx={styles.text03}>
-          {userInfo?.fullname}
-        </Typography>}
-        <Typography sx={styles.text04} style={{...!userInfo?.fullname && {fontSize: '20px', fontWeight: 'bold'}}}>
+        {userInfo?.fullname && <Typography sx={styles.text03}>{userInfo?.fullname}</Typography>}
+        <Typography sx={styles.text04} style={{ ...(!userInfo?.fullname && { fontSize: '20px', fontWeight: 'bold' }) }}>
           {userInfo?.phone ? userInfo?.phone : '09**-***-***'}
         </Typography>
       </div>
     </div>
   );
-
-  const arrayItemButtonAuth = [0, 1, 10];
 
   const isUnauthenticatedUser = (
     <>
@@ -111,9 +105,10 @@ function BoxUser({ style_icon }) {
       >
         <AiOutlineUser style={style_icon} />
       </IconButton>
+
       <Popover
         disableScrollLock
-        id={id}
+        id={open ? 'simple-popover' : undefined}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
@@ -135,14 +130,10 @@ function BoxUser({ style_icon }) {
           }
         }}
       >
-        <Paper
-          sx={styles.paper}
-          onMouseOver={() => handleOnHoverBoxUser(true)}
-          onMouseLeave={() => handleOnHoverBoxUser(false)}
-        >
+        <Paper sx={styles.paper}>
           <div style={styles.paper_header}>
             <Typography sx={{ fontWeight: 'bold', fontSize: '20px' }}>Tài khoản</Typography>
-            <IconButton sx={{ fontSize: '18px', fontWeight: '600' }} onClick={() => handleClickBtnClose()}>
+            <IconButton sx={{ fontSize: '18px', fontWeight: '600' }} onClick={handleClose}>
               <GrClose />
             </IconButton>
           </div>
@@ -153,7 +144,7 @@ function BoxUser({ style_icon }) {
                 return (
                   <ButtonItemMenuBox
                     useFor={'MENU'}
-                    closeBox={() => handleClose()}
+                    closeBox={handleClose}
                     path={data.path}
                     key={data.text}
                     iconButton={data.icon}

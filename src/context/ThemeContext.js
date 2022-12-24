@@ -1,14 +1,15 @@
 import { createContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { hoverComponentState } from '~/store/selectors/index.js';
+import { focusComponentState } from '~/store/selectors/index.js';
 export const ThemeContext = createContext();
 export const ContextProvider = ({ children }) => {
   // state scroll trên toàn bộ ứng dụng
   const [isScrollDown, setIsScrollDown] = useState(false);
-  const isHoverComponent = useSelector(hoverComponentState);
+  const isFocusComponent = useSelector(focusComponentState);
+
   var scrollableElement = document.body;
   useEffect(() => {
-    if (!isHoverComponent) {
+    if (!isFocusComponent) {
       scrollableElement.addEventListener('wheel', checkScrollDirection);
     }
     return () => {

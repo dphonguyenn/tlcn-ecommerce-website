@@ -34,7 +34,7 @@ const NoResult = styled('div')({
   justifyContent: 'center',
   alignContent: 'center',
   textAlign: 'center',
-  color: '#000',
+  color: '#000'
 });
 
 const DropDown = ({ products, callback }) => {
@@ -57,7 +57,7 @@ const DropDown = ({ products, callback }) => {
   }
 
   return (
-    <ResultWrapper>
+    <ResultWrapper onFocus={() => {}}>
       <ResultLabel>Sản phẩm ({products.length})</ResultLabel>
       {products.map((item, index) => {
         const product = { ...item, id: item._id, _img: item.img?.[0], price: item.sale_price || 0 };
