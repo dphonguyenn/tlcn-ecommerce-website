@@ -28,7 +28,7 @@ function User() {
   const fetchUserData = async (token) => {
     const rsOrders = await fetchAllOrders(token);
     if (rsOrders?.status === 200) {
-      setUserOrders(handleOrdersData(rsOrders?.data));
+      setUserOrders(handleOrdersData(rsOrders?.data || rsOrders));
     }
     if (localStorage.getItem("user")) {
       setUserInfo(JSON.parse(localStorage.getItem("user")));

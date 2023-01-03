@@ -13,29 +13,27 @@ import { getAbsolutePath } from '~/utils';
 
 import InfoDetailedProduct from './MainDetailedProduct/InfoDetailedProduct';
 import InfoPayment from './MainDetailedProduct/InfoPayment';
+import { fetchDetailedDevice } from '~/apis/index.js';
 
 function DetailedProduct() {
   const [loading, setLoading] = useState(false);
-  const data = useSelector(detailedDeviceState);
-  useEffect(() => {
-    setLoading(true);
-    const timing = setTimeout(() => {
-      if (Object.keys(data).length > 0) {
-        setLoading(false);
-      } else setLoading(true);
-    }, 1000);
-    return () => clearTimeout(timing);
-  }, [data]);
-  const dispatch = useDispatch();
+  const [data, setData] = useState({});
   const location = useLocation();
   
-  const getData = useCallback(() => {
-    dispatch(getDetailedDevice.getDetailedDeviceRequest(getAbsolutePath(location.pathname)));
-  }, [dispatch, location.pathname]);
-
+  
   useEffect(() => {
-    getData();
-  }, [getData]);
+    getData()
+      .then(() => setLoading(false))
+      .catch(err=>setLoading(false));
+  }, []);
+  
+  const getData = async () => {
+    setLoading(true);
+    const rs = await fetchDetailedDevice(getAbsolutePath(location.pathname));
+    if (rs) {
+      setData(rs||rs?.data);
+    }
+  }
 
   return (
     <div style={styles.container_page}>

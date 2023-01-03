@@ -1,28 +1,16 @@
-import axios from 'axios';
-import { Config } from '~/config/config';
-
-const API = axios.create({
-  baseURL: `http://localhost:4000/`,
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
+import Req from "~/utils/request.js";
 
 export const fetchAllOrdersOfCusomers = async token => {
-  API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  console.log(API.baseURL);
-  const response = await API.get('user/admin/orders');
+  const response = await Req.GET('user/admin/orders');
   return response;
 };
 
 export const getOrderDetail = async (id, token) => {
-  API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  return await API.get(`orders/${id}`);
+  return await Req.GET(`/orders/${id}`);
 };
 
 export const updateOrderStatus = async (data, token) => {
-  API.defaults.headers.common['Authorization'] = `Bearer ${token}`
-  return await API.patch(`orders/update`,{
+  return await Req.PATCH(`/orders/update`,{
     id: data?.id,
     state: data?.state
   });
