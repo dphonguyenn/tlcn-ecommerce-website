@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import { Container, Grid, Typography } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-import InfoPayment from "./InfoPayment";
+import ArrowForwardIosIcon from "./InfoPayment";
 import InfoDetailedProduct from "./InfoDetailedProduct";
 import InfoMediaProduct from "./InfoMediaProduct";
+
 
 import { detailedDeviceState } from "~/store/selectors";
 import SkeletonTable from "../elements/Skeleton/SkeletonTable.js";
@@ -59,7 +60,7 @@ function MainDetailedProduct() {
               <ArrowForwardIosIcon sx={styles.arrow_icon} />
               <Link style={styles.link} to="/">
                 <Typography sx={styles.text_redirect}>
-                  {data.configuration.brand}
+                  {data?.configuration.brand}
                 </Typography>
               </Link>
             </Grid>

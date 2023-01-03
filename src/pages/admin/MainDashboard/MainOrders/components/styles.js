@@ -288,5 +288,13 @@ export const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between'
+  },
+
+  text10: {
+    padding: '0px 0px 0px 43px',
+    display: 'flex',
+    margin: '0',
+    color : 'black',
+    fontSize: '24px'
   }
 };

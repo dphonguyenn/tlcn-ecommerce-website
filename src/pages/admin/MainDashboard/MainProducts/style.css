@@ -1,0 +1,84 @@
+.productMainAdmin {
+    display: flex;
+    flex-direction: column;
+}
+
+.productTitle {
+    font-size: 30px;
+    font-weight: 600;
+}
+.select{
+    font-size: 18px;
+    position: relative;
+    display: flex;
+    justify-content: end;
+    width: 200px;
+    height: 50px;
+    line-height: 3;
+    color: rgb(190, 190, 190);
+    background-color: transparent;
+    border-radius: .25em;
+    border: none;
+ }
+
+ .selected{
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    position: relative;
+    display: flex;
+    justify-content: end;
+    width: 200px;
+    height: 50px;
+    line-height: 3;
+    color: rgb(16, 14, 24);
+    border-radius: .25em;
+ }
+
+ .headerProduct{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+ }
+ .bottomMOdalProduct{
+    position: relative;
+    bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+ }
+
+ .imgDetailProduct{
+    height: 611px;
+ }
+
+ .infoProduct{
+    display: flex;
+    gap: 150px;
+    justify-content: space-between;
+ }
+ .labelProduct{
+    font-size: 20px;
+    font-weight: 700;
+ }
+
+ .fillDetailProduct{
+    width: 40%;
+    height: 50px;
+    font-size: 15px;
+    padding-left: 10px;
+    border-radius: 20px;
+    border: none;
+ }
+
+ .detailModal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+ }
+
+ .imgHolder{
+    height: 100%;
+ }

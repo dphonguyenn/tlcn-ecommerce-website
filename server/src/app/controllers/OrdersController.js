@@ -216,9 +216,8 @@ export const getDetailOrder = async (req, res, next) => {
 };
 
 export const deleteOrders = async (req, res,next) => {
-  const id = req?.body?.id;
+  const id = req?.body.id
   try {
-
     if (mongooseTypeData.checkType(id) === 'array') {
       const deleteOrders = await BillModel.deleteMany({
         _id: { $in: id}

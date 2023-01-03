@@ -2,6 +2,7 @@ import { LaptopModel } from "../models/LaptopModel.js";
 import { MonitorModel } from "../models/MonitorModel.js";
 import { KeyboardModel } from "../models/KeyboardModel.js";
 var use_inside = false;
+
 const collections = [
     {
         name: LaptopModel.collection.collectionName,
@@ -79,6 +80,21 @@ export const getProductsFollowType = async (req, res, next) => {
 export const getDetailedProduct = async (req, res, next) => {
     try {
         use_inside = true;
+        const devices = await getProductsFollowType(req, res, next, true);
+        if (devices) {
+            use_inside = false;
+            const respond_device = devices.find(device => device._id === req.params.id_product);
+            res.status(200).json(respond_device);
+        }
+        // output: _ { type_product: laptop, name_product: acer }
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+}
+
+export const deleteDevices = async (req, res, next) => {
+    const id = req?.body?.id || "" || [];
+    try {
         const devices = await getProductsFollowType(req, res, next, true);
         if (devices) {
             use_inside = false;

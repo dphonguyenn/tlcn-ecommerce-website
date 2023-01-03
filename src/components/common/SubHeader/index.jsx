@@ -14,6 +14,8 @@ import useStyles from './styles.js';
 import { devices } from './data.js';
 import { productTypes } from '~/utils/contants.js';
 
+import './style.css'
+
 const styles = {
   box: {
     p: '6px 0px',
@@ -66,7 +68,8 @@ function SubHeader() {
     [setSelectedItemSubmenu]
   );
 
-  const subheader = (
+  return (
+    <div className={!showSubHeader && 'vanish-effect'}>
     <Box sx={styles.box} position="fixed" left="0" right="0" top="80px">
       <Container
         maxWidth="lg"
@@ -151,9 +154,9 @@ function SubHeader() {
         </div>
       </Container>
     </Box>
-  );
+    </div>
 
-  return showSubHeader ? subheader : <></>;
+  );
 }
 
 export default SubHeader;

@@ -19,7 +19,7 @@ function InfoMediaProduct({ data }) {
           >
             <CameraAltIcon />
             <Typography sx={{ marginLeft: "6px" }}>
-              {idxImage} / {data.img.length}
+              {idxImage} / {data?.img.length}
             </Typography>
           </Button>
           <Button
@@ -52,7 +52,7 @@ function InfoMediaProduct({ data }) {
               ))
             }
           >
-            {data.img.map((img, index) => {
+            {data?.img.map((img, index) => {
               return (
                 <div key={index} style={styles.img_slider}>
                   <img src={img} alt="img slider" height="390" />

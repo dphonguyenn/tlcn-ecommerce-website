@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Config } from '~/config/config';
 
 const API = axios.create({
-  baseURL: `${process.env.REACT_APP_API_KEY}`,
+  baseURL: `http://localhost:4000/`,
   // baseURL: Config.SERVER_URL,
   headers: {
     'Content-Type': 'application/json'
@@ -21,7 +21,7 @@ export const fetchLaptops = async (search, field, ascSort) => {
   } else return false;
 };
 
-export const fetchDevices = async (type, search, field, ascSort) => {
+export const fetchDevices = async (type, search = "", field ="", ascSort ="") => {
   const queryObj = new URLSearchParams({
     search,
     field,
@@ -31,6 +31,13 @@ export const fetchDevices = async (type, search, field, ascSort) => {
   if (response) {
     return response;
   } else return false;
+};
+
+export const fetchDeviceDetail = async (type, id) => {
+    const response = await API.get(`/product/${type}/${id}`);
+    if (response) {
+      return response;
+    } else return false;
 };
 
 export const fetchDetailedDevice = async path => {

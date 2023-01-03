@@ -35,7 +35,7 @@ function InfoPayment({ data }) {
     );
     toast.dismiss();
     toast(<ToastContent />, {
-      toastId: data._id,
+      toastId: data?._id,
       position: 'bottom-left',
       autoClose: 3000,
       hideProgressBar: false,
@@ -94,7 +94,7 @@ function InfoPayment({ data }) {
               <FcApproval fill="rgb(0, 230, 64);" style={styles.icon_approval} />
               <div style={styles.message_box_content}>
                 <Typography variant="body2" sx={styles.message_box_text}>
-                  LapDarker là Nhà bán lẻ chính thức của {data.brand} tại Việt Nam
+                  LapDarker là Nhà bán lẻ chính thức của {data?.brand} tại Việt Nam
                 </Typography>
               </div>
             </div>
@@ -119,27 +119,27 @@ function InfoPayment({ data }) {
             </div>
             <div>
               <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-                {data.name}
+                {data?.name}
               </Typography>
             </div>
             <div style={{ display: 'flex' }}>
               <Typography sx={styles.text03}>SKU: </Typography>
-              <Typography sx={styles.text04}>{data.sku}</Typography>
+              <Typography sx={styles.text04}>{data?.sku}</Typography>
             </div>
             <div style={styles.info_part02}>
               <Typography sx={styles.text05}>
-                {parseInt(data.sale_price)
+                {parseInt(data?.sale_price)
                   .toString()
                   .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </Typography>
               <Typography sx={styles.text06}>
                 <del style={{}}>
-                  {parseInt(data.original_price)
+                  {parseInt(data?.original_price)
                     .toString()
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </del>
               </Typography>
-              <Typography sx={styles.text07}>-{data.sale}%</Typography>
+              <Typography sx={styles.text07}>-{data?.sale}%</Typography>
             </div>
             <div style={styles.info_part03}>
               <div style={styles.info_part03_1}>
@@ -155,14 +155,14 @@ function InfoPayment({ data }) {
             </div>
             <div style={styles.info_part04}>
               <Typography sx={styles.text09}>Màu</Typography>
-              <Typography sx={styles.text10}>{data.color}</Typography>
+              <Typography sx={styles.text10}>{data?.color}</Typography>
               <div style={styles.info_part04_1}>
-                <div style={Object.assign({ backgroundColor: data.color }, styles.box_color)}></div>
+                <div style={Object.assign({ backgroundColor: data?.color }, styles.box_color)}></div>
                 <div
                   style={{
                     width: '24px',
                     height: '2px',
-                    backgroundColor: data.color
+                    backgroundColor: data?.color
                   }}
                 ></div>
               </div>
@@ -179,16 +179,16 @@ function InfoPayment({ data }) {
         <div style={{ display: 'flex' }}>
           <Typography variant="body2" sx={styles.text11}>
             <del style={styles.del_tag}>
-              {parseInt(data.original_price)
+              {parseInt(data?.original_price)
                 .toString()
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
             </del>
-            -{data.sale}%
+            -{data?.sale}%
           </Typography>
         </div>
         <div style={{ paddingTop: '8px' }}>
           <Typography variant="body2" sx={styles.text12}>
-            {parseInt(data.sale_price)
+            {parseInt(data?.sale_price)
               .toString()
               .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
           </Typography>

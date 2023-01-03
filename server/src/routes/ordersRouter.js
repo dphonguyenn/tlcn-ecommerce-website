@@ -12,6 +12,6 @@ router.patch('/update', verifyToken, updateOrders);
 
 router.get('/:id',verifyToken, getDetailOrder);
 
-router.delete('/',verifyToken, deleteOrders);
+router.post('/delete',verifyToken, deleteOrders);
 
 export default router;

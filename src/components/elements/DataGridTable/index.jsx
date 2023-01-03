@@ -10,7 +10,7 @@ import SingleDetailOrder from '~/pages/admin/MainDashboard/MainOrders/components
 
 const ExpandedComponent = ({ data }) => {
   const token = localStorage.getItem('token');
-
+  
   const [state, setState] = useState({
     data,
     loading: true

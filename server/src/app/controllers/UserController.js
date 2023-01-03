@@ -7,6 +7,7 @@ import { generateAccessToken, generateRefreshToken } from '../../util/jwt.js';
 import { mongooseTypeData } from '../../util/mongoose.js';
 import { REFRESH_KEY, SECRECT_KEY } from '../middlewares/index.js';
 // * [POST] /user/post-login
+
 export const postInfoUserLogin = async (req, res, next) => {
   try {
     const data = req.body;
