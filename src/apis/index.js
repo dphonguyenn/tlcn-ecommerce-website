@@ -1,13 +1,5 @@
-import axios from 'axios';
-import { Config } from '~/config/config';
+import Req from "~/utils/request.js";
 
-const API = axios.create({
-  baseURL: `http://localhost:4000/`,
-  // baseURL: Config.SERVER_URL,
-  headers: {
-    'Content-Type': 'application/json'
-  }
-});
 export const fetchLaptops = async (search, field, ascSort) => {
   const queryObj = new URLSearchParams({
     search,
@@ -15,7 +7,7 @@ export const fetchLaptops = async (search, field, ascSort) => {
     ascSort
   });
 
-  const response = await API.get('/products', { params: queryObj });
+  const response = await Req.GET('/products', { params: queryObj });
   if (response) {
     return response;
   } else return false;
@@ -27,7 +19,7 @@ export const fetchDevices = async (type, search = "", field ="", ascSort ="") =>
     field,
     ascSort
   });
-  const response = await API.get(`/product/${type}`, { params: queryObj });
+  const response = await Req.GET(`/product/${type}`, { params: queryObj });
   if (response) {
     return response;
   } else return false;
@@ -41,45 +33,41 @@ export const fetchDeviceDetail = async (type, id) => {
 };
 
 export const fetchDetailedDevice = async path => {
-  const response = await API.get(`/${path}`);
+  const response = await Req.GET(`/${path}`);
   if (response) {
     return response;
   } else return false;
 };
 
 export const fetchOrdersFollowType = async (order, token) => {
-  API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  const response = await API.get(`/orders/get?type=${order}`);
+  const response = await Req.GET(`/orders/get?type=${order}`);
   if (response) {
     return response;
   } else return false;
 };
 
 export const fetchAllOrders = async token => {
-  API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  const response = await API.get('/orders/get-all');
+  const response = await Req.GET('/orders/get-all');
   if (response) {
     return response;
   } else return false;
 };
 
-export const postOrders = async data => await API.post('/orders/post', data);
+export const postOrders = async data => await Req.POST('/orders/post', data);
 
 export const updateOrders = async (data, token) => {
-  API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  const response = await API.patch('/orders/update', data);
+  const response = await Req.PATCH('/orders/update', data);
   if (response) {
     return response;
   } else return false;
 };
 
-export const postInfoLogin = async info => await API.post('/user/post-login', info);
+export const postInfoLogin = async info => await Req.POST('/user/post-login', info);
 
 export const postLogout = async token => {
-  API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  return await API.post('/user/logout');
+  return await Req.POST('/user/logout');
 };
 
 export const refreshAccessToken = async id => {
-  return await API.post('/user/refresh-access-token', { id: id });
+  return await Req.POST('/user/refresh-access-token', { id: id });
 };

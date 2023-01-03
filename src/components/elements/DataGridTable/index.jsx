@@ -2,28 +2,24 @@ import DataTable from 'react-data-table-component';
 import './style.css';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { classifyDataToTable } from '~/utils';
-import { getOrderDetail } from '~/apis/Admin';
+import { getOrderDetail } from '~/apis/admin';
 import SkeletonTable from '~/components/elements/Skeleton/SkeletonTable.jsx';
 import SingleDetailOrder from '~/pages/admin/MainDashboard/MainOrders/components/SingleDetailOrder';
- 
-
 
 const ExpandedComponent = ({ data }) => {
   const token = localStorage.getItem('token');
-  
   const [state, setState] = useState({
     data,
     loading: true
   })
   
   const handleGetDetailOrder = async () => {
-    const rs = await getOrderDetail(data._id, token)
+    const rs = await getOrderDetail(data._id, token);
 
-    console.log('rs', rs);
-    if (rs?.status === 200 && rs?.statusText === 'OK') {
+    if (rs) {
       setState({
         ...state,
-        data: rs?.data,
+        data: rs?.data || rs,
         loading: false
         })
     }

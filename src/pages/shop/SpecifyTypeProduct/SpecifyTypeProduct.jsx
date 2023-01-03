@@ -25,8 +25,8 @@ function SpecifyTypeProduct() {
   const {pathname} = useLocation();
   const fetchDataPage = async (type) => {
     const rs = await fetchDevices(type, search, field, ascSort);
-    if (rs && rs?.data) {
-      setProducts(rs?.data);
+    if (rs) {
+      setProducts(rs);
     }
     else {
       return <h1>Something wrong</h1>

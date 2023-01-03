@@ -18,8 +18,8 @@ import momo from '~/assets/img/selections/momo.png';
 import creadit from '~/assets/img/selections/credits.png';
 import { SelectStateOrder } from './SelectStatusOrder.jsx';
 import { ordersActions } from '~/store/actions';
-import { updateOrderStatus, deleteOrder } from '~/apis/Admin';
-import { useContext } from 'react';
+import { updateOrderStatus } from '~/apis/admin';
+import {useGetAllOrders} from '~/hook';
 
 import { styles } from './styles.js';
 

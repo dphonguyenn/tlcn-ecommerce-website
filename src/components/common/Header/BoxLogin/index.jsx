@@ -18,11 +18,12 @@ import { FcGoogle } from "react-icons/fc";
 
 import img_box_login from "~/assets/img/selections/12.jpg";
 import cursor_error from "~/assets/img/cursor/cursor06.png";
-import { postInfoLogin } from "~/store/actions";
+// import { postInfoLogin } from "~/store/actions";
 import { stateRequestAuth } from "~/store/selectors";
 
 import { styles } from "./styles.js";
 import { isVietnamesePhoneNumber } from "~/utils/index.js";
+import { postInfoLogin } from "~/apis/index.js";
 
 function BoxLogin({ isShow, handleClose }) {
   const [textPhone, setTextPhone] = useState("");
@@ -32,11 +33,25 @@ function BoxLogin({ isShow, handleClose }) {
   const [messageWrongPass, setMessageWrongPass] = useState("");
   const dispatch = useDispatch();
   const state_request = useSelector(stateRequestAuth);
+
   useEffect(() => {
     console.log(state_request);
+    if (state_request === 'LOGOUT_SUCCESS') {
+      resetStateAuth();
+    }
   }, [state_request]);
 
-  const isPostedInfoAcc = state_request.length > 0 ? true : false;
+  const resetStateAuth = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    setTextPhone("");
+    setTextPassword("");
+    setCheckAccountInput(false);
+    setCheckPasswordInput(false);
+    setMessageWrongPass("");
+  }
+
+  const isPostedInfoAcc = state_request.length > 0  && state_request !== 'LOGOUT_SUCCESS' ? true : false;
   const hasExistAcc = state_request === "CREATE_PASSWORD" ? false : true;
 
   const handleChangeTextPhone = useCallback(
@@ -64,9 +79,10 @@ function BoxLogin({ isShow, handleClose }) {
     );
   }, [dispatch]);
 
-  const handleSubmitInfoAccount = useCallback(() => {
-    dispatch(postInfoLogin.postInfoLoginAccountRequest({ phone: textPhone }));
-  }, [dispatch, textPhone]);
+  const handleSubmitInfoAccount = useCallback(async () => {
+    const rs = await postInfoLogin({ phone: textPhone });
+    // dispatch(postInfoLogin.postInfoLoginAccountRequest({ phone: textPhone }));
+  }, [textPhone]);
 
   const handleSubmitInfoPassword = useCallback(() => {
     dispatch(
@@ -80,6 +96,7 @@ function BoxLogin({ isShow, handleClose }) {
     );
     if (state_request === "WRONG_PASSWORD") {
       setMessageWrongPass("Mật khẩu không chính xác");
+      return;
     } else {
       handleClose();
       setMessageWrongPass("");
@@ -92,6 +109,7 @@ function BoxLogin({ isShow, handleClose }) {
     state_request,
     handleClose,
   ]);
+
   // ? box 1
   const boxInfoAcc = (
     <>

@@ -19,28 +19,23 @@ function Home() {
   const field = query.get('field') || '';
   const ascSort = query.get('ascSort') || 'false';
 
-  // const location = useLocation();
-  // // const dispatch = useDispatch();
-  // // const laptops = useSelector(devicesFiltersState);
-
   const fetchDataPage = async () => {
     setLoading(true);
 
     const rs = await fetchLaptops(search, field, ascSort);
+    console.log(rs);
     setLoading(false);
-    if (rs && rs?.data) {
-      setLaptops(rs?.data);
+    if (rs) {
+      setLaptops(rs);
     } else {
       return <h1>Something wrong</h1>;
     }
   };
 
   useEffect(() => {
-    // dispatch(getDevices.getDevicesRequest('laptops'));
-    fetchDataPage().catch(err => {
-      console.log('error at Home()', err);
-      setLoading(false);
-    });
+    fetchDataPage()
+      .then(() => setLoading(false))
+      .catch(err => setLoading(false));
   }, [search, field, ascSort]);
 
   if (loading) {
