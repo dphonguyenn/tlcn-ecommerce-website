@@ -9,7 +9,7 @@ export default makeStyles({
   wrap_img: {
     position: 'absolute',
     width: '100%',
-    height: '100%'
+    height: '380px'
   },
   img: {
     // objectFit: 'cover',
