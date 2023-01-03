@@ -68,9 +68,12 @@ function SubHeader() {
     [setSelectedItemSubmenu]
   );
 
-  return (
-    <div className={!showSubHeader && 'vanish-effect'}>
-    <Box sx={styles.box} position="fixed" left="0" right="0" top="80px">
+  console.log(showSubHeader);
+
+  return  (
+    showSubHeader && (
+      <>
+      <Box sx={styles.box} position="fixed" left="0" right="0" top="80px">
       <Container
         maxWidth="lg"
         sx={{
@@ -153,10 +156,9 @@ function SubHeader() {
           </div>
         </div>
       </Container>
-    </Box>
-    </div>
-
-  );
-}
+      </Box>
+      </>
+    )
+  )}
 
 export default SubHeader;

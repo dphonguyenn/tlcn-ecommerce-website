@@ -10,6 +10,8 @@ function Shop() {
   const [includeSubHeader, setIncludeSubHeader] = useState(true);
   const { pathname } = useLocation();
 
+  console.log(pathname);
+
   useEffect(() => {
     if (ignoreSubHeader(pathname)) {
       setIncludeSubHeader(false);
