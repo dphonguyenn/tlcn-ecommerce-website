@@ -43,7 +43,7 @@ export const postInfoUserLogin = async (req, res, next) => {
                 user: { ...newData },
                 token: accessToken
               });
-            } else res.status(400).json({ status: 'WRONG_PASSWORD' });
+            } else res.status(200).json({ status: 'WRONG_PASSWORD' });
           } catch (error) {
             res.status(500).json({ error: error });
           }

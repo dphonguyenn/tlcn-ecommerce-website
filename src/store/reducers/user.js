@@ -61,7 +61,6 @@ export default function userReducer(state = INIT_STATE.user, action) {
         stateRequest: 'REQUEST_LOGOUT'
       };
     case getType(postLogout.postLogoutSuccess):
-      console.log('log out success');
       return {
         stateRequest: action.payload,
         isLoading: false,

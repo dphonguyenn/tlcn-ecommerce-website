@@ -23,7 +23,6 @@ function Home() {
     setLoading(true);
 
     const rs = await fetchLaptops(search, field, ascSort);
-    console.log(rs);
     setLoading(false);
     if (rs) {
       setLaptops(rs);

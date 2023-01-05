@@ -68,12 +68,8 @@ function SubHeader() {
     [setSelectedItemSubmenu]
   );
 
-  console.log(showSubHeader);
-
-  return  (
-    showSubHeader && (
-      <>
-      <Box sx={styles.box} position="fixed" left="0" right="0" top="80px">
+  const subheader = (
+    <Box sx={styles.box} position="fixed" left="0" right="0" top="80px">
       <Container
         maxWidth="lg"
         sx={{
@@ -156,9 +152,10 @@ function SubHeader() {
           </div>
         </div>
       </Container>
-      </Box>
-      </>
-    )
-  )}
+    </Box>
+  );
+
+  return showSubHeader ? subheader : <></>;
+}
 
 export default SubHeader;

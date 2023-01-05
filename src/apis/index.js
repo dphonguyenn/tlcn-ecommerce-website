@@ -26,7 +26,7 @@ export const fetchDevices = async (type, search = "", field ="", ascSort ="") =>
 };
 
 export const fetchDeviceDetail = async (type, id) => {
-    const response = await API.get(`/product/${type}/${id}`);
+    const response = await Req.GET(`/product/${type}/${id}`);
     if (response) {
       return response;
     } else return false;

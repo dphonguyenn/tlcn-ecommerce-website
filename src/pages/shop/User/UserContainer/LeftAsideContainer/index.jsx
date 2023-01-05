@@ -12,7 +12,7 @@ import BoxLogin from '~/components/common/Header/BoxLogin';
 function LeftAsideContainer() {
   const [openBoxLogin, setOpenBoxLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
-  const isLogin = useSelector(userState);
+  const isLogin = localStorage.getItem('user') ? true : false;
 
   useEffect(() => {
     setUserInfo(JSON.parse(localStorage.getItem('user')));

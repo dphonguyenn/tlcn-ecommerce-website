@@ -17,11 +17,14 @@ function BoxUser({ style_icon }) {
 
   const dispatch = useDispatch();
   const open = Boolean(anchorEl);
-  const isLogin = useSelector(userState);
+  const isLogin = localStorage.getItem('user') ? true : false;
   const arrayItemButtonAuth = [0, 1, 10];
 
   useEffect(() => {
-    setUserInfo(JSON.parse(localStorage.getItem('user')));
+    const dataUser = JSON.parse(localStorage.getItem('user'));
+    if (dataUser) {
+      setUserInfo(dataUser);
+    }
   }, [isLogin]);
 
   const handleOnFocus = useCallback(

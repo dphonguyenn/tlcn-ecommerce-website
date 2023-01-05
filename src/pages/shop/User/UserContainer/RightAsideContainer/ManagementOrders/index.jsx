@@ -1,20 +1,34 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect,  useState } from 'react';
 import { Box, Button, Paper, Tab, Tabs, Typography } from '@mui/material';
 import { styles } from './styles.js';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link, useLocation, useNavigate, useOutletContext } from 'react-router-dom';
-import { ordersState, userState } from '~/store/selectors';
-import { ordersActions } from '~/store/actions';
 import OrderItem from '~/components/elements/OrderItem';
 import { fetchAllOrders } from '~/apis/index.js';
 import SpinnerLoader from '~/components/common/SpinnerLoader/Spinner.jsx';
+import { handleOrdersData } from '~/utils/index.js';
 
 function ManagementOrders() {
-  const { userOrders, loading } = useOutletContext();
+  const [userOrders, setUserOrders] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const outLetContext = useOutletContext();
   const [currentIdx, setCurrentIdx] = useState(0);
-
   const navigate = useNavigate();
+
+  const getUserOrders = async () => {
+    setLoading(true);
+    const rs = await fetchAllOrders();
+    if (rs) {
+      setUserOrders(handleOrdersData(rs));
+    }
+    return;
+  }
+  
+  useEffect(() => {
+    if (outLetContext?.isFetch === "/user/management-orders") {
+      getUserOrders().then(()=>setLoading(false)).catch(err => setLoading(false));
+    }
+  }, [outLetContext])
 
   const handleChangeIdxPanel = useCallback((event, newValue) => {
     setCurrentIdx(newValue);
@@ -22,31 +36,32 @@ function ManagementOrders() {
 
   const checkOrders = () => {
     return {
-      type0: userOrders.type0.length > 0 ? true : false,
-      type1: userOrders.type1.length > 0 ? true : false,
-      type2: userOrders.type2.length > 0 ? true : false,
-      type3: userOrders.type3.length > 0 ? true : false,
-      type4: userOrders.type4.length > 0 ? true : false
+      type0: userOrders?.type0?.length > 0 ? true : false,
+      type1: userOrders?.type1?.length > 0 ? true : false,
+      type2: userOrders?.type2?.length > 0 ? true : false,
+      type3: userOrders?.type3?.length > 0 ? true : false,
+      type4: userOrders?.type4?.length > 0 ? true : false
     };
   };
   
   const TextElmPanel = ({ text }) => {
+    console.log('userOrders', userOrders);
     let numOrder;
     switch (text) {
       case 'Chờ thanh toán':
-        numOrder = userOrders.type0.length;
+        numOrder = userOrders?.type0?.length;
         break;
       case 'Chờ xác nhận':
-        numOrder = userOrders.type1.length;
+        numOrder = userOrders?.type1?.length;
         break;
       case 'Đang xử lý':
-        numOrder = userOrders.type2.length;
+        numOrder = userOrders?.type2?.length;
         break;
       case 'Đang vận chuyển':
-        numOrder = userOrders.type3.length;
+        numOrder = userOrders?.type3?.length;
         break;
       case 'Đã giao':
-        numOrder = userOrders.type4.length;
+        numOrder = userOrders?.type4?.length;
         break;
       default:
         break;
@@ -99,10 +114,6 @@ function ManagementOrders() {
       </div>
     );
   };
-
-  if (loading) {
-    return <SpinnerLoader />
-  }
 
   return (
     <>

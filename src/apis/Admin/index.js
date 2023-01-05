@@ -17,12 +17,8 @@ export const updateOrderStatus = async (data, token) => {
 };
 
 export const deleteOrder = async (data, token) => {
-  API.defaults.headers.common['Authorization'] = `Bearer ${token}`
-  return await API.post(`orders/delete`,{
+  return await Req.POST(`orders/delete`,{
     id: data?.id,
   });
 };
-
-
-////
 

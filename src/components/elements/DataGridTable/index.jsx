@@ -53,16 +53,12 @@ const ExpandedComponent = ({ data }) => {
 }
 
 function DataGridTable({ data, getDataAllOrders }) {
-  
   const [_data, setData] = useState({ rows: [], columns: [] });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (data?.length !== 0) {
-      data?.then(result => {
-        setData(classifyDataToTable(result));
-        setLoading(true);
-      });
+      setData(classifyDataToTable(data));
     }
   }, [data]);
 

@@ -1,7 +1,7 @@
 import { Container, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useOutletContext } from "react-router-dom";
 import { fetchAllOrders } from "~/apis/index.js";
 import BoxUser from "~/components/common/Header/BoxUser/index.jsx";
 import SpinnerLoader from "~/components/common/SpinnerLoader/Spinner.jsx";
@@ -11,21 +11,24 @@ import LeftAsideContainer from "./UserContainer/LeftAsideContainer";
 import RightAsideContainer from "./UserContainer/RightAsideContainer";
 
 function User() {
+  const outletContext = useOutletContext();
+  console.log('outletContext', outletContext);
   const [userInfo, setUserInfo] = useState({});
   const [userOrders, setUserOrders] = useState({});
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const tokenUser = localStorage.getItem("token");
+    console.log('call it');
     if (tokenUser) {
-      setLoading(true);
-      fetchUserData(tokenUser)
+      fetchUserData()
         .then(() => setLoading(false))
         .catch(() => setLoading(false));
     }
   }, []);
 
   const fetchUserData = async (token) => {
+    setLoading(true);
     const rsOrders = await fetchAllOrders(token);
     if (rsOrders?.status === 200) {
       setUserOrders(handleOrdersData(rsOrders?.data || rsOrders));
@@ -60,7 +63,7 @@ function User() {
             {/* <BoxUser/> */}
           </Grid>
           <Grid item md={7.8}>
-            <RightAsideContainer outlet={<Outlet context={{ loading, userInfo, userOrders }}/>} />
+            <RightAsideContainer outlet={<Outlet context={{ ...outletContext }}/>} />
           </Grid>
         </Grid>
       </Container>

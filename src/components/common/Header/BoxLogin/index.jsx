@@ -30,29 +30,28 @@ function BoxLogin({ isShow, handleClose }) {
   const [textPassword, setTextPassword] = useState("");
   const [checkAccountInput, setCheckAccountInput] = useState(false);
   const [checkPasswordInput, setCheckPasswordInput] = useState(false);
+  const [stateAuth, setStateAuth] = useState("INITIAL");
   const [messageWrongPass, setMessageWrongPass] = useState("");
-  const dispatch = useDispatch();
-  const state_request = useSelector(stateRequestAuth);
+  // const dispatch = useDispatch();
+  // const state_request = useSelector(stateRequestAuth);
 
   useEffect(() => {
-    console.log(state_request);
-    if (state_request === 'LOGOUT_SUCCESS') {
+    console.log(stateAuth);
+    if (stateAuth === 'LOGOUT_SUCCESS') {
       resetStateAuth();
     }
-  }, [state_request]);
+  }, [stateAuth]);
 
   const resetStateAuth = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    setStateAuth("INITIAL")
     setTextPhone("");
     setTextPassword("");
+    setMessageWrongPass("");
     setCheckAccountInput(false);
     setCheckPasswordInput(false);
-    setMessageWrongPass("");
-  }
-
-  const isPostedInfoAcc = state_request.length > 0  && state_request !== 'LOGOUT_SUCCESS' ? true : false;
-  const hasExistAcc = state_request === "CREATE_PASSWORD" ? false : true;
+  };
 
   const handleChangeTextPhone = useCallback(
     (event) => {
@@ -73,47 +72,43 @@ function BoxLogin({ isShow, handleClose }) {
     [setTextPassword, setCheckPasswordInput]
   );
 
-  const handleOnClickBtnReturn = useCallback(() => {
-    dispatch(
-      postInfoLogin.postInfoLoginAccountCancelled("CANCELLED_AUTHENTICATION")
-    );
-  }, [dispatch]);
+  const handleOnClickBtnReturn = () => {
+    resetStateAuth();
+  };
 
-  const handleSubmitInfoAccount = useCallback(async () => {
+  const handleSubmitInfoAccount = async () => {
     const rs = await postInfoLogin({ phone: textPhone });
-    // dispatch(postInfoLogin.postInfoLoginAccountRequest({ phone: textPhone }));
-  }, [textPhone]);
+    if (rs) {
+      setStateAuth(rs);
+    }
+  };
 
-  const handleSubmitInfoPassword = useCallback(() => {
-    dispatch(
-      postInfoLogin.postInfoLoginPasswordRequest({
-        phone: textPhone,
-        password: textPassword,
-        state_request: hasExistAcc
-          ? "LAST_AUTHENTICATION"
-          : "CREATE_NEW_ACCOUNT",
-      })
-    );
-    if (state_request === "WRONG_PASSWORD") {
+  const handleSubmitInfoPassword = async () => {
+    const rs = await postInfoLogin({
+      phone: textPhone,
+      password: textPassword,
+      state_request: stateAuth === 'CREATE_PASSWORD' ? "CREATE_NEW_ACCOUNT" : "LAST_AUTHENTICATION",
+    });
+
+    if (rs?.status === "WRONG_PASSWORD") {
       setMessageWrongPass("Mật khẩu không chính xác");
       return;
-    } else {
-      handleClose();
-      setMessageWrongPass("");
     }
-  }, [
-    dispatch,
-    textPhone,
-    textPassword,
-    hasExistAcc,
-    state_request,
-    handleClose,
-  ]);
+    else {
+      handleClose();
+      resetStateAuth();
+      setMessageWrongPass("");
+      localStorage.setItem("token", rs?.token);
+      localStorage.setItem("user", JSON.stringify(rs?.user) || "")
+    }
+  }
 
   // ? box 1
   const boxInfoAcc = (
     <>
-      <Typography sx={styles.text_body01}>LapDarkder xin chào!</Typography>
+      <Typography sx={styles.text_body01}>
+        LapDarkder xin chào!
+      </Typography>
       <Typography sx={styles.text_body02}>
         Hãy bắt đầu với số điện thoại của bạn nhé
       </Typography>
@@ -196,10 +191,10 @@ function BoxLogin({ isShow, handleClose }) {
     <>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <Typography sx={styles.text_body01}>
-          {hasExistAcc ? "Chào mừng trở lại," : "Còn một bước nữa thôi, "}
+          {stateAuth !== "CREATE_PASSWORD" ? "Chào mừng trở lại," : "Còn một bước nữa thôi, "}
         </Typography>
         <Typography sx={styles.text_body02}>
-          {hasExistAcc
+          {stateAuth !== "CREATE_PASSWORD"
             ? "Hãy nhập mật khẩu cho tài khoản của bạn"
             : `Hãy tạo mật khẩu cho số điện thoại ${textPhone}`}
         </Typography>
@@ -288,7 +283,7 @@ function BoxLogin({ isShow, handleClose }) {
                 </IconButton>
               </div>
               <div style={styles.side_box_body}>
-                {isPostedInfoAcc ? boxInfoPassword : boxInfoAcc}
+                {stateAuth === 'INITIAL' ? boxInfoAcc : boxInfoPassword}
               </div>
             </div>
           </div>

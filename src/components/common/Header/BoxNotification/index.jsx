@@ -13,7 +13,7 @@ import { focusOnComponent } from '~/store/actions/index.js';
 function BoxNotification({ style_icon }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openBoxLogin, setOpenBoxLogin] = useState(false);
-  const isLogin = useSelector(userState);
+  const isLogin = localStorage.getItem('user') ? true : false;
   const dispatch = useDispatch();
 
   const handleOnFocus = useCallback(

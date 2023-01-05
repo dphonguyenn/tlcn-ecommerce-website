@@ -33,7 +33,7 @@ import { ordersActions } from '~/store/actions';
 
 import { styles } from './styles.js';
 function InfoOrdersContainer() {
-  const isLogin = useSelector(userState);
+  const isLogin = localStorage.getItem('user') ? true : false;
   const [currentIdx, setCurrentIdx] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isFilledAllInput, setIsFilledAllInput] = useState(false);

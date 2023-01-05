@@ -48,7 +48,7 @@ const {data, refetch} = useGetLapTop(state.selectedType);
   },[data])
 
   useEffect( ()=> {
-      window.localStorage.setItem('selectedTypeProduct',state.selectedType);
+    localStorage.setItem('selectedTypeProduct',state.selectedType);
   },[state.selectedType])
 
   useEffect(()=>{
