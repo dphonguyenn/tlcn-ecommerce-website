@@ -2,7 +2,7 @@ import DataTable from 'react-data-table-component';
 import './style.css';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { classifyDataToTable } from '~/utils';
-import { getOrderDetail } from '~/apis/admin';
+import { getOrderDetail } from '~/apis/admin/index.js';
 import SkeletonTable from '~/components/elements/Skeleton/SkeletonTable.jsx';
 import SingleDetailOrder from '~/pages/admin/MainDashboard/MainOrders/components/SingleDetailOrder';
 

@@ -18,7 +18,7 @@ import momo from '~/assets/img/selections/momo.png';
 import creadit from '~/assets/img/selections/credits.png';
 import { SelectStateOrder } from './SelectStatusOrder.jsx';
 import { ordersActions } from '~/store/actions';
-import { updateOrderStatus } from '~/apis/admin';
+import { updateOrderStatus } from '~/apis/admin/index.js';
 import {useGetAllOrders} from '~/hook';
 
 import { styles } from './styles.js';

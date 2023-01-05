@@ -6,7 +6,7 @@ import * as React from 'react';
 // import { DataGrid } from '@mui/x-data-grid';
 import SkeletonTable from '~/components/elements/Skeleton/SkeletonTable.jsx';
 import DataGridTable from '~/components/elements/DataGridTable';
-import { fetchAllOrdersOfCusomers } from '~/apis/admin';
+import { fetchAllOrdersOfCusomers } from '~/apis/admin/index.js';
 
 import { useGetAllOrders } from '~/hook'; 
 

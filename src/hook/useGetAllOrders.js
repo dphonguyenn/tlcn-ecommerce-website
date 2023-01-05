@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchAllOrdersOfCusomers } from '~/apis/admin';
+import { fetchAllOrdersOfCusomers } from '~/apis/admin/index.js';
 
 function useRefetchAllOrders() {
   const [state, setState] = useState();
