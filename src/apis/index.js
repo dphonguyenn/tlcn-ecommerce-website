@@ -7,8 +7,11 @@ export const fetchLaptops = async (search, field, ascSort) => {
     ascSort
   });
 
+  console.log(queryObj);
+
   const response = await Req.GET('/products', { params: queryObj });
   if (response) {
+    console.log('responsene', response);
     return response;
   } else return false;
 };

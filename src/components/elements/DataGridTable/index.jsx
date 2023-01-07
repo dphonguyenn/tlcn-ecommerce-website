@@ -28,13 +28,14 @@ const ExpandedComponent = ({ data }) => {
 
   useEffect(() => {
     if(token && data) {
-      handleGetDetailOrder()
-      return;
+      handleGetDetailOrder();
     }
-    return () =>{
-      setState({...state, data});
-    }
-  },[])
+    // return () =>{
+    //   setState({...state, data});
+    // }
+  }, [])
+  
+  console.log('state?.data',state?.data);
 
   const HaveOrders = () => {
     return (
@@ -54,17 +55,19 @@ const ExpandedComponent = ({ data }) => {
 
 function DataGridTable({ data, getDataAllOrders }) {
   const [_data, setData] = useState({ rows: [], columns: [] });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
+  console.log('alo', data);
   useEffect(() => {
     if (data?.length !== 0) {
       setData(classifyDataToTable(data));
+      console.log(classifyDataToTable(data));
     }
-  }, [data]);
+  }, []);
 
   return (
     <div>
-      {loading === true && (
+      {loading && (
         <DataTable
           columns={_data.columns}
           data={_data.rows}

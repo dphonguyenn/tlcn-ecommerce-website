@@ -13,16 +13,16 @@ import { useGetAllOrders } from '~/hook';
 function MainOrders() {
   const [ordersFetch, setOrdersFetch] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  const { data: listOrders, refetch: refecthOrder} = useGetAllOrders();
+  // const { data: listOrders, refetch: refecthOrder} = useGetAllOrders();
+
   const DataContext = createContext(null);
   const getData = async () => {
     setLoading(true);
     const data = await fetchAllOrdersOfCusomers();
-    console.log('datane', data);
+    console.log('123', data);
     if (data) {
       setOrdersFetch(data);
     }
-    return data;
   };
 
   React.useEffect(() => {
@@ -32,7 +32,7 @@ function MainOrders() {
   }, []);
 
   return (
-    <DataContext.Provider value={{refecthOrder: refecthOrder}}> 
+    <DataContext.Provider value={{ refecthOrder: null }}> 
       <div className=''>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography sx={{ fontSize: '28px', fontWeight: 'bold' }}>Đơn hàng</Typography>

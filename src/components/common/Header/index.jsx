@@ -45,9 +45,10 @@ export default function Header() {
 
   useEffect(() => {
     if (debouncedSearch.trim()) {
+      console.log(debouncedSearch);
       fetchLaptops(debouncedSearch)
-        .then(data => {
-          if (data.status === 200) setRsSearch(data.data);
+        .then(rs => {
+          if (rs.status === 200) setRsSearch(rs?.data);
         })
         .catch(e => console.log('fetchLaptops error', e));
     } else {
