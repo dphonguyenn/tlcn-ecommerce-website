@@ -2,17 +2,12 @@ import React, {useState, useEffect} from 'react'
 import { Container, Box, Button, Grid, Modal, Typography } from '@mui/material';
 import {fetchDeviceDetail} from '~/apis/index'
 
-
-
-import { styles } from './styles' 
-
-
 export default function DetailProduct(props) {
     let type = localStorage.getItem('selectedTypeProduct');
     const [ data, setData ] = useState([])
     const {idProduct,handleCloseModalDetail} = props;
 
-    const getDtailProduct = async () => {
+    const getDetailProduct = async () => {
         console.log('type >>>>>>>> ', idProduct)
         const response = await fetchDeviceDetail(type, idProduct);
         if(response) {
@@ -21,7 +16,7 @@ export default function DetailProduct(props) {
     }
 
     useEffect(() => {
-        getDtailProduct();
+        getDetailProduct();
     },[idProduct, type])
 
     console.log(data);

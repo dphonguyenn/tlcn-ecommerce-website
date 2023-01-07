@@ -11,7 +11,7 @@ export const useGetLapTop = (type) => {
        const response = await fetchDevices(type);
        console.log('response',response)
        if (response) {
-        setData(classifyDataToTable(response.data))
+        setData(classifyDataToTable(response))
        } 
     }
 
