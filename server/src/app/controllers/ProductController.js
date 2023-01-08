@@ -121,10 +121,10 @@ export const deleteDevice = async (req, res, next) => {
 
 export const updateDevice = async (req, res, next) => {
     let _index;
-    const body = req?.body?.data
+    const body = req?.body
 
     collections.forEach((collection, index) => {
-        if (collection.name === req?.body?.type) {
+        if (collection.name === body?.type) {
             _index = index
         }
     });

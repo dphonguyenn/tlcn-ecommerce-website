@@ -28,6 +28,7 @@ export default function DetailProduct(props) {
                 name: data?.name,
                 quantity: data?.quantity,
                 sale: data?.sale,
+                type: 'monitors'
             }
             const response = await updateProduct(body);
             console.log('>>>>>>>>>>>', response);
