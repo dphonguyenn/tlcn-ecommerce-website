@@ -21,3 +21,9 @@ export const deleteOrder = async (data, token) => {
     id: data?.id,
   });
 };
+
+export const updateProduct = async (data, token) => {
+  return await Req.PUT(`product/update`,{
+    data
+  });
+};

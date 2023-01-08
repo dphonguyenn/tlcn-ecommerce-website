@@ -26,7 +26,7 @@ function InfoDetailedProduct({ data }) {
             <Typography sx={{ fontWeight: "600" }}>
               Vi xử lý (CPU) <FcAbout />
             </Typography>
-            <Typography>{data?.configuration.CPU}</Typography>
+            <Typography>{data?.configuration?.CPU}</Typography>
           </div>
         </div>
         {/* 2.1 */}
@@ -38,7 +38,7 @@ function InfoDetailedProduct({ data }) {
             <Typography sx={{ fontWeight: "600" }}>
               RAM <FcAbout />
             </Typography>
-            <Typography>{data?.configuration.RAM}</Typography>
+            <Typography>{data?.configuration?.RAM}</Typography>
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@ function InfoDetailedProduct({ data }) {
             <Typography sx={{ fontWeight: "600" }}>
               Màn hình <FcAbout />
             </Typography>
-            <Typography>{data?.configuration.monitor}</Typography>
+            <Typography>{data?.configuration?.monitor}</Typography>
           </div>
         </div>
         {/* 3.1 */}
@@ -65,7 +65,7 @@ function InfoDetailedProduct({ data }) {
             <Typography sx={{ fontWeight: "600" }}>
               Card đồ họa (GPU) <FcAbout />
             </Typography>
-            <Typography>{data?.configuration.card_graphic}</Typography>
+            <Typography>{data?.configuration?.card_graphic}</Typography>
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@ function InfoDetailedProduct({ data }) {
             <Typography sx={{ fontWeight: "600" }}>
               Lưu trữ <FcAbout />
             </Typography>
-            <Typography>{data?.configuration.storage}</Typography>
+            <Typography>{data?.configuration?.storage}</Typography>
           </div>
         </div>
         {/* 4.1 */}
@@ -92,7 +92,7 @@ function InfoDetailedProduct({ data }) {
             <Typography sx={{ fontWeight: "600" }}>
               PIN <FcAbout />
             </Typography>
-            <Typography>{data?.configuration.PIN}</Typography>
+            <Typography>{data?.configuration?.PIN}</Typography>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@ function InfoDetailedProduct({ data }) {
             <Typography sx={{ fontWeight: "600" }}>
               Kết nối chính <FcAbout />
             </Typography>
-            <Typography>{data?.configuration.ports}</Typography>
+            <Typography>{data?.configuration?.ports}</Typography>
           </div>
         </div>
         {/* 5.1 */}
@@ -119,17 +119,17 @@ function InfoDetailedProduct({ data }) {
             <Typography sx={{ fontWeight: "600" }}>
               Trọng lượng <FcAbout />
             </Typography>
-            <Typography>{data?.configuration.weight}</Typography>
+            <Typography>{data?.configuration?.weight}</Typography>
           </div>
         </div>
       </div>
     </>
   );
-  const arrValueConfig = Object.values(data?.configuration);
+  // const arrValueConfig = Object?.values(data?.configuration);
   const AnotherDetail = () => (
     <>
       {Object.keys(data?.configuration).map((config, index) => {
-        console.log(arrValueConfig[index]);
+        // console.log(arrValueConfig[index]);
         return (
           <div key={index} style={styles.side_info}>
             <div style={styles.wrap_elm_info}>

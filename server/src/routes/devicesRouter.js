@@ -11,7 +11,7 @@ router.get('/products', getLaptops);
 
 router.post('/product/:type_product/delete', deleteDevice);
 
-router.put('/product/:type_product/update', updateDevice);
+router.put('/product/update', updateDevice);
 
 router.post('/product/create', createDevice);
 

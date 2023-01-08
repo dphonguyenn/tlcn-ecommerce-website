@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { Container, Box, Button, Grid, Modal, Typography } from '@mui/material';
 import {fetchDeviceDetail} from '~/apis/index'
+import {updateProduct} from '~/apis/admin/index'
 
 export default function DetailProduct(props) {
     let type = localStorage.getItem('selectedTypeProduct');
     const [ data, setData ] = useState([])
-    const {idProduct,handleCloseModalDetail} = props;
+    const {idProduct="",handleCloseModalDetail} = props;
 
     const getDetailProduct = async () => {
         console.log('type >>>>>>>> ', idProduct)
@@ -20,13 +21,28 @@ export default function DetailProduct(props) {
         getDetailProduct();
     },[idProduct, type])
 
-    console.log(data);
+    const handleProduct = async () => {
+        if(idProduct) {
+            const response = await updateProduct(data);
+            console.log('>>>>>>>>>>>', response);
+            if (response?.data.statusCode == 200) {
+                handleCloseModalDetail()
+            }
+
+        } else {
+
+        }
+    }
+
   return (
     <div>
     <Container>
         <div className="detailModal">
                 <div className="imgDetailProduct">
-                    <img className ='imgHolder' src={data?.img?.[0]} alt="anh san pham" />
+                    {data?.img?.map((p, index) => {
+                        <img className ='imgHolder' key={index} src={p} alt="anh san pham" />
+                    })}
+                   
                 </div>
 
                 <div className="infoProduct">
@@ -53,7 +69,7 @@ export default function DetailProduct(props) {
 
               
                 <div className="bottomMOdalProduct">
-                    <Button  >
+                    <Button onClick={handleProduct}  >
                         <Typography>Cập Nhật</Typography>
                     </Button>
 

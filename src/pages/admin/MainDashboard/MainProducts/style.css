@@ -52,6 +52,7 @@
 
  .imgDetailProduct{
     height: 611px;
+    width: 100%;
  }
 
  .infoProduct{
@@ -81,4 +82,5 @@
 
  .imgHolder{
     height: 100%;
+    width: 200px;
  }

@@ -47,7 +47,7 @@ function DetailedProduct() {
               </Link>
               <ArrowForwardIosIcon sx={styles.arrow_icon} />
               <Link style={styles.link} to="/">
-                <Typography sx={styles.text_redirect}>{data.configuration.brand}</Typography>
+                <Typography sx={styles.text_redirect}>{data?.configuration?.brand}</Typography>
               </Link>
             </Grid>
             <Grid item md={7}>

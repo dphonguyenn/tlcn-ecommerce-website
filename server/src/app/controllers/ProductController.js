@@ -121,14 +121,15 @@ export const deleteDevice = async (req, res, next) => {
 
 export const updateDevice = async (req, res, next) => {
     let _index;
+    const body = req?.body
+
     collections.forEach((collection, index) => {
-        if (collection.name === req.params.type_product) {
+        if (collection.name === req?.body?.type) {
             _index = index
         }
     });
     
     try {
-        const body = req?.body
         const devices = await collections[_index].model.findOneAndUpdate({_id : body?.id},body);
         console.log('devices', devices);
         if (devices) {
