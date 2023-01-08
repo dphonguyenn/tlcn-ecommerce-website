@@ -56,7 +56,7 @@ export default function DetailProduct(props) {
 
     const handleDeleteProduct = async () => {
         const response = await deleteProduct({
-            type:type,
+            type_product:type,
             _id:state?.data?._id
         })
         if (response?.statusCode == 200) {
