@@ -94,15 +94,16 @@ export const getDetailedProduct = async (req, res, next) => {
 
 export const deleteDevice = async (req, res, next) => {
     let _index;
+    const body = req?.body?.data
     collections.forEach((collection, index) => {
-        if (collection.name === req.params.type_product) {
+        if (collection.name === body?.type_product) {
             _index = index
         }
     });
     
     try {
         const id = req?.body?.id
-        const devices = await collections[_index].model.deleteOne({_id: id})
+        const devices = await collections[_index].model.deleteOne({_id: body?._id})
        
         if (devices) {
             res.status(200).json({

@@ -27,3 +27,9 @@ export const updateProduct = async (data, token) => {
     data
   });
 };
+
+export const deleteProduct = async (data, token) => {
+  return await Req.PUT(`product/delete`,{
+    data
+  });
+};

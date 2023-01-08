@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Container, Box, Button, Grid, Modal, Typography } from '@mui/material';
 import {fetchDeviceDetail} from '~/apis/index'
-import {updateProduct} from '~/apis/admin/index'
+import {updateProduct,deleteProduct} from '~/apis/admin/index'
 
 export default function DetailProduct(props) {
     let type = localStorage.getItem('selectedTypeProduct');
@@ -54,17 +54,22 @@ export default function DetailProduct(props) {
         }
     }
 
+    const handleDeleteProduct = async () => {
+        const response = await deleteProduct({
+            type:type,
+            _id:state?.data?._id
+        })
+        if (response?.statusCode == 200) {
+            refetchData()
+            handleCloseModalDetail()
+        }
+    }
+
   return (
     <div>
     <Container>
         <div className="detailModal">
-                {/* <div className="imgDetailProduct">
-                    {state?.data?.img?.map((p, index) => {
-                        <img className ='imgHolder' key={index} src={p} alt="anh san pham" />
-                    })}
-                   
-                </div> */}
-
+               
                 <div className="infoProduct">
                     <div className ='labelProduct'>Tên Sản Phẩm</div>
                     <input defaultValue={state?.data?.name} className= 'fillDetailProduct' onChange={(e)=>setState({...state,name:e.target.value})}/>
@@ -102,6 +107,15 @@ export default function DetailProduct(props) {
                     <Button onClick={handleCloseModalDetail} >
                         <Typography>Hủy</Typography>
                     </Button>
+
+                    <Button onClick={handleDeleteProduct} >
+                        <Typography>Xóa </Typography>
+                    </Button>
+                </div>
+                <div className="imgDetailProduct">
+                    {state?.data?.img?.map((p, index) => {
+                        return <img className ='imgHolder' key={index} src={p} alt="anh san pham" />
+                    })}
                 </div>
         </div>
       </Container>

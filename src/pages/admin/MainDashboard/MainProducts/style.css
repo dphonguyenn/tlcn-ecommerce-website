@@ -81,6 +81,9 @@
  }
 
  .imgHolder{
-    height: 100%;
+    height: 50%;
     width: 200px;
+ }
+ .imgHolder:hover {
+   border: 1px solid green;
  }
