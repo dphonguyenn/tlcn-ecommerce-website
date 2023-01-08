@@ -102,7 +102,6 @@ export const deleteDevice = async (req, res, next) => {
     });
     
     try {
-        const id = req?.body?.id
         const devices = await collections[_index].model.deleteOne({_id: body?._id})
        
         if (devices) {

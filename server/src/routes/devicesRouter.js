@@ -9,7 +9,7 @@ router.get('/product/:type_product', getProductsFollowType);
 router.get('/products', getLaptops);
 
 
-router.post('/product/:type_product/delete', deleteDevice);
+router.delete('/product/delete', deleteDevice);
 
 router.put('/product/update', updateDevice);
 
