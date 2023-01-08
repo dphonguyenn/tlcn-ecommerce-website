@@ -10,8 +10,9 @@ export default function DetailProduct(props) {
     const getDetailProduct = async () => {
         console.log('type >>>>>>>> ', idProduct)
         const response = await fetchDeviceDetail(type, idProduct);
+        console.log('response', response);
         if(response) {
-            setData(response?.data);
+            setData(response);
         }
     }
 

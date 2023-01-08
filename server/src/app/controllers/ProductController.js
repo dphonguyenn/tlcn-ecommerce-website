@@ -92,16 +92,94 @@ export const getDetailedProduct = async (req, res, next) => {
     }
 }
 
-export const deleteDevices = async (req, res, next) => {
-    const id = req?.body?.id || "" || [];
-    try {
-        const devices = await getProductsFollowType(req, res, next, true);
-        if (devices) {
-            use_inside = false;
-            const respond_device = devices.find(device => device._id === req.params.id_product);
-            res.status(200).json(respond_device);
+export const deleteDevice = async (req, res, next) => {
+    let _index;
+    collections.forEach((collection, index) => {
+        if (collection.name === req.params.type_product) {
+            _index = index
         }
-        // output: _ { type_product: laptop, name_product: acer }
+    });
+    
+    try {
+        const id = req?.body?.id
+        const devices = await collections[_index].model.deleteOne({_id: id})
+       
+        if (devices) {
+            res.status(200).json({
+                statusCode : 200,
+                isSuccess: true,
+                message: "Delete Successfully !"
+            });
+        }
+        else {
+            res.status(200).json(convert_devices);
+        }
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+}
+
+export const updateDevice = async (req, res, next) => {
+    let _index;
+    collections.forEach((collection, index) => {
+        if (collection.name === req.params.type_product) {
+            _index = index
+        }
+    });
+    
+    try {
+        const body = req?.body
+        const devices = await collections[_index].model.findOneAndUpdate({_id : body?.id},body);
+        console.log('devices', devices);
+        if (devices) {
+            res.status(200).json({
+                statusCode : 200,
+                isSuccess: true,
+                message: "Update Successfully !"
+            });
+        }
+        else {
+            res.status(200).json(convert_devices);
+        }
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+}
+
+export const createDevice = async (req, res, next) => {
+    const body = req?.body
+    console.log('body', body);
+    let _index;
+    collections.forEach((collection, index) => {
+        if (collection.name === req.body.type_products) {
+            _index = index
+        }
+    });
+    try {
+        const savedDevice = {
+            name: body?.name,
+            sku: body?.sku,
+            img: body?.img,
+            video: body?.video,
+            original_price: body?.original_price,
+            sale: body?.sale,
+            quantity: body?.quantity,
+            color: body?.color,
+            type: body?.type,
+          };
+        const devices = await collections[_index].model;
+        console.log('devices', devices);
+        const newDeveice = devices(savedDevice).save()
+        if (newDeveice) {
+            res.status(200).json({
+                statusCode : 200,
+                isSuccess: true,
+                message: "Create Successfully !"
+            });
+        }
+        else {
+            res.status(200).json(convert_devices);
+        }
     } catch (error) {
         res.status(500).json({ error: error });
     }
