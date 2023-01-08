@@ -23,7 +23,13 @@ export default function DetailProduct(props) {
 
     const handleProduct = async () => {
         if(idProduct) {
-            const response = await updateProduct(data);
+            const body =   {
+                _id: data?._id,
+                name: data?.name,
+                quantity: data?.quantity,
+                sale: data?.sale,
+            }
+            const response = await updateProduct(body);
             console.log('>>>>>>>>>>>', response);
             if (response?.data.statusCode == 200) {
                 handleCloseModalDetail()
