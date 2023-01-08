@@ -2,8 +2,30 @@ import React, {useState, useEffect} from 'react'
 import { Container, Box, Button, Grid, Modal, Typography } from '@mui/material';
 import {fetchDeviceDetail} from '~/apis/index'
 import {updateProduct,deleteProduct} from '~/apis/admin/index'
+import { BiCheck } from 'react-icons/bi';
+
+import { toast, ToastContainer } from 'react-toastify';
+
+const ToastContent = (props) => {
+    const {content} = props;
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}
+    >
+      <div style={{ display: 'flex' }}>
+        <BiCheck style={{ fontSize: '24px' }} />
+        <Typography> {content}</Typography>
+      </div>
+    </div>
+  )}
+
 
 export default function DetailProduct(props) {
+    var listImg = [];
     let type = localStorage.getItem('selectedTypeProduct');
     const [ state, setState ] = useState({
         data: [],
@@ -16,6 +38,8 @@ export default function DetailProduct(props) {
         sku: '',
     });
     const {idProduct="",handleCloseModalDetail, refetchData} = props;
+
+ 
 
     const getDetailProduct = async () => {
         console.log('type >>>>>>>> ', idProduct)
@@ -41,17 +65,35 @@ export default function DetailProduct(props) {
                 original_price: state?.original_price == 0 ? state?.data?.original_price : state?.original_price,
                 sale_price: Number(state?.original_price - (state?.original_price * (state?.sale/100))),
                 sku: state?.sku === '' ? state?.data?.sku : state?.sku,
-                type_product: type
+                type_product: type,
+                img: state?.img.length === 0 ? state?.data?.img : state?.img
             }
             const response = await updateProduct(body);
             if (response) {
                 refetchData()
                 handleCloseModalDetail()
+                toast.dismiss();
+                toast(<ToastContent content= 'Cập nhật thành công' />, {
+                  toastId: idProduct,
+                  position: 'bottom-left',
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  style: { width: 'auto', backgroundColor: 'rgba(2,1,36,.85)' }
+                });
             }
 
         } else {
 
         }
+    }
+
+    const handleInputImg = (value) => {
+        listImg.push(value);
+        setState({...state,img:listImg});
     }
 
     const handleDeleteProduct = async () => {
@@ -62,6 +104,18 @@ export default function DetailProduct(props) {
         if (response?.statusCode == 200) {
             refetchData()
             handleCloseModalDetail()
+            toast.dismiss();
+            toast(<ToastContent content= 'Xóa Thành Công' />, {
+                toastId: idProduct,
+                position: 'bottom-left',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                style: { width: 'auto', backgroundColor: 'rgba(2,1,36,.85)' }
+              });
         }
     }
 
@@ -86,7 +140,7 @@ export default function DetailProduct(props) {
                 </div>
                 <div className="infoProduct">
                     <div className ='labelProduct'>Sale</div>
-                    <input defaultValue={`${state?.data?.sale}%`} className= 'fillDetailProduct'  onChange={(e)=>setState({...state,sale:Number(e.target.value)})}/>
+                    <input defaultValue={state?.data?.sale || 0} className= 'fillDetailProduct'  onChange={(e)=>setState({...state,sale:Number(e.target.value)})}/>
                 </div>
                 <div className="infoProduct">
                     <div className ='labelProduct'>Số Lượng</div>
@@ -98,7 +152,15 @@ export default function DetailProduct(props) {
                     <input value={state?.data?.type} className= 'fillDetailProduct'/>
                 </div>
 
-              
+                    {state?.data?.img?.map((p, index) => {
+                        return (
+                            <div className='infoProduct'>
+                                <div className ='labelProduct'>Ảnh {index + 1}</div>
+                                <input defaultValue={p} className= 'fillDetailProduct' onChange={(e)=>handleInputImg(e.target.value)}/>
+                            </div>
+                        ) 
+                    })}
+
                 <div className="bottomMOdalProduct">
                     <Button onClick={handleProduct}  >
                         <Typography>Cập Nhật</Typography>
@@ -107,10 +169,11 @@ export default function DetailProduct(props) {
                     <Button onClick={handleCloseModalDetail} >
                         <Typography>Hủy</Typography>
                     </Button>
-
+                    {idProduct && 
                     <Button onClick={handleDeleteProduct} >
                         <Typography>Xóa </Typography>
-                    </Button>
+                    </Button> }
+                    
                 </div>
                 <div className="imgDetailProduct">
                     {state?.data?.img?.map((p, index) => {

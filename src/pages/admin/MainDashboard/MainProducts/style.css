@@ -51,7 +51,6 @@
  }
 
  .imgDetailProduct{
-    height: 611px;
     width: 100%;
  }
 
@@ -59,6 +58,8 @@
     display: flex;
     gap: 150px;
     justify-content: space-between;
+    padding-right: 150px;
+    padding-left: 100px;
  }
  .labelProduct{
     font-size: 20px;

@@ -29,7 +29,7 @@ export const updateProduct = async (data, token) => {
 };
 
 export const deleteProduct = async (data, token) => {
-  return await Req.POST(`product/delete`,{
+  return await Req.DELETE(`product/delete`,{
     data
   });
 };

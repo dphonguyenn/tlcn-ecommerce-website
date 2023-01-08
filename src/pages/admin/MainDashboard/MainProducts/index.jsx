@@ -86,7 +86,7 @@ const {data, refetch} = useGetLapTop(state.selectedType);
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-              <div style={{ backgroundColor: '#fff' , height:'100%', width:'760px', position:'absolute', top:"0px", left:'30%', borderRadius:'30px'}}>
+              <div style={{ backgroundColor: '#fff' , height:'90%', width:'1100px', position:'absolute', top:"30px", left:'20%', borderRadius:'30px'}}>
                   <DetailProduct
                       idProduct ={state?.idProduct}
                       handleCloseModalDetail={handleCloseModalDetail}
