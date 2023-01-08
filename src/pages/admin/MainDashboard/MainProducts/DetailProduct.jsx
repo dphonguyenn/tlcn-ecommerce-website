@@ -37,10 +37,11 @@ export default function DetailProduct(props) {
                 name: state?.name === "" ? state?.data?.name : state?.name ,
                 quantity: state?.quantity == 0 ? state?.data?.quantity : state?.quantity,
                 sale: state?.sale == 0 ? state?.data?.sale : state?.sale,
-                type: type,
+                type: state?.type,
                 original_price: state?.original_price == 0 ? state?.data?.original_price : state?.original_price,
                 sale_price: Number(state?.original_price - (state?.original_price * (state?.sale/100))),
-                sku: state?.sku === '' ? state?.data?.sku : state?.sku
+                sku: state?.sku === '' ? state?.data?.sku : state?.sku,
+                type_product: type
             }
             const response = await updateProduct(body);
             if (response) {

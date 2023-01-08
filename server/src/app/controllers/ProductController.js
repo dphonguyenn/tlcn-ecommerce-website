@@ -125,7 +125,7 @@ export const updateDevice = async (req, res, next) => {
     console.log('>>>>>>>', body);
 
     collections.forEach((collection, index) => {
-        if (collection.name === body?.type) {
+        if (collection.name === body?.type_product) {
             _index = index
         }
     });
