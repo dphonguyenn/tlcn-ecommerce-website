@@ -90,6 +90,7 @@ const {data, refetch} = useGetLapTop(state.selectedType);
                   <DetailProduct
                       idProduct ={state?.idProduct}
                       handleCloseModalDetail={handleCloseModalDetail}
+                      refetchData={refetch}
                   />
               </div>
           </Modal>
