@@ -123,24 +123,31 @@ export default function DetailProduct(props) {
     <div>
     <Container>
         <div className="detailModal">
-               
-                <div className="infoProduct">
+        <p style={{fontSize:'23px', fontWeight:'bold'}}>Chi Tiết Sản Phẩm </p>
+            <div className='girdModal'>
+            <div className='flex-modal'>
+               <div className="infoProduct">
                     <div className ='labelProduct'>Tên Sản Phẩm</div>
                     <input defaultValue={state?.data?.name} className= 'fillDetailProduct' onChange={(e)=>setState({...state,name:e.target.value})}/>
                 </div>
 
                 <div className="infoProduct">
                     <div className ='labelProduct'>Tên Viết Tắt</div>
+                    
                     <input defaultValue={state?.data?.sku} className= 'fillDetailProduct' onChange={(e)=>setState({...state,sku:e.target.value})}/>
+                    
+                   
                 </div>
 
                 <div className="infoProduct">
                     <div className ='labelProduct'>Giá Gốc</div>
+                    
                     <input defaultValue={state?.data?.original_price} className= 'fillDetailProduct'  onChange={(e)=>setState({...state,original_price:Number(e.target.value)})}/>
+                   
                 </div>
                 <div className="infoProduct">
                     <div className ='labelProduct'>Sale</div>
-                    <input defaultValue={state?.data?.sale || 0} className= 'fillDetailProduct'  onChange={(e)=>setState({...state,sale:Number(e.target.value)})}/>
+                   <input defaultValue={state?.data?.sale || 0} className= 'fillDetailProduct'  onChange={(e)=>setState({...state,sale:Number(e.target.value)})}/>
                 </div>
                 <div className="infoProduct">
                     <div className ='labelProduct'>Số Lượng</div>
@@ -151,8 +158,7 @@ export default function DetailProduct(props) {
                     <div className ='labelProduct'>Loại</div>
                     <input value={state?.data?.type} className= 'fillDetailProduct'/>
                 </div>
-
-                    {state?.data?.img?.map((p, index) => {
+                {state?.data?.img?.map((p, index) => {
                         return (
                             <div className='infoProduct'>
                                 <div className ='labelProduct'>Ảnh {index + 1}</div>
@@ -160,7 +166,17 @@ export default function DetailProduct(props) {
                             </div>
                         ) 
                     })}
+            </div>
 
+            <div className='col-img'>
+                <div className="imgDetailProduct">
+                    {state?.data?.img?.map((p, index) => {
+                        return <img className ='imgHolder' key={index} src={p} alt="anh san pham" />
+                    })}
+                </div>
+            </div>
+            </div>
+            <div>
                 <div className="bottomMOdalProduct">
                     <Button onClick={handleProduct}  >
                         <Typography>Cập Nhật</Typography>
@@ -175,13 +191,13 @@ export default function DetailProduct(props) {
                     </Button> }
                     
                 </div>
-                <div className="imgDetailProduct">
-                    {state?.data?.img?.map((p, index) => {
-                        return <img className ='imgHolder' key={index} src={p} alt="anh san pham" />
-                    })}
-                </div>
+            </div> 
+               
         </div>
+
+        
       </Container>
+     
 
     </div>
   )

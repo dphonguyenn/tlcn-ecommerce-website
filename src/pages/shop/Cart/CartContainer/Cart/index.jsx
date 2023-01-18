@@ -17,6 +17,42 @@ import { styles } from './styles.js';
 import 'react-toastify/dist/ReactToastify.css';
 
 export function CartItem({ item, index, itemLength, showControl, showDetail, callback }) {
+  const { items, updateItemQuantity, removeItem, cartTotal } = useCart();
+  const ToastContent = () => (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ display: 'flex' }}>
+        <BiCheck style={{ fontSize: '24px' }} />
+        <Typography> Xóa sản phẩm khỏi giỏ hàng thành công</Typography>
+      </div>
+    </div>
+  );
+  const handleReduceItem = useCallback(
+    (id, currentQuantity) => {
+      updateItemQuantity(id, currentQuantity - 1);
+    },
+    [updateItemQuantity]
+  );
+  const handleAddItem = useCallback(
+    (id, currentQuantity) => {
+      updateItemQuantity(id, currentQuantity + 1);
+    },
+    [updateItemQuantity]
+  );
+  const removeItemInCart = id => {
+    toast.dismiss();
+    toast(<ToastContent />, {
+      toastId: id,
+      position: 'bottom-left',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      style: { width: 'auto', backgroundColor: 'rgba(2,1,36,.85)' }
+    });
+    removeItem(id);
+  };
   return (
     <Paper key={item.id} sx={Object.assign({ ...styles.paper }, index === itemLength - 1 && { margin: '0' })}>
       <div style={styles.wrap_paper}>
@@ -115,33 +151,7 @@ function Cart() {
     </div>
   );
   const navigate = useNavigate();
-  const handleReduceItem = useCallback(
-    (id, currentQuantity) => {
-      updateItemQuantity(id, currentQuantity - 1);
-    },
-    [updateItemQuantity]
-  );
-  const handleAddItem = useCallback(
-    (id, currentQuantity) => {
-      updateItemQuantity(id, currentQuantity + 1);
-    },
-    [updateItemQuantity]
-  );
-  const removeItemInCart = id => {
-    toast.dismiss();
-    toast(<ToastContent />, {
-      toastId: id,
-      position: 'bottom-left',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      style: { width: 'auto', backgroundColor: 'rgba(2,1,36,.85)' }
-    });
-    removeItem(id);
-  };
+ 
   return (
     <Grid columnSpacing={4} container>
       <Grid item md={8}>

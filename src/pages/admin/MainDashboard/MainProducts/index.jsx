@@ -9,6 +9,7 @@ import { Box, Button, Grid, Modal, Typography } from '@mui/material';
 
 
 import './style.css'
+import { Translate } from '@mui/icons-material';
 
 const listType = [
   {id: 'laptops', name: 'Laptop'},
@@ -86,7 +87,13 @@ const {data, refetch} = useGetLapTop(state.selectedType);
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-              <div style={{ backgroundColor: '#fff' , height:'90%', width:'1100px', position:'absolute', top:"30px", left:'20%', borderRadius:'30px'}}>
+              <div style={{ backgroundColor: '#fff' , height:'93%', width:'1000px', position:'absolute', top:"5%", left:'15%',
+              borderRadius:'30px',
+              overflow:'scroll',
+              overflowY:'hidden',
+
+            
+            }}>
                   <DetailProduct
                       idProduct ={state?.idProduct}
                       handleCloseModalDetail={handleCloseModalDetail}
